@@ -2414,16 +2414,39 @@
         if (!grid) return;
 
         grid.innerHTML = "";
+
+        // Intersection Observer để lazy load ảnh khi xuất hiện trong viewport
+        const imgObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute("data-src");
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute("data-src");
+                        img.style.background = "";
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        }, { rootMargin: "200px 0px", threshold: 0.01 });
+
         currentFiltered.forEach((concept, index) => {
             const card = document.createElement("div");
             card.className = "tiemanh-card";
             card.setAttribute("data-id", concept.id);
+
+            const img0 = concept.images[0] || "";
+            const img1 = concept.images[1] || "";
+            const img2 = concept.images[2] || "";
+            const placeholderStyle = "background:linear-gradient(135deg,#f0f0f0,#e0e0e0);min-height:80px;";
+
             card.innerHTML = `
                 <div class="collage-wrapper">
-                    <img src="${concept.images[0]}" class="collage-main-img" alt="${concept.title}">
+                    <img data-src="${img0}" class="collage-main-img" alt="${concept.title}" style="${img0 ? placeholderStyle : 'display:none'}">
                     <div class="collage-side">
-                        <img src="${concept.images[1]}" class="collage-side-img top" alt="${concept.title}">
-                        <img src="${concept.images[2]}" class="collage-side-img bottom" alt="${concept.title}">
+                        <img data-src="${img1}" class="collage-side-img top" alt="${concept.title}" style="${img1 ? placeholderStyle : 'display:none'}">
+                        <img data-src="${img2}" class="collage-side-img bottom" alt="${concept.title}" style="${img2 ? placeholderStyle : 'display:none'}">
                     </div>
                 </div>
                 <div class="tiemanh-card-footer">
@@ -2439,13 +2462,22 @@
                     <div class="tiemanh-card-arrow">➔</div>
                 </div>
             `;
-            // Gắn sự kiện click mở Lightbox
+
+            // Lazy load từng ảnh khi vào viewport
+            card.querySelectorAll("img[data-src]").forEach(img => {
+                if (img.getAttribute("data-src")) {
+                    imgObserver.observe(img);
+                }
+            });
+
+            // Click mở Lightbox
             card.addEventListener("click", () => {
                 openLightbox(concept);
             });
             grid.appendChild(card);
         });
     }
+
 
     // 6. Trình xem ảnh Lightbox
     let activeConcept = null;
