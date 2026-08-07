@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Đa Dạng - Tiệm Ảnh Trái Thơm</title>
+    <meta name="description" content="Trải nghiệm bộ sưu tập concept chụp ảnh đa dạng tại Tiệm Ảnh Trái Thơm. Dịch vụ chụp ảnh chuyên nghiệp, trang phục makeup cao cấp.">
+    
+    <!-- Tải trước phông chữ Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 
+        Container gắn giao diện động Tiệm Ảnh Trái Thơm.
+        Tệp custom-tiemanh.js sẽ tự động phát hiện container này và render toàn bộ giao diện Landing Page chuyên nghiệp vào đây.
+    -->
+    <div id="tiemanh-container"></div>
+
+    <!-- Nhúng mã nguồn tĩnh tối ưu (kèm chống cache trình duyệt khi test) -->
+    <script>
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/gh/newiexk-cyber/webcake-scripts@main/custom-tiemanh.js?v=" + new Date().getTime();
+        document.body.appendChild(script);
+    </script>
+
+    <!-- 
+        Đoạn mã ví dụ hướng dẫn tích hợp tracking pixel (Facebook Pixel, GTM) cho Webcake:
+        <script>
+            window.addEventListener("tiemanh-booking-success", function(event) {
+                console.log("Đặt lịch thành công, gửi dữ liệu sang Pixel:", event.detail);
+                // Ví dụ FB Pixel: fbq('track', 'Lead', { value: 0, currency: 'VND' });
+            });
+        </script>
+    -->
+</body>
+</html>
