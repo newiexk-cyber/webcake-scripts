@@ -2140,23 +2140,30 @@
         setupInteractions();
     }
 
-    // Hàm chuyển Google Drive share link → direct image URL siêu tốc (không lo bị Google chặn)
+    // Hàm chuyển Google Drive share link → thumbnail URL ổn định (không bị chặn cross-origin)
     function driveToDirectUrl(url) {
         if (!url) return url;
+        
+        // Helper: trích xuất FILE_ID và trả về thumbnail URL
+        function toThumbnail(fileId) {
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+        }
+        
         // Dạng: drive.google.com/file/d/FILE_ID
         const m1 = url.match(/drive\.google\.com\/file\/d\/([^/&#?]+)/);
-        if (m1) return `https://lh3.googleusercontent.com/d/${m1[1]}`;
+        if (m1) return toThumbnail(m1[1]);
         
         // Dạng: drive.google.com/open?id=FILE_ID
         const m2 = url.match(/drive\.google\.com\/open\?id=([^&#?]+)/);
-        if (m2) return `https://lh3.googleusercontent.com/d/${m2[1]}`;
+        if (m2) return toThumbnail(m2[1]);
         
         // Dạng: drive.google.com/uc?export=view&id=FILE_ID hoặc uc?id=FILE_ID
         const m3 = url.match(/id=([^&#?]+)/);
-        if (m3 && url.includes("drive.google.com")) return `https://lh3.googleusercontent.com/d/${m3[1]}`;
+        if (m3 && url.includes("drive.google.com")) return toThumbnail(m3[1]);
         
         return url;
     }
+
 
     // Bộ sưu tập ảnh mẫu chất lượng cao để hiển thị nếu thư mục Drive của bạn đang trống
     const DEFAULT_PLACEHOLDERS = {
