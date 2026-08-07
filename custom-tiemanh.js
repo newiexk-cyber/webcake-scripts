@@ -2108,6 +2108,22 @@
 
         const rootContainer = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
         if (rootContainer) {
+            // 🔥 Webcake Overlay Mode: Phủ toàn màn hình, che hết nội dung Webcake cũ
+            const isInsideWebcake = document.body.children.length > 2; // Webcake đã có nhiều phần tử
+            if (isInsideWebcake) {
+                rootContainer.style.cssText = `
+                    position: fixed !important;
+                    top: 0 !important; left: 0 !important;
+                    width: 100vw !important; height: 100vh !important;
+                    z-index: 2147483647 !important;
+                    overflow-y: auto !important;
+                    overflow-x: hidden !important;
+                    background: #0d0d0d;
+                    -webkit-overflow-scrolling: touch;
+                `;
+                // Ngăn cuộn trang gốc Webcake
+                document.body.style.overflow = "hidden";
+            }
             rootContainer.innerHTML = HTML_STRUCTURE;
         } else {
             const body = document.body;
@@ -2117,11 +2133,22 @@
                     body.innerHTML = HTML_STRUCTURE;
                 } else {
                     const div = document.createElement("div");
+                    div.id = "tiemanh-container";
+                    div.style.cssText = `
+                        position: fixed !important;
+                        top: 0 !important; left: 0 !important;
+                        width: 100vw !important; height: 100vh !important;
+                        z-index: 2147483647 !important;
+                        overflow-y: auto !important; overflow-x: hidden !important;
+                        background: #0d0d0d;
+                    `;
                     div.innerHTML = HTML_STRUCTURE;
+                    body.style.overflow = "hidden";
                     body.appendChild(div);
                 }
             }
         }
+
 
         window.addEventListener("scroll", function() {
             const navbar = document.getElementById("tiemanh-navbar");
