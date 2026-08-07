@@ -9,6 +9,7 @@
     const CONFIG = {
         webhookUrl: "", // Nhập link Webhook (Google Sheets, Pancake POS) để gửi data khách hàng
         redirectUrl: "", // Đường dẫn trang Cảm ơn nếu muốn chuyển hướng
+        targetId: "w-naljqcdc", // ID phần tử trên Webcake để chèn giao diện
         // 🔑 ID của Google Sheet quản lý concept (nhân viên sửa tại đây)
         // Lấy từ URL: https://docs.google.com/spreadsheets/d/[ID Ở ĐÂY]/edit
         sheetId: "1hhUOljIvpXuVo0U0b0H0Pu6SVon3mPADD8yXRlnddg8",
@@ -2092,7 +2093,20 @@
 
     // 4. Khởi tạo gắn giao diện lên trang
     function init() {
-        const rootContainer = document.getElementById("tiemanh-container");
+        // Tự động ghi đè chiều cao của khung Webcake để không bị giới hạn chiều cao ảnh
+        if (CONFIG.targetId) {
+            const targetEl = document.getElementById(CONFIG.targetId);
+            if (targetEl) {
+                targetEl.style.height = "auto";
+                targetEl.style.minHeight = "auto";
+                targetEl.style.padding = "0";
+            }
+            const overrideStyle = document.createElement("style");
+            overrideStyle.innerHTML = `#${CONFIG.targetId} { height: auto !important; min-height: auto !important; padding: 0 !important; }`;
+            document.head.appendChild(overrideStyle);
+        }
+
+        const rootContainer = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
         if (rootContainer) {
             rootContainer.innerHTML = HTML_STRUCTURE;
         } else {
