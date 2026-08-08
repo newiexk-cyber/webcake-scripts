@@ -351,43 +351,96 @@
             position: relative;
         }
 
-        /* Hiệu ứng bóng mờ màu sắc trôi nổi nghệ thuật ở nền (Mesh Gradient) */
+        /* Lớp họa tiết lưới chấm studio mờ ảo nghệ thuật */
+        .tiemanh-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(251, 192, 45, 0.25) 1.2px, transparent 1.2px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+            mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 90%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 90%);
+        }
+
+        /* Các vệt sáng màu Mesh Gradient mềm mại trôi nổi sinh động */
         .tiemanh-bg-blob {
             position: absolute;
-            width: 600px;
-            height: 600px;
             border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.15;
+            filter: blur(80px);
+            opacity: 0.48;
             z-index: 0;
             pointer-events: none;
-            animation: floatBlob 25s infinite alternate ease-in-out;
         }
-        .tiemanh-bg-blob.pink {
-            background: radial-gradient(circle, #ff80ab 0%, rgba(255,128,171,0) 70%);
-            top: -150px;
-            right: -100px;
-            animation-delay: 0s;
+        .tiemanh-bg-blob.yellow-top {
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, #ffe082 0%, #ffca28 40%, rgba(255,202,40,0) 70%);
+            top: -120px;
+            left: -150px;
+            animation: floatBlob1 16s infinite alternate ease-in-out;
         }
-        .tiemanh-bg-blob.yellow {
-            background: radial-gradient(circle, #ffe082 0%, rgba(255,224,130,0) 70%);
-            bottom: 25%;
-            left: -200px;
-            animation-delay: -6s;
+        .tiemanh-bg-blob.pink-right {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #ff80ab 0%, #ff4081 40%, rgba(255,64,129,0) 70%);
+            top: 40px;
+            right: -120px;
+            animation: floatBlob2 18s infinite alternate ease-in-out;
         }
-        .tiemanh-bg-blob.peach {
-            background: radial-gradient(circle, #ffab91 0%, rgba(255,171,145,0) 70%);
-            top: 40%;
-            right: -150px;
-            animation-delay: -12s;
+        .tiemanh-bg-blob.peach-center {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #ffcc80 0%, #ffa726 35%, rgba(255,167,38,0) 70%);
+            top: 420px;
+            left: 20%;
+            animation: floatBlob3 20s infinite alternate ease-in-out;
         }
-        @keyframes floatBlob {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            100% {
-                transform: translate(80px, 40px) scale(1.12) rotate(45deg);
-            }
+        .tiemanh-bg-blob.purple-bottom {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #e1bee7 0%, #ba68c8 35%, rgba(186,104,200,0) 70%);
+            top: 950px;
+            right: 5%;
+            animation: floatBlob1 22s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatBlob1 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            100% { transform: translate(60px, 40px) scale(1.15); }
+        }
+        @keyframes floatBlob2 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            100% { transform: translate(-50px, 50px) scale(1.12); }
+        }
+        @keyframes floatBlob3 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.18); }
+        }
+
+        /* Các ngôi sao lấp lánh & bụi sáng nghệ thuật trôi trong không gian */
+        .tiemanh-sparkle-item {
+            position: absolute;
+            color: #fbc02d;
+            font-size: 18px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.75;
+            animation: sparkleGlow 4s infinite alternate ease-in-out;
+        }
+        .tiemanh-sparkle-item.s1 { top: 110px; left: 6%; font-size: 24px; animation-delay: 0s; color: #ffa000; }
+        .tiemanh-sparkle-item.s2 { top: 160px; left: 40%; font-size: 18px; animation-delay: 1.2s; color: #ff4081; }
+        .tiemanh-sparkle-item.s3 { top: 70px; right: 8%; font-size: 22px; animation-delay: 0.6s; color: #fbc02d; }
+        .tiemanh-sparkle-item.s4 { top: 490px; left: 4%; font-size: 19px; animation-delay: 2.1s; color: #ff80ab; }
+        .tiemanh-sparkle-item.s5 { top: 460px; right: 6%; font-size: 22px; animation-delay: 1.8s; color: #ffa726; }
+        
+        @keyframes sparkleGlow {
+            0% { transform: scale(0.8) translateY(0px) rotate(0deg); opacity: 0.35; }
+            50% { transform: scale(1.25) translateY(-10px) rotate(15deg); opacity: 0.95; }
+            100% { transform: scale(0.9) translateY(-18px) rotate(30deg); opacity: 0.45; }
         }
 
         /* 1. Header (Navbar) */
@@ -508,8 +561,9 @@
             gap: 50px;
             align-items: center;
             padding: 60px 6% 75px 6%;
-            background: radial-gradient(circle at 85% 30%, #fffde7 0%, var(--tiemanh-bg) 100%);
+            background: transparent;
             position: relative;
+            z-index: 1;
         }
         .tiemanh-hero::after {
             content: '';
@@ -692,7 +746,8 @@
 
         .polaroid-card img {
             width: 100%;
-            height: 250px;
+            aspect-ratio: 16 / 9;
+            height: auto;
             object-fit: cover;
             border-radius: 12px;
             border: 1px solid rgba(0, 0, 0, 0.04);
@@ -1740,7 +1795,6 @@
             .tiemanh-hero-left { align-items: center; }
             .tiemanh-hero-title { font-size: 48px; }
             .tiemanh-hero-btns { justify-content: center; }
-            .polaroid-card img { height: 210px; }
             .tiemanh-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tiemanh-section-container { padding: 50px 5%; }
             .tiemanh-footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1759,7 +1813,7 @@
             .hot-badge { font-size: 10.5px; padding: 4px 14px; margin-bottom: 6px; }
             .hot-concepts-grid { gap: 8px; }
             .polaroid-card { padding: 6px 6px 10px 6px; border-radius: 14px; }
-            .polaroid-card img { height: 145px; border-radius: 10px; }
+            .polaroid-card img { border-radius: 10px; }
             .polaroid-caption { font-size: 11.5px; margin-top: 6px; letter-spacing: 0; }
             .polaroid-caption::after { font-size: 9.5px; margin-top: 1px; }
             .tiemanh-grid { grid-template-columns: 1fr; }
@@ -1794,10 +1848,21 @@
     // 3. Cấu trúc giao diện HTML hoàn chỉnh
     const HTML_STRUCTURE = `
         <div id="tiemanh-root">
-            <!-- Decorative animated mesh background blobs -->
-            <div class="tiemanh-bg-blob pink"></div>
-            <div class="tiemanh-bg-blob yellow"></div>
-            <div class="tiemanh-bg-blob peach"></div>
+            <!-- Lớp nền họa tiết lưới chấm studio nghệ thuật -->
+            <div class="tiemanh-bg-pattern"></div>
+
+            <!-- Các vệt sáng màu Mesh Gradient mềm mại trôi nổi sinh động -->
+            <div class="tiemanh-bg-blob yellow-top"></div>
+            <div class="tiemanh-bg-blob pink-right"></div>
+            <div class="tiemanh-bg-blob peach-center"></div>
+            <div class="tiemanh-bg-blob purple-bottom"></div>
+
+            <!-- Các hạt bụi sáng & sao lấp lánh nghệ thuật -->
+            <div class="tiemanh-sparkle-item s1">✦</div>
+            <div class="tiemanh-sparkle-item s2">✨</div>
+            <div class="tiemanh-sparkle-item s3">★</div>
+            <div class="tiemanh-sparkle-item s4">✦</div>
+            <div class="tiemanh-sparkle-item s5">✨</div>
 
             <!-- Header (Navbar) -->
             <header class="tiemanh-navbar" id="tiemanh-navbar">
