@@ -1775,7 +1775,7 @@
                 </ul>
             </header>
 
-            <!-- Hero Section -->
+            <!-- Hero Section với 3 ảnh Polaroid nổi bật từ Concept thực tế của Studio -->
             <section class="tiemanh-hero">
                 <div class="tiemanh-hero-left">
                     <h5 class="tiemanh-hero-subtitle">Bộ sưu tập</h5>
@@ -1789,17 +1789,17 @@
                 </div>
                 <div class="tiemanh-hero-right">
                     <div class="polaroid-stack">
-                        <div class="polaroid-card p1" data-concept-idx="0">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80" alt="Nữ Tính">
-                            <div class="polaroid-caption">Nữ Tính</div>
+                        <div class="polaroid-card p1">
+                            <img src="" alt="Concept nổi bật 1">
+                            <div class="polaroid-caption">Concept</div>
                         </div>
-                        <div class="polaroid-card p2" data-concept-idx="2">
-                            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Couple">
-                            <div class="polaroid-caption">Couple</div>
+                        <div class="polaroid-card p2">
+                            <img src="" alt="Concept nổi bật 2">
+                            <div class="polaroid-caption">Concept</div>
                         </div>
-                        <div class="polaroid-card p3" data-concept-idx="5">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Profile">
-                            <div class="polaroid-caption">Profile</div>
+                        <div class="polaroid-card p3">
+                            <img src="" alt="Concept nổi bật 3">
+                            <div class="polaroid-caption">Concept</div>
                         </div>
                     </div>
                 </div>
@@ -2345,15 +2345,18 @@
                 const cleanedTheme = normalizeThemeName(obj.theme || "");
                 const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category, obj.category);
 
-                // Tập hợp các ảnh từ img1 -> img10
-                let images = [];
+                // Tập hợp các ảnh thật từ img1 -> img10 từ Google Sheets
+                let realImages = [];
                 for (let n = 1; n <= 10; n++) {
                     const imgVal = driveToDirectUrl(obj[`img${n}`]);
-                    if (imgVal) images.push(imgVal);
+                    if (imgVal) realImages.push(imgVal);
                 }
 
-                // NẾU THƯ MỤC TRÊN DRIVE ĐANG TRỐNG: Tự động gán ảnh mẫu để card không bị ẩn
-                if (images.length < 3) {
+                const hasRealImages = realImages.length > 0;
+                let images = [...realImages];
+
+                // Nếu concept chưa có ảnh trên Drive thì mới dự phòng ảnh placeholder
+                if (images.length === 0) {
                     const titleNorm = cleanTextForMatching(cleanedTitle);
                     let fallbackKey = "GENERAL";
                     for (const key in DEFAULT_PLACEHOLDERS) {
@@ -2378,7 +2381,8 @@
                     iconColor: obj.iconColor || "#fbc02d",
                     bgColor: bgColor,
                     description: obj.description || "",
-                    images: images
+                    images: images,
+                    hasRealImages: hasRealImages
                 };
             }).filter(Boolean);
 
@@ -2396,14 +2400,18 @@
         }
     }
 
-    // Hàm chọn 3 concept ngẫu nhiên từ bộ dữ liệu thật để đưa lên Hero banner
+    // Hàm chọn 3 concept từ bộ dữ liệu thật của studio để đưa lên Hero banner
     function randomizeHeroPolaroids() {
         if (!CONCEPTS || CONCEPTS.length === 0) return;
         const polaroids = document.querySelectorAll(".polaroid-card");
         if (polaroids.length === 0) return;
 
-        // Xáo trộn ngẫu nhiên danh sách concepts
-        const shuffled = [...CONCEPTS].sort(() => 0.5 - Math.random());
+        // Ưu tiên chọn các concept có ảnh thật từ Google Sheets của studio
+        const realConcepts = CONCEPTS.filter(c => c.hasRealImages && c.images && c.images.length > 0);
+        const candidateList = realConcepts.length >= 3 ? realConcepts : CONCEPTS;
+
+        // Xáo trộn ngẫu nhiên danh sách concepts của studio
+        const shuffled = [...candidateList].sort(() => 0.5 - Math.random());
         const selected = shuffled.slice(0, Math.min(3, shuffled.length));
 
         polaroids.forEach((card, i) => {
