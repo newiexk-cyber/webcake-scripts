@@ -1752,9 +1752,14 @@
                     </div>
                 </a>
                 <ul class="tiemanh-menu">
-                    <li class="tiemanh-menu-item"><a href="#" id="menuTrangChu">Trang chủ</a></li>
-                    <li class="tiemanh-menu-item active"><a href="#" id="menuConcept">Concept</a></li>
+                    <li class="tiemanh-menu-item active"><a href="#" id="menuTrangChu">Trang chủ</a></li>
+                    <li class="tiemanh-menu-item"><a href="#" id="menuConcept">Concept</a></li>
+                    <li class="tiemanh-menu-item"><a href="#" id="menuBangGia">Bảng giá</a></li>
+                    <li class="tiemanh-menu-item"><a href="#" id="menuQuyTrinh">Quy trình</a></li>
+                    <li class="tiemanh-menu-item"><a href="#" id="menuChiNhanh">Chi nhánh</a></li>
+                    <li class="tiemanh-menu-item"><a href="#" id="menuLienHe">Liên hệ</a></li>
                 </ul>
+                <a href="#" class="tiemanh-btn-primary" id="btnDatLichHeader">📅 Đặt Lịch Ngay</a>
             </header>
 
             <!-- Hero Section -->
@@ -1765,7 +1770,10 @@
                     <p class="tiemanh-hero-desc">
                         Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
                     </p>
-
+                    <div class="tiemanh-hero-btns">
+                        <button class="tiemanh-btn-primary" id="btnHeroTuVan">📅 Tư Vấn & Đặt Lịch</button>
+                        <button class="tiemanh-btn-secondary" id="btnHeroBangGia">💎 Xem Bảng Giá</button>
+                    </div>
                 </div>
                 <div class="tiemanh-hero-right">
                     <div class="polaroid-stack">
