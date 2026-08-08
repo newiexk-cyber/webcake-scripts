@@ -801,6 +801,34 @@
             color: #d84315;
         }
 
+        /* Hiệu ứng Skeleton Loading sang trọng khi đang tải dữ liệu Google Sheets */
+        .polaroid-card.loading-skeleton {
+            pointer-events: none;
+            border-color: rgba(251, 192, 45, 0.2);
+            background: #ffffff;
+        }
+        .skeleton-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #f5f2ea 25%, #fff9e6 50%, #f5f2ea 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.4s infinite linear;
+        }
+        .skeleton-text {
+            width: 65%;
+            height: 14px;
+            border-radius: 6px;
+            margin-top: 12px;
+            background: linear-gradient(90deg, #f5f2ea 25%, #fff9e6 50%, #f5f2ea 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.4s infinite linear;
+        }
+        @keyframes skeletonShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         /* 3. Category Filter Bar */
         .tiemanh-section-container,
         .tiemanh-banggia-sec,
@@ -1903,17 +1931,17 @@
                             <h3 class="hot-showcase-title">Gợi Ý Nổi Bật Hôm Nay</h3>
                         </div>
                         <div class="hot-concepts-grid">
-                            <div class="polaroid-card p1">
-                                <img src="" alt="Concept hot 1">
-                                <div class="polaroid-caption">Concept</div>
+                            <div class="polaroid-card p1 loading-skeleton">
+                                <div class="skeleton-img"></div>
+                                <div class="skeleton-text"></div>
                             </div>
-                            <div class="polaroid-card p2">
-                                <img src="" alt="Concept hot 2">
-                                <div class="polaroid-caption">Concept</div>
+                            <div class="polaroid-card p2 loading-skeleton">
+                                <div class="skeleton-img"></div>
+                                <div class="skeleton-text"></div>
                             </div>
-                            <div class="polaroid-card p3">
-                                <img src="" alt="Concept hot 3">
-                                <div class="polaroid-caption">Concept</div>
+                            <div class="polaroid-card p3 loading-skeleton">
+                                <div class="skeleton-img"></div>
+                                <div class="skeleton-text"></div>
                             </div>
                         </div>
                     </div>
@@ -2288,9 +2316,7 @@
             }
         });
 
-        currentFiltered = shuffleArray([...CONCEPTS]);
-        setupGallery();
-        randomizeHeroPolaroids();
+        // Chờ tải dữ liệu thực tế từ Google Sheets (tránh nháy ảnh mẫu không phù hợp)
         fetchConceptsFromSheets();
         setupInteractions();
     }
@@ -2534,35 +2560,31 @@
         const polaroids = document.querySelectorAll(".polaroid-card");
         if (polaroids.length === 0) return;
 
-        // Ưu tiên chọn các concept có ảnh thật từ Google Sheets của studio
-        const realConcepts = CONCEPTS.filter(c => c.hasRealImages && c.images && c.images.length > 0);
-        const candidateList = realConcepts.length >= 3 ? realConcepts : CONCEPTS;
+        // Chỉ chọn các concept có ảnh thật từ Google Sheets của studio (tuyệt đối không lấy ảnh mẫu)
+        const realConcepts = CONCEPTS.filter(c => c.hasRealImages && c.images && c.images.length > 0 && !c.images[0].includes("unsplash"));
+        const candidateList = realConcepts.length > 0 ? realConcepts : CONCEPTS.filter(c => c.hasRealImages);
 
-        // Xáo trộn ngẫu nhiên danh sách concepts của studio
+        if (candidateList.length === 0) return;
+
+        // Xáo trộn ngẫu nhiên danh sách concepts thật của studio
         const shuffled = [...candidateList].sort(() => 0.5 - Math.random());
         const selected = shuffled.slice(0, Math.min(3, shuffled.length));
 
         polaroids.forEach((card, i) => {
             if (i < selected.length) {
                 const concept = selected[i];
-                const imgEl = card.querySelector("img");
-                const captionEl = card.querySelector(".polaroid-caption");
-                
-                if (imgEl && concept.images && concept.images.length > 0) {
-                    imgEl.src = concept.images[0];
-                    imgEl.alt = concept.title;
-                }
-                if (captionEl) {
-                    captionEl.innerText = concept.title;
-                }
+                card.classList.remove("loading-skeleton");
+                card.innerHTML = `
+                    <img src="${concept.images[0]}" alt="${concept.title}">
+                    <div class="polaroid-caption">${concept.title}</div>
+                `;
                 
                 // Gán sự kiện click để mở trực tiếp Lightbox của concept tương ứng
                 card.onclick = (e) => {
                     e.preventDefault();
                     openLightbox(concept);
                 };
-                
-                card.style.display = "block";
+                card.style.display = "flex";
             } else {
                 card.style.display = "none";
             }
