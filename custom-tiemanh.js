@@ -618,24 +618,32 @@
             flex-wrap: wrap;
         }
         .tiemanh-btn-secondary {
-            background: var(--tiemanh-white);
-            color: var(--tiemanh-dark);
-            border: 2px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--tiemanh-dark) !important;
+            border: 1.5px solid rgba(251, 192, 45, 0.45);
             border-radius: 30px;
-            padding: 11px 26px;
+            padding: 11px 24px;
             font-weight: 700;
             font-size: 14px;
-            cursor: pointer;
-            transition: var(--tiemanh-transition);
-            text-decoration: none;
+            letter-spacing: 0.3px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(8px);
+            transition: var(--tiemanh-transition);
+            text-decoration: none;
         }
         .tiemanh-btn-secondary:hover {
-            border-color: var(--tiemanh-dark);
-            background: rgba(0,0,0,0.01);
-            transform: translateY(-2px);
+            background: #ffffff;
+            border-color: var(--tiemanh-primary-dark);
+            color: var(--tiemanh-primary-dark) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(251, 192, 45, 0.3);
+        }
+        .tiemanh-btn-secondary:active {
+            transform: translateY(-1px);
         }
 
         /* Khung hiển thị bộ 3 Concept Hot Trending cao cấp */
@@ -893,47 +901,49 @@
         .tiemanh-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 30px;
         }
         .tiemanh-card {
-            background: var(--tiemanh-white);
-            border-radius: var(--tiemanh-border-radius);
-            box-shadow: var(--tiemanh-shadow-sm);
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            border: 1px solid rgba(251, 192, 45, 0.08);
-            transition: var(--tiemanh-transition);
+            border: 1.5px solid rgba(251, 192, 45, 0.22);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
             cursor: pointer;
             position: relative;
         }
         .tiemanh-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--tiemanh-shadow-md);
-            border-color: rgba(251, 192, 45, 0.3);
+            transform: translateY(-10px) scale(1.015);
+            box-shadow: 0 22px 45px rgba(251, 192, 45, 0.28), 0 8px 20px rgba(0, 0, 0, 0.06);
+            border-color: rgba(251, 192, 45, 0.85);
         }
 
         /* Collage inside card */
         .collage-wrapper {
             display: grid;
-            grid-template-columns: 1.8fr 1fr;
-            gap: 5px;
+            grid-template-columns: 1.85fr 1fr;
+            gap: 6px;
             height: 380px;
-            padding: 6px;
-            background: #fff6f8;
+            padding: 8px;
+            background: #fffdf5;
             overflow: hidden;
+            border-radius: 20px 20px 0 0;
+            position: relative;
         }
         .collage-main-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 10px 0 0 10px;
+            border-radius: 14px 4px 4px 14px;
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .collage-side {
             display: grid;
             grid-template-rows: 1fr 1fr;
-            gap: 5px;
+            gap: 6px;
         }
         .collage-side-img {
             width: 100%;
@@ -941,33 +951,27 @@
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .tiemanh-card:hover .collage-main-img {
-            transform: scale(1.08);
-        }
-        .tiemanh-card:hover .collage-side-img {
-            transform: scale(1.1);
-        }
         .collage-side-img.top {
-            border-radius: 0 10px 0 0;
+            border-radius: 4px 14px 4px 4px;
         }
         .collage-side-img.bottom {
-            border-radius: 0 0 10px 0;
+            border-radius: 4px 4px 14px 4px;
         }
         .tiemanh-card:hover .collage-main-img, 
         .tiemanh-card:hover .collage-side-img {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         /* Card Content footer */
         .tiemanh-card-footer {
-            padding: 16px 20px;
+            padding: 16px 20px 18px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid rgba(0,0,0,0.02);
-            background: var(--tiemanh-white);
+            background: #ffffff;
             position: relative;
             z-index: 2;
+            border-top: 1px solid rgba(251, 192, 45, 0.12);
         }
         .tiemanh-card-meta {
             display: flex;
@@ -975,41 +979,77 @@
             gap: 12px;
         }
         .tiemanh-card-icon-box {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
+            background: #fff8e1;
+            box-shadow: 0 4px 12px rgba(251, 192, 45, 0.15);
             transition: var(--tiemanh-transition);
+            flex-shrink: 0;
+        }
+        .tiemanh-card:hover .tiemanh-card-icon-box {
+            transform: scale(1.1) rotate(5deg);
         }
         .tiemanh-card-title-box {
             display: flex;
             flex-direction: column;
-            line-height: 1.2;
+            gap: 4px;
         }
         .tiemanh-card-title {
+            font-family: var(--tiemanh-serif);
             font-weight: 800;
-            font-size: 14.5px;
+            font-size: 16px;
             color: var(--tiemanh-dark);
-            letter-spacing: 0.5px;
             margin: 0;
-            text-transform: uppercase;
+            line-height: 1.3;
+            transition: color 0.3s ease;
         }
-        .tiemanh-card-count {
+        .tiemanh-card:hover .tiemanh-card-title {
+            color: var(--tiemanh-primary-dark);
+        }
+        .tiemanh-card-badge {
             font-size: 11.5px;
-            color: var(--tiemanh-text-light);
-            margin-top: 3px;
+            font-weight: 600;
+            color: #d84315;
+            background: #fbe9e7;
+            padding: 2px 9px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            letter-spacing: 0.2px;
+        }
+        .tiemanh-card-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #fffde7;
+            border: 1px solid rgba(251, 192, 45, 0.4);
+            padding: 7px 14px;
+            border-radius: 20px;
+            color: var(--tiemanh-dark);
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.35s ease;
+            white-space: nowrap;
         }
         .tiemanh-card-arrow {
-            color: var(--tiemanh-text-light);
-            font-size: 18px;
-            transition: var(--tiemanh-transition);
+            font-size: 13px;
+            transition: transform 0.3s ease;
+        }
+        .tiemanh-card:hover .tiemanh-card-btn {
+            background: linear-gradient(135deg, var(--tiemanh-primary), #ffa000);
+            color: #1e1e24;
+            box-shadow: 0 6px 16px rgba(251, 192, 45, 0.4);
+            border-color: transparent;
+            transform: translateX(2px);
         }
         .tiemanh-card:hover .tiemanh-card-arrow {
-            transform: translateX(5px);
-            color: var(--tiemanh-primary-dark);
+            transform: translateX(4px);
         }
 
         /* 5. CTA Section */
@@ -1924,6 +1964,7 @@
                     </p>
                     <div class="tiemanh-hero-btns">
                         <button class="tiemanh-btn-primary" id="btnHeroBangGia">💎 Xem Bảng Giá</button>
+                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">✨ Xem Thêm Concept ➔</button>
                     </div>
                 </div>
                 <div class="tiemanh-hero-right">
@@ -2756,10 +2797,13 @@
                         </div>
                         <div class="tiemanh-card-title-box">
                             <h4 class="tiemanh-card-title">${concept.title}</h4>
-                            <span class="tiemanh-card-count">${concept.tag || concept.category}</span>
+                            <span class="tiemanh-card-badge">📍 ${concept.tag || concept.category}</span>
                         </div>
                     </div>
-                    <div class="tiemanh-card-arrow">➔</div>
+                    <div class="tiemanh-card-btn">
+                        <span>Xem album</span>
+                        <span class="tiemanh-card-arrow">➔</span>
+                    </div>
                 </div>
             `;
 
@@ -3035,14 +3079,6 @@
             });
         }
 
-        // Nút xem bảng giá cuộn xuống phần Bảng Giá
-        const btnHeroBangGia = document.getElementById("btnHeroBangGia");
-        if (btnHeroBangGia) {
-            btnHeroBangGia.addEventListener("click", () => {
-                const sec = document.getElementById("banggiaSection");
-                if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
-            });
-        }
 
         // Submit form đặt lịch
         const bookingForm = document.getElementById("bookingForm");
@@ -3174,6 +3210,23 @@
                 openBookingModal(conceptName);
             });
         });
+
+        // Xử lý nút bấm trên Hero Section
+        const btnHeroBangGia = document.getElementById("btnHeroBangGia");
+        if (btnHeroBangGia) {
+            btnHeroBangGia.addEventListener("click", (e) => {
+                e.preventDefault();
+                smoothScrollToSection("banggiaSection");
+            });
+        }
+
+        const btnHeroExplore = document.getElementById("btnHeroExplore");
+        if (btnHeroExplore) {
+            btnHeroExplore.addEventListener("click", (e) => {
+                e.preventDefault();
+                smoothScrollToSection("filterBar");
+            });
+        }
 
         // Xử lý cuộn mượt cho các liên kết ở Footer
         const footerLinks = document.querySelectorAll(".tiemanh-footer-links a");
