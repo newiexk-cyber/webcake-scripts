@@ -1,6 +1,6 @@
 /**
  * Tiệm Ảnh Trái Thơm - Hệ thống Script giao diện và tính năng Concept nâng cao
- * Tác giả: Antigravity
+ * Tác giả: NHATLAM
  * Chức năng: Tạo giao diện Landing Page chuyên nghiệp, lọc danh mục, xem album ảnh dạng Lightbox, đăng ký lịch tư vấn/chụp ảnh.
  */
 
@@ -2126,47 +2126,48 @@
                             </div>
                         </a>
                         <p class="tiemanh-footer-desc">
-                            Chụp lại ước mơ và lưu trữ từng khoảnh khắc thanh xuân rực rỡ trọn vẹn của bạn. Chúng tôi mang đến dịch vụ tận tâm và chuyên nghiệp hàng đầu.
+                            Chụp lại ước mơ và lưu giữ từng khoảnh khắc thanh xuân rực rỡ trọn vẹn của bạn. Dịch vụ chụp ảnh nghệ thuật chỉn chu, tận tâm và chuyên nghiệp hàng đầu.
                         </p>
                         <div class="tiemanh-footer-socials">
-                            <a href="#" class="tiemanh-social-icon">f</a>
-                            <a href="#" class="tiemanh-social-icon">📸</a>
-                            <a href="#" class="tiemanh-social-icon">🎵</a>
-                            <a href="#" class="tiemanh-social-icon">▶️</a>
+                            <a href="https://facebook.com" target="_blank" class="tiemanh-social-icon" title="Facebook">f</a>
+                            <a href="https://instagram.com" target="_blank" class="tiemanh-social-icon" title="Instagram">📸</a>
+                            <a href="https://tiktok.com" target="_blank" class="tiemanh-social-icon" title="TikTok">🎵</a>
+                            <a href="https://zalo.me" target="_blank" class="tiemanh-social-icon" title="Zalo">💬</a>
                         </div>
                     </div>
                     <div class="tiemanh-footer-col">
-                        <h4 class="tiemanh-footer-title">Dịch vụ</h4>
+                        <h4 class="tiemanh-footer-title">Dịch Vụ Concept</h4>
                         <ul class="tiemanh-footer-links">
-                            <li><a href="#">Chụp chân dung</a></li>
-                            <li><a href="#">Chụp couple lãng mạn</a></li>
-                            <li><a href="#">Chụp kỷ yếu thanh xuân</a></li>
-                            <li><a href="#">Chụp gia đình sum vầy</a></li>
-                            <li><a href="#">Profile cá nhân chuyên nghiệp</a></li>
+                            <li><a href="#filterBar">Concept Nàng Thơ & Beauty</a></li>
+                            <li><a href="#filterBar">Concept Sinh Nhật & Kỷ Niệm</a></li>
+                            <li><a href="#filterBar">Concept Tết & Áo Dài</a></li>
+                            <li><a href="#filterBar">Concept Cổ Trang Nghệ Thuật</a></li>
+                            <li><a href="#filterBar">Concept Sexy & Năng Động</a></li>
                         </ul>
                     </div>
                     <div class="tiemanh-footer-col">
-                        <h4 class="tiemanh-footer-title">Hỗ trợ</h4>
+                        <h4 class="tiemanh-footer-title">Khám Phá</h4>
                         <ul class="tiemanh-footer-links">
-                            <li><a href="#">Bảng báo giá dịch vụ</a></li>
-                            <li><a href="#">Quy trình chụp ảnh</a></li>
-                            <li><a href="#">Các gói khuyến mãi</a></li>
-                            <li><a href="#">Chính sách hủy đặt lịch</a></li>
-                            <li><a href="#">Ý kiến phản hồi</a></li>
+                            <li><a href="#tiemanh-banggia">Bảng báo giá dịch vụ</a></li>
+                            <li><a href="#tiemanh-quytrinh">Quy trình chụp ảnh</a></li>
+                            <li><a href="#tiemanh-chinhanh">Hệ thống chi nhánh</a></li>
+                            <li><a href="#filterBar">Bộ sưu tập 100+ Concept</a></li>
+                            <li><a href="#tiemanh-banggia">Đăng ký tư vấn miễn phí</a></li>
                         </ul>
                     </div>
                     <div class="tiemanh-footer-col">
-                        <h4 class="tiemanh-footer-title">Liên hệ</h4>
+                        <h4 class="tiemanh-footer-title">Liên Hệ & Chi Nhánh</h4>
                         <ul class="tiemanh-footer-contacts">
                             <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
-                            <li class="address-line"><span class="icon">📍</span> <span>CS1: 214/19/21 Nguyễn Văn Nguyễn, Q.1, TP. Hồ Chí Minh</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1-TPHCM: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>Hệ thống: Thủ Đức • Biên Hòa • Bình Dương • Cần Thơ • Đà Nẵng</span></li>
                         </ul>
                     </div>
                 </div>
                 <div class="tiemanh-footer-bottom">
-                    <span>© 2024 Tiệm Ảnh Trái Thơm. All rights reserved.</span>
-                    <span>Thiết kế bởi Antigravity 💛</span>
+                    <span>© 2026 Tiệm Ảnh Trái Thơm. All rights reserved.</span>
+                    <span>Thiết kế bởi NHATLAM 💛</span>
                 </div>
             </footer>
 
@@ -3166,6 +3167,22 @@
             btn.addEventListener("click", () => {
                 const conceptName = btn.getAttribute("data-concept") || "";
                 openBookingModal(conceptName);
+            });
+        });
+
+        // Xử lý cuộn mượt cho các liên kết ở Footer
+        const footerLinks = document.querySelectorAll(".tiemanh-footer-links a");
+        footerLinks.forEach(link => {
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("href");
+                if (href && href.startsWith("#")) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    if (targetId === "tiemanh-banggia") smoothScrollToSection("banggiaSection");
+                    else if (targetId === "tiemanh-quytrinh") smoothScrollToSection("quytrinhSection");
+                    else if (targetId === "tiemanh-chinhanh") smoothScrollToSection("chinhanhSection");
+                    else if (targetId === "filterBar") smoothScrollToSection("filterBar");
+                }
             });
         });
     }
