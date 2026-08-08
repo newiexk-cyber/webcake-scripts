@@ -504,19 +504,19 @@
         /* 2. Hero Section */
         .tiemanh-hero {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 50px;
             align-items: center;
-            padding: 80px 8% 100px 8%;
-            background: radial-gradient(circle at 80% 20%, #fffde7 0%, var(--tiemanh-bg) 100%);
+            padding: 60px 6% 75px 6%;
+            background: radial-gradient(circle at 85% 30%, #fffde7 0%, var(--tiemanh-bg) 100%);
             position: relative;
         }
         .tiemanh-hero::after {
             content: '';
             position: absolute;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 235, 59, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 235, 59, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
             top: 20%;
             left: 5%;
             pointer-events: none;
@@ -524,7 +524,7 @@
         .tiemanh-hero-left {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 22px;
         }
         .tiemanh-hero-subtitle {
             font-family: var(--tiemanh-font);
@@ -538,7 +538,7 @@
         }
         .tiemanh-hero-title {
             font-family: var(--tiemanh-serif);
-            font-size: 64px;
+            font-size: 62px;
             font-weight: 900;
             line-height: 1.1;
             background: linear-gradient(135deg, #4a1525 0%, #c2185b 50%, #ffa000 100%);
@@ -591,23 +591,29 @@
             width: 100%;
         }
         .tiemanh-hot-showcase {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 251, 235, 0.92));
-            border: 2px solid rgba(251, 192, 45, 0.45);
-            border-radius: 24px;
-            padding: 24px 20px 22px 20px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 251, 235, 0.94));
+            border: 2px solid rgba(251, 192, 45, 0.5);
+            border-radius: 28px;
+            padding: 26px 24px 24px 24px;
             box-shadow: 
-                0 20px 50px rgba(251, 192, 45, 0.18),
-                0 6px 20px rgba(0, 0, 0, 0.04),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+                0 25px 60px rgba(251, 192, 45, 0.22),
+                0 8px 25px rgba(0, 0, 0, 0.04),
+                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
             width: 100%;
-            max-width: 600px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             position: relative;
             box-sizing: border-box;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .tiemanh-hot-showcase:hover {
+            box-shadow: 
+                0 30px 70px rgba(251, 192, 45, 0.28),
+                0 10px 30px rgba(0, 0, 0, 0.06);
+            border-color: rgba(251, 192, 45, 0.7);
         }
         .hot-showcase-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         .hot-badge {
             display: inline-flex;
@@ -617,21 +623,21 @@
             color: #ffffff;
             font-size: 12px;
             font-weight: 800;
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 50px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+            box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
             margin-bottom: 8px;
             animation: pulseGlow 2.5s infinite alternate ease-in-out;
         }
         @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3); }
-            100% { transform: scale(1.04); box-shadow: 0 6px 20px rgba(230, 81, 0, 0.5); }
+            0% { transform: scale(1); box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35); }
+            100% { transform: scale(1.05); box-shadow: 0 6px 22px rgba(230, 81, 0, 0.55); }
         }
         .hot-showcase-title {
             font-family: var(--tiemanh-serif);
-            font-size: 21px;
+            font-size: 23px;
             font-weight: 800;
             color: var(--tiemanh-dark);
             margin: 0;
@@ -640,16 +646,16 @@
         .hot-concepts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            gap: 18px;
             width: 100%;
         }
         .polaroid-card {
             background: #ffffff;
-            padding: 10px 10px 14px 10px;
-            border-radius: 16px;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+            padding: 12px 12px 16px 12px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
             border: 1.5px solid rgba(251, 192, 45, 0.25);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -659,23 +665,48 @@
             width: 100%;
             box-sizing: border-box;
         }
+        
+        /* Hiệu ứng bồng bềnh so le nhẹ nhàng, nhịp điệu sinh động */
+        .polaroid-card.p1 {
+            animation: gentleFloat1 5s infinite alternate ease-in-out;
+        }
+        .polaroid-card.p2 {
+            animation: gentleFloat2 5.6s infinite alternate ease-in-out 0.4s;
+        }
+        .polaroid-card.p3 {
+            animation: gentleFloat3 5.2s infinite alternate ease-in-out 0.8s;
+        }
+        
+        @keyframes gentleFloat1 {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-7px); }
+        }
+        @keyframes gentleFloat2 {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+        @keyframes gentleFloat3 {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
         .polaroid-card img {
             width: 100%;
-            height: 190px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid rgba(0, 0, 0, 0.04);
-            transition: transform 0.4s ease;
+            transition: transform 0.45s ease;
         }
         .polaroid-card:hover img {
-            transform: scale(1.06);
+            transform: scale(1.07);
         }
         .polaroid-caption {
             font-family: var(--tiemanh-font);
             font-weight: 800;
-            font-size: 13.5px;
+            font-size: 14px;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 12px;
             color: var(--tiemanh-dark);
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -684,6 +715,7 @@
             text-overflow: ellipsis;
             width: 100%;
             box-sizing: border-box;
+            transition: color 0.3s ease;
         }
         .polaroid-caption::after {
             content: '✨ Xem album ➔';
@@ -695,12 +727,23 @@
             letter-spacing: 0;
             margin-top: 3px;
             opacity: 0.9;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
+        
+        /* Hiệu ứng khi rê chuột (Hover) */
         .polaroid-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 16px 35px rgba(251, 192, 45, 0.4);
-            border-color: rgba(251, 192, 45, 0.9);
+            animation: none !important;
+            transform: translateY(-12px) scale(1.04) !important;
+            box-shadow: 0 20px 45px rgba(251, 192, 45, 0.45), 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(251, 192, 45, 0.95);
             z-index: 10;
+        }
+        .polaroid-card:hover .polaroid-caption {
+            color: var(--tiemanh-primary-dark);
+        }
+        .polaroid-card:hover .polaroid-caption::after {
+            transform: translateX(3px);
+            color: #d84315;
         }
 
         /* 3. Category Filter Bar */
@@ -1693,8 +1736,11 @@
         /* 9. Responsive layout adjust */
         @media (max-width: 1024px) {
             .tiemanh-navbar { padding: 18px 5%; }
-            .tiemanh-hero { padding: 60px 5%; gap: 40px; }
-            .tiemanh-hero-title { font-size: 46px; }
+            .tiemanh-hero { grid-template-columns: 1fr; padding: 50px 5%; gap: 35px; text-align: center; }
+            .tiemanh-hero-left { align-items: center; }
+            .tiemanh-hero-title { font-size: 48px; }
+            .tiemanh-hero-btns { justify-content: center; }
+            .polaroid-card img { height: 210px; }
             .tiemanh-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tiemanh-section-container { padding: 50px 5%; }
             .tiemanh-footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1706,16 +1752,16 @@
             .tiemanh-pricing-grid, .tiemanh-steps-container, .tiemanh-feedback-grid, .tiemanh-branches-grid { grid-template-columns: 1fr; }
             .tiemanh-navbar { flex-direction: column; gap: 15px; padding: 15px; }
             .tiemanh-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
-            .tiemanh-hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 40px 20px; }
+            .tiemanh-hero { grid-template-columns: 1fr; text-align: center; gap: 30px; padding: 35px 16px; }
             .tiemanh-hero-right { width: 100%; height: auto; }
-            .tiemanh-hot-showcase { padding: 18px 12px 16px 12px; border-radius: 18px; }
-            .hot-showcase-title { font-size: 16.5px; }
-            .hot-badge { font-size: 10.5px; padding: 4px 12px; margin-bottom: 6px; }
+            .tiemanh-hot-showcase { padding: 18px 12px 16px 12px; border-radius: 20px; }
+            .hot-showcase-title { font-size: 17px; }
+            .hot-badge { font-size: 10.5px; padding: 4px 14px; margin-bottom: 6px; }
             .hot-concepts-grid { gap: 8px; }
-            .polaroid-card { padding: 6px 6px 10px 6px; border-radius: 12px; }
-            .polaroid-card img { height: 135px; border-radius: 8px; }
-            .polaroid-caption { font-size: 11px; margin-top: 6px; letter-spacing: 0; }
-            .polaroid-caption::after { font-size: 9px; margin-top: 1px; }
+            .polaroid-card { padding: 6px 6px 10px 6px; border-radius: 14px; }
+            .polaroid-card img { height: 145px; border-radius: 10px; }
+            .polaroid-caption { font-size: 11.5px; margin-top: 6px; letter-spacing: 0; }
+            .polaroid-caption::after { font-size: 9.5px; margin-top: 1px; }
             .tiemanh-grid { grid-template-columns: 1fr; }
             .tiemanh-cta-panel { flex-direction: column; text-align: center; gap: 30px; padding: 30px; }
             .tiemanh-cta-left { flex-direction: column; gap: 15px; }
