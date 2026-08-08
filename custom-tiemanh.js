@@ -2240,6 +2240,7 @@
             }
         });
 
+        currentFiltered = shuffleArray([...CONCEPTS]);
         setupGallery();
         randomizeHeroPolaroids();
         fetchConceptsFromSheets();
@@ -2455,16 +2456,28 @@
 
             if (parsed.length > 0) {
                 CONCEPTS.length = 0;
-                parsed.forEach(c => CONCEPTS.push(c));
+                // Xáo trộn ngẫu nhiên toàn bộ concept để không bị cố định vị trí
+                const randomizedConcepts = shuffleArray([...parsed]);
+                randomizedConcepts.forEach(c => CONCEPTS.push(c));
                 currentFiltered = [...CONCEPTS];
                 setupGallery();
                 randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
                 renderFilterBar();
-                console.log(`[TiệmẢnh] ✅ Đã tải ${parsed.length} concept từ Google Sheets dạng JSONP (bypass CORS).`);
+                console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept ngẫu nhiên từ Google Sheets.`);
             }
         } catch (e) {
             console.warn("[TiệmẢnh] Lỗi xử lý dữ liệu từ Google Sheets:", e);
         }
+    }
+
+    // Hàm xáo trộn ngẫu nhiên mảng chuẩn (Fisher-Yates Shuffle)
+    function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
     }
 
     // Hàm chọn 3 concept từ bộ dữ liệu thật của studio để đưa lên Hero banner
@@ -3084,11 +3097,14 @@
     }
 
     function applyDoubleFilter() {
-        currentFiltered = CONCEPTS.filter(c => {
+        const filtered = CONCEPTS.filter(c => {
             const matchBranch = (selectedBranch === "all" || c.category === selectedBranch);
             const matchTheme = (selectedTheme === "all" || (c.theme && c.theme.toUpperCase() === selectedTheme));
             return matchBranch && matchTheme;
         });
+
+        // Tự động xáo trộn ngẫu nhiên các concept để giao diện luôn tươi mới, sinh động
+        currentFiltered = shuffleArray([...filtered]);
 
         const grid = document.getElementById("conceptGrid");
         if (grid) {
