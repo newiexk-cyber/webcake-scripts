@@ -316,10 +316,12 @@
     ];
 
     const STYLES = `
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap');
+
         :root {
-            --tiemanh-font: 'Plus Jakarta Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --tiemanh-serif: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
-            --tiemanh-cursive: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+            --tiemanh-font: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --tiemanh-serif: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --tiemanh-cursive: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             
             --tiemanh-primary: #fbc02d;
             --tiemanh-primary-dark: #f9a825;
@@ -1302,11 +1304,12 @@
         }
         .tiemanh-lightbox-title {
             font-family: var(--tiemanh-serif);
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             color: var(--tiemanh-white);
-            margin: 0 0 20px 0;
-            text-transform: uppercase;
+            margin: 0 0 16px 0;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
         }
         .tiemanh-lightbox-desc {
             font-size: 14.5px;
@@ -1866,7 +1869,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
@@ -2789,9 +2792,19 @@
 
         if (!overlay || !lightboxImg) return;
 
-        lightboxCat.textContent = `Concept ${concept.title}`;
+        const displayTheme = concept.theme || concept.tag || "";
+        lightboxCat.textContent = displayTheme ? `CONCEPT ${displayTheme.toUpperCase()}` : "CONCEPT NGHỆ THUẬT";
         lightboxTitle.textContent = concept.title;
-        lightboxDesc.textContent = concept.description;
+        
+        let desc = String(concept.description || "").trim();
+        if (desc.toLowerCase().startsWith("concept done")) {
+            desc = desc.replace(/^(concept done|concept done mẫu|concept)\s*/gi, "").trim();
+            desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+            desc = `Bộ ảnh ${desc}. Được đầu tư kỹ lưỡng từ trang phục, ánh sáng và bối cảnh độc quyền tại Tiệm Ảnh Trái Thơm.`;
+        } else if (!desc) {
+            desc = `Bộ ảnh ${concept.title} được đầu tư kỹ lưỡng từ trang phục, makeup và bối cảnh nghệ thuật độc quyền tại Tiệm Ảnh Trái Thơm.`;
+        }
+        lightboxDesc.textContent = desc;
         
         // Cập nhật zoom state về mặc định
         lightboxImg.className = "tiemanh-lightbox-img";
