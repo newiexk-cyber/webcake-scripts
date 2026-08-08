@@ -582,10 +582,10 @@
             transform: translateY(-2px);
         }
 
-        /* Polaroid stacked images */
+        /* Polaroid stacked images - Thiết kế Studio Cao Cấp */
         .tiemanh-hero-right {
             position: relative;
-            height: 480px;
+            height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -599,111 +599,178 @@
         .polaroid-stack::after {
             content: '';
             position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(251, 192, 45, 0.15) 0%, rgba(251,192,45,0) 70%);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(251, 192, 45, 0.25) 0%, rgba(255, 117, 143, 0.1) 50%, rgba(251,192,45,0) 75%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 0;
             pointer-events: none;
+            filter: blur(20px);
         }
         .polaroid-card {
             position: absolute;
-            background: var(--tiemanh-white);
-            padding: 14px 14px 28px 14px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(74, 21, 37, 0.12), 0 5px 15px rgba(0, 0, 0, 0.05);
-            width: 245px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: #ffffff;
+            padding: 12px 12px 20px 12px;
+            border-radius: 16px;
+            box-shadow: 
+                0 15px 35px rgba(30, 30, 36, 0.1),
+                0 5px 15px rgba(251, 192, 45, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+            width: 255px;
+            transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1.5px solid rgba(251, 192, 45, 0.25);
             cursor: pointer;
             z-index: 2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        /* Hiệu ứng băng keo giấy (Washi Tape) dán ảnh nghệ thuật */
+        /* Hiệu ứng ánh sáng lấp lánh (Shimmer reflection) khi hover */
+        .polaroid-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                rgba(255, 255, 255, 0) 25%,
+                rgba(255, 255, 255, 0.45) 50%,
+                rgba(255, 255, 255, 0) 75%
+            );
+            transform: rotate(25deg);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .polaroid-card:hover::after {
+            opacity: 1;
+            animation: shimmerSweep 1.2s ease-in-out;
+        }
+        @keyframes shimmerSweep {
+            0% { transform: translateY(-30%) rotate(25deg); }
+            100% { transform: translateY(30%) rotate(25deg); }
+        }
+        
+        /* Băng keo dán Washi Tape sang trọng */
         .polaroid-card::before {
             content: '';
             position: absolute;
-            top: -12px;
+            top: -10px;
             left: 50%;
-            width: 80px;
-            height: 26px;
-            background-color: rgba(255, 255, 255, 0.38);
-            backdrop-filter: blur(2px);
-            border-left: 1px dashed rgba(0,0,0,0.06);
-            border-right: 1px dashed rgba(0,0,0,0.06);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+            width: 76px;
+            height: 24px;
+            background: linear-gradient(135deg, rgba(255, 253, 231, 0.9), rgba(255, 243, 224, 0.8));
+            backdrop-filter: blur(4px);
+            border-left: 2px dashed rgba(251, 192, 45, 0.5);
+            border-right: 2px dashed rgba(251, 192, 45, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             z-index: 10;
+            border-radius: 2px;
         }
         
         .polaroid-card img {
             width: 100%;
-            height: 245px;
+            height: 255px;
             object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: transform 0.45s ease;
         }
+        .polaroid-card:hover img {
+            transform: scale(1.04);
+        }
+
         .polaroid-caption {
             font-family: var(--tiemanh-font);
-            font-weight: 700;
-            font-size: 15px;
+            font-weight: 800;
+            font-size: 14.5px;
             text-align: center;
-            margin-top: 14px;
+            margin-top: 12px;
             color: var(--tiemanh-dark);
             letter-spacing: 0.8px;
             text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            width: 100%;
+        }
+        .polaroid-caption::after {
+            content: '✨ Xem album ảnh ➔';
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--tiemanh-primary-dark);
+            text-transform: none;
+            letter-spacing: 0;
+            opacity: 0.85;
         }
         
-        /* Phân bổ các ảnh rải rác tự nhiên ra (Scatter) kèm hiệu ứng bay nhẹ */
+        /* Bố cục 3 cánh quạt so le đẹp mắt, tránh che khuất chữ */
         .polaroid-card.p1 {
-            top: 5%;
-            left: -5%;
-            animation: floatCard1 5s infinite alternate ease-in-out;
+            top: 4%;
+            left: 2%;
+            transform: rotate(-10deg);
+            animation: floatCard1 6s infinite alternate ease-in-out;
+            z-index: 2;
         }
         .polaroid-card.p1::before {
-            transform: translateX(-50%) rotate(-13deg);
+            transform: translateX(-50%) rotate(-8deg);
         }
         
         .polaroid-card.p2 {
-            top: 12%;
-            left: 52%;
-            animation: floatCard2 6s infinite alternate ease-in-out;
+            top: 8%;
+            right: 2%;
+            transform: rotate(10deg);
+            animation: floatCard2 6.5s infinite alternate ease-in-out;
+            z-index: 2;
         }
         .polaroid-card.p2::before {
-            transform: translateX(-50%) rotate(5deg);
+            transform: translateX(-50%) rotate(7deg);
         }
         
         .polaroid-card.p3 {
-            top: 42%;
-            left: 22%;
+            top: 36%;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg);
             animation: floatCard3 5.5s infinite alternate ease-in-out;
+            z-index: 5;
+            box-shadow: 
+                0 22px 45px rgba(30, 30, 36, 0.15),
+                0 8px 20px rgba(251, 192, 45, 0.25);
         }
         .polaroid-card.p3::before {
-            transform: translateX(-50%) rotate(-2deg);
+            transform: translateX(-50%) rotate(-1deg);
         }
         
-        /* Tương tác khi Hover: Dừng bay, phóng to và nổi lên trên cùng */
+        /* Tương tác khi Hover: Dừng bay, phóng to và nổi bật lên */
         .polaroid-card:hover {
             animation: none !important;
-            transform: scale(1.12) rotate(0deg) translateY(-20px) !important;
+            transform: scale(1.1) rotate(0deg) translateY(-16px) !important;
             z-index: 99 !important;
-            box-shadow: 0 30px 60px rgba(251, 192, 45, 0.35), 0 10px 20px rgba(74, 21, 37, 0.1);
-            border-color: rgba(251, 192, 45, 0.6);
+            box-shadow: 
+                0 30px 60px rgba(251, 192, 45, 0.4),
+                0 12px 25px rgba(30, 30, 36, 0.15) !important;
+            border-color: rgba(251, 192, 45, 0.7);
         }
 
         /* Các chuyển động bay bổng tự do riêng biệt cho từng ảnh */
         @keyframes floatCard1 {
-            0% { transform: rotate(-11deg) translateY(0px); }
-            100% { transform: rotate(-8deg) translateY(-8px); }
+            0% { transform: rotate(-10deg) translateY(0px); }
+            100% { transform: rotate(-7deg) translateY(-8px); }
         }
         @keyframes floatCard2 {
-            0% { transform: rotate(5deg) translateY(0px); }
-            100% { transform: rotate(8deg) translateY(-12px); }
+            0% { transform: rotate(10deg) translateY(0px); }
+            100% { transform: rotate(7deg) translateY(-10px); }
         }
         @keyframes floatCard3 {
-            0% { transform: rotate(1deg) translateY(0px); }
-            100% { transform: rotate(-1deg) translateY(-10px); }
+            0% { transform: translateX(-50%) rotate(0deg) translateY(0px); }
+            100% { transform: translateX(-50%) rotate(-1deg) translateY(-8px); }
         }
 
         /* 3. Category Filter Bar */
@@ -1711,14 +1778,14 @@
             .tiemanh-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .tiemanh-hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 40px 20px; }
             .tiemanh-hero-desc { margin: 0 auto; }
-            .tiemanh-hero-btns { justify-content: center; }
-            .tiemanh-hero-right { height: 350px; }
-            .polaroid-card { width: 180px; padding: 10px 10px 20px 10px; }
-            .polaroid-card img { height: 180px; }
-            .polaroid-caption { font-size: 18px; margin-top: 10px; }
-            .polaroid-card.p1 { left: 5%; }
-            .polaroid-card.p2 { left: 50%; }
-            .polaroid-card.p3 { left: 25%; top: 35%; }
+            .tiemanh-hero-right { height: 370px; width: 100%; max-width: 380px; margin: 0 auto; position: relative; }
+            .polaroid-card { width: 180px; padding: 10px 10px 16px 10px; border-radius: 14px; }
+            .polaroid-card img { height: 180px; border-radius: 8px; }
+            .polaroid-caption { font-size: 13px; margin-top: 8px; }
+            .polaroid-caption::after { font-size: 10px; }
+            .polaroid-card.p1 { left: 0%; top: 4%; transform: rotate(-9deg); }
+            .polaroid-card.p2 { right: 0%; top: 8%; transform: rotate(9deg); }
+            .polaroid-card.p3 { left: 50%; top: 35%; transform: translateX(-50%) rotate(0deg); }
             .tiemanh-grid { grid-template-columns: 1fr; }
             .tiemanh-cta-panel { flex-direction: column; text-align: center; gap: 30px; padding: 30px; }
             .tiemanh-cta-left { flex-direction: column; gap: 15px; }
