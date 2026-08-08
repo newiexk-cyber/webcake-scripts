@@ -850,27 +850,58 @@
         .tiemanh-section-container {
             padding: 60px 8%;
         }
+        /* Wrapper tạo hiệu ứng fade ở 2 cạnh gợi ý còn nội dung */
+        .tiemanh-filter-scroll-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .tiemanh-filter-scroll-wrap::before,
+        .tiemanh-filter-scroll-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .tiemanh-filter-scroll-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--tiemanh-bg) 0%, transparent 100%);
+        }
+        .tiemanh-filter-scroll-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--tiemanh-bg) 0%, transparent 100%);
+        }
+
         .tiemanh-filter-bar {
             display: flex;
-            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
             gap: 10px;
+            padding: 6px 12px 10px 12px;
             margin-bottom: 0px;
-            flex-wrap: wrap;
+            justify-content: flex-start;
         }
+        .tiemanh-filter-bar::-webkit-scrollbar { display: none; }
         .tiemanh-filter-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
         }
         .tiemanh-filter-label {
             font-size: 13px;
             font-weight: 700;
             color: var(--tiemanh-text);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             opacity: 0.7;
+            padding-left: 4px;
         }
         .tiemanh-filter-pill {
             background: var(--tiemanh-white);
@@ -883,6 +914,8 @@
             cursor: pointer;
             transition: var(--tiemanh-transition);
             box-shadow: var(--tiemanh-shadow-sm);
+            flex-shrink: 0;
+            white-space: nowrap;
         }
         .tiemanh-filter-pill:hover {
             background: #fffde7;
@@ -1908,25 +1941,17 @@
             .polaroid-caption { font-size: 10.5px; margin-top: 4px; font-weight: 700; }
             .polaroid-caption::after { font-size: 8.5px; margin-top: 1px; }
 
-            /* Bộ lọc chuyển thành dạng vuốt ngang (Horizontal Swipe) như app di động */
+            /* Bộ lọc vuốt ngang Mobile — tối ưu touch */
             .tiemanh-filter-wrapper { margin-bottom: 18px; gap: 6px; }
-            .tiemanh-filter-label { font-size: 11.5px; text-align: left; padding-left: 2px; margin-bottom: 2px; }
+            .tiemanh-filter-group { align-items: flex-start; }
+            .tiemanh-filter-label { font-size: 11.5px; padding-left: 4px; margin-bottom: 6px; }
             .tiemanh-filter-bar {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                padding: 4px 2px 8px 2px;
+                padding: 4px 8px 10px 8px;
                 gap: 8px;
-                justify-content: flex-start;
             }
-            .tiemanh-filter-bar::-webkit-scrollbar { display: none; }
             .tiemanh-filter-pill {
-                flex-shrink: 0;
-                padding: 6px 14px;
-                font-size: 12.5px;
-                white-space: nowrap;
+                padding: 7px 16px;
+                font-size: 13px;
                 border-radius: 20px;
             }
 
@@ -2081,15 +2106,19 @@
                 <!-- Bộ lọc kép: Chi nhánh & Chủ đề -->
                 <div class="tiemanh-filter-group" style="margin-bottom: 20px;">
                     <div class="tiemanh-filter-label">📍 Chọn Chi nhánh:</div>
-                    <div class="tiemanh-filter-bar" id="branchFilterBar">
-                        <button class="tiemanh-filter-pill active" data-branch="all">Tất cả</button>
+                    <div class="tiemanh-filter-scroll-wrap">
+                        <div class="tiemanh-filter-bar" id="branchFilterBar">
+                            <button class="tiemanh-filter-pill active" data-branch="all">Tất cả</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="tiemanh-filter-group" style="margin-bottom: 40px;">
                     <div class="tiemanh-filter-label">📸 Chọn Chủ đề:</div>
-                    <div class="tiemanh-filter-bar" id="themeFilterBar">
-                        <button class="tiemanh-filter-pill active" data-theme="all">Tất cả</button>
+                    <div class="tiemanh-filter-scroll-wrap">
+                        <div class="tiemanh-filter-bar" id="themeFilterBar">
+                            <button class="tiemanh-filter-pill active" data-theme="all">Tất cả</button>
+                        </div>
                     </div>
                 </div>
 
