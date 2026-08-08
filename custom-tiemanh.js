@@ -317,9 +317,9 @@
 
     const STYLES = `
         :root {
-            --tiemanh-font: 'Be Vietnam Pro', sans-serif;
-            --tiemanh-serif: 'Playfair Display', serif;
-            --tiemanh-cursive: 'Playfair Display', serif;
+            --tiemanh-font: 'Plus Jakarta Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --tiemanh-serif: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+            --tiemanh-cursive: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
             
             --tiemanh-primary: #fbc02d;
             --tiemanh-primary-dark: #f9a825;
@@ -527,13 +527,14 @@
             gap: 24px;
         }
         .tiemanh-hero-subtitle {
-            font-family: var(--tiemanh-cursive);
-            font-style: italic;
-            font-size: 34px;
-            font-weight: 600;
+            font-family: var(--tiemanh-font);
+            font-size: 16px;
+            font-weight: 700;
             color: var(--tiemanh-primary-dark);
             margin: 0;
-            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            line-height: 1.2;
         }
         .tiemanh-hero-title {
             font-family: var(--tiemanh-serif);
@@ -644,12 +645,14 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
         .polaroid-caption {
-            font-family: var(--tiemanh-cursive);
-            font-style: italic;
-            font-size: 22px;
+            font-family: var(--tiemanh-font);
+            font-weight: 700;
+            font-size: 15px;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 14px;
             color: var(--tiemanh-dark);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
         }
         
         /* Phân bổ các ảnh rải rác tự nhiên ra (Scatter) kèm hiệu ứng bay nhẹ */
@@ -704,6 +707,13 @@
         }
 
         /* 3. Category Filter Bar */
+        .tiemanh-section-container,
+        .tiemanh-banggia-sec,
+        .tiemanh-quytrinh-sec,
+        .tiemanh-chinhanh-sec,
+        .tiemanh-footer {
+            scroll-margin-top: 85px;
+        }
         .tiemanh-section-container {
             padding: 60px 8%;
         }
@@ -1159,11 +1169,13 @@
             border-left: 1px solid rgba(255,255,255,0.05);
         }
         .tiemanh-lightbox-cat {
-            font-family: var(--tiemanh-cursive);
-            font-style: italic;
+            font-family: var(--tiemanh-font);
             color: var(--tiemanh-primary);
-            font-size: 28px;
-            margin-bottom: 5px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
         }
         .tiemanh-lightbox-title {
             font-family: var(--tiemanh-serif);
@@ -1387,11 +1399,13 @@
             margin-bottom: 50px;
         }
         .tiemanh-sec-subtitle {
-            font-family: var(--tiemanh-cursive);
-            font-style: italic;
-            font-size: 28px;
+            font-family: var(--tiemanh-font);
+            font-size: 14px;
+            font-weight: 700;
             color: var(--tiemanh-primary-dark);
             margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .tiemanh-sec-title {
             font-family: var(--tiemanh-serif);
@@ -1727,7 +1741,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
@@ -1759,7 +1773,6 @@
                     <li class="tiemanh-menu-item"><a href="#" id="menuChiNhanh">Chi nhánh</a></li>
                     <li class="tiemanh-menu-item"><a href="#" id="menuLienHe">Liên hệ</a></li>
                 </ul>
-                <a href="#" class="tiemanh-btn-primary" id="btnDatLichHeader">📅 Đặt Lịch Ngay</a>
             </header>
 
             <!-- Hero Section -->
@@ -1771,8 +1784,7 @@
                         Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
                     </p>
                     <div class="tiemanh-hero-btns">
-                        <button class="tiemanh-btn-primary" id="btnHeroTuVan">📅 Tư Vấn & Đặt Lịch</button>
-                        <button class="tiemanh-btn-secondary" id="btnHeroBangGia">💎 Xem Bảng Giá</button>
+                        <button class="tiemanh-btn-primary" id="btnHeroBangGia">💎 Xem Bảng Giá</button>
                     </div>
                 </div>
                 <div class="tiemanh-hero-right">
@@ -1839,7 +1851,6 @@
                         </ul>
                         <div class="price-desc-highlight">⏰ Khách hàng <strong>chụp trải nghiệm nhanh</strong></div>
                         <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp kỷ niệm, sinh nhật.</div>
-                        <button class="tiemanh-btn-primary btn-price-select" data-concept="Gói Thanh Xuân" style="margin-top: auto; width: 100%;">📅 ĐẶT LỊCH NGAY</button>
                     </div>
 
                     <!-- Gói Toả Sáng -->
@@ -1858,7 +1869,6 @@
                         <div class="price-desc-highlight">⚠️ <strong>Tiết kiệm</strong> hơn khi chụp nhiều concept</div>
                         <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp ảnh cá nhân, Beauty, Sinh nhật, Profile.</div>
                         <div class="price-best-seller">🔥 Best Seller 🔥</div>
-                        <button class="tiemanh-btn-primary btn-price-select" data-concept="Gói Toả Sáng" style="margin-top: auto; width: 100%; box-shadow: 0 6px 20px rgba(251, 192, 45, 0.45);">📅 ĐẶT LỊCH NGAY</button>
                     </div>
 
                     <!-- Gói Hào Quang -->
@@ -1878,7 +1888,6 @@
                         </ul>
                         <div class="price-desc-highlight">💎 Khách hàng thích trải nghiệm <strong>cao cấp</strong>, ekip sẽ <strong>chăm sóc kỹ từng chi tiết</strong></div>
                         <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> tất cả các concept chụp ảnh dịp quan trọng cần chỉn chu đầu tư.</div>
-                        <button class="tiemanh-btn-primary btn-price-select" data-concept="Gói Hào Quang" style="margin-top: auto; width: 100%;">📅 ĐẶT LỊCH NGAY</button>
                     </div>
                 </div>
             </section>
@@ -2035,9 +2044,6 @@
                             <div style="font-weight: 700; margin-bottom: 12px; color: var(--tiemanh-white); font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.5px;">BỘ SƯU TẬP ẢNH MẪU:</div>
                             <div class="tiemanh-lightbox-img-counter" id="lightboxImgCounter">1 / 10</div>
                             <div class="tiemanh-lightbox-thumb-container" id="lightboxThumbs"></div>
-                            <button class="tiemanh-btn-primary" id="lightboxBookBtn" style="width: 100%; justify-content: center; padding: 14px;">
-                                📅 ĐẶT LỊCH CONCEPT NÀY
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -2305,6 +2311,21 @@
             .join(' ');
     }
 
+    // Hàm chuẩn hóa tên chi nhánh (Đổi Q1, Quận 1 thành Quận 1-TPHCM)
+    function normalizeBranchName(name, slug) {
+        const raw = String(name || slug || "").trim();
+        const s = raw.toUpperCase();
+        if (s === "Q1" || s === "QUAN 1" || s === "QUẬN 1" || s === "TATT Q1" || s === "Q.1" || s.startsWith("Q1") || s.startsWith("QUẬN 1")) {
+            return "Quận 1-TPHCM";
+        }
+        if (s.includes("THU DUC") || s.includes("THỦ ĐỨC")) return "Thủ Đức";
+        if (s.includes("DA NANG") || s.includes("ĐÀ NẴNG")) return "Đà Nẵng";
+        if (s.includes("CAN THO") || s.includes("CẦN THƠ")) return "Cần Thơ";
+        if (s.includes("BIEN HOA") || s.includes("BIÊN HÒA")) return "Biên Hòa";
+        if (s.includes("BINH DUONG") || s.includes("BÌNH DƯƠNG")) return "Bình Dương";
+        return raw || "Concept";
+    }
+
     // Xử lý dữ liệu nhận được từ Google Sheets JSONP
     function handleSheetsData(data) {
         try {
@@ -2322,6 +2343,7 @@
                 // Tự động làm sạch tên concept và chuẩn hóa gộp nhóm chủ đề
                 const cleanedTitle = cleanTitle(obj.title || "Concept");
                 const cleanedTheme = normalizeThemeName(obj.theme || "");
+                const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category, obj.category);
 
                 // Tập hợp các ảnh từ img1 -> img10
                 let images = [];
@@ -2351,7 +2373,7 @@
                     theme: cleanedTheme,
                     title: cleanedTitle,
                     category: obj.category || "nutinh",
-                    tag: obj.tag || obj.category || "Concept",
+                    tag: cleanedBranch,
                     icon: obj.icon || "📸",
                     iconColor: obj.iconColor || "#fbc02d",
                     bgColor: bgColor,
@@ -2834,6 +2856,32 @@
             });
         });
 
+        // Hàm cuộn mượt thông minh (hỗ trợ cả cuộn cửa sổ và cuộn Webcake overlay)
+        function smoothScrollToSection(targetId) {
+            if (!targetId) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                const c = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
+                if (c) c.scrollTo({ top: 0, behavior: "smooth" });
+                return;
+            }
+
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            const navbar = document.getElementById("tiemanh-navbar");
+            const navHeight = navbar ? navbar.offsetHeight : 70;
+
+            // Sử dụng scrollIntoView chuẩn kết hợp scroll-margin-top
+            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // Hỗ trợ trường hợp phần tử nằm trong khung overlay cuộn độc lập
+            const container = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
+            if (container && container.scrollHeight > container.clientHeight && getComputedStyle(container).overflowY === "auto") {
+                const topPos = targetEl.offsetTop - navHeight - 10;
+                container.scrollTo({ top: Math.max(0, topPos), behavior: "smooth" });
+            }
+        }
+
         // Xử lý cuộn mượt cho toàn bộ Menu Header
         const menuScrollLinks = [
             { id: "menuTrangChu", targetId: null }, // null tức là cuộn lên top
@@ -2858,14 +2906,7 @@
                     // Thêm class active cho thẻ cha li
                     el.closest(".tiemanh-menu-item")?.classList.add("active");
 
-                    if (link.targetId) {
-                        const targetEl = document.getElementById(link.targetId);
-                        if (targetEl) {
-                            targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
-                        }
-                    } else {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
+                    smoothScrollToSection(link.targetId);
                 });
             }
         });
@@ -2891,7 +2932,8 @@
         CONCEPTS.forEach(c => {
             if (c.category && !seenBranches.has(c.category)) {
                 seenBranches.add(c.category);
-                branches.push({ slug: c.category, name: c.tag || c.category });
+                const bName = normalizeBranchName(c.tag || c.category, c.category);
+                branches.push({ slug: c.category, name: bName });
             }
         });
 
