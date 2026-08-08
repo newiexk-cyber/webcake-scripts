@@ -1859,39 +1859,122 @@
             font-size: 16px;
         }
 
-        /* 9. Responsive layout adjust */
+        /* 9. Tối ưu hóa toàn diện giao diện trên Mobile & Tablet */
         @media (max-width: 1024px) {
-            .tiemanh-navbar { padding: 18px 5%; }
-            .tiemanh-hero { grid-template-columns: 1fr; padding: 50px 5%; gap: 35px; text-align: center; }
+            .tiemanh-navbar { padding: 16px 4%; }
+            .tiemanh-hero { grid-template-columns: 1fr; padding: 40px 4%; gap: 30px; text-align: center; }
             .tiemanh-hero-left { align-items: center; }
-            .tiemanh-hero-title { font-size: 48px; }
+            .tiemanh-hero-title { font-size: 46px; }
             .tiemanh-hero-btns { justify-content: center; }
             .tiemanh-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .tiemanh-section-container { padding: 50px 5%; }
+            .tiemanh-section-container { padding: 40px 4%; }
             .tiemanh-footer-grid { grid-template-columns: repeat(2, 1fr); }
             .tiemanh-lightbox-container { grid-template-columns: 1fr; height: 90vh; }
             .tiemanh-lightbox-panel { border-left: none; border-top: 1px solid rgba(255,255,255,0.05); padding: 25px; }
             .tiemanh-lightbox-thumb-container { margin-bottom: 20px; }
         }
+
         @media (max-width: 768px) {
-            .tiemanh-pricing-grid, .tiemanh-steps-container, .tiemanh-feedback-grid, .tiemanh-branches-grid { grid-template-columns: 1fr; }
-            .tiemanh-navbar { flex-direction: column; gap: 15px; padding: 15px; }
-            .tiemanh-menu { gap: 15px; flex-wrap: wrap; justify-content: center; }
-            .tiemanh-hero { grid-template-columns: 1fr; text-align: center; gap: 30px; padding: 35px 16px; }
+            /* Khoảng cách & cỡ chữ thanh thoát, không bị ngợp */
+            .tiemanh-section-title { font-size: 26px; }
+            .tiemanh-section-subtitle { font-size: 12px; letter-spacing: 1.5px; }
+            .tiemanh-section-desc { font-size: 13.5px; margin-bottom: 22px; line-height: 1.5; }
+            .tiemanh-section-container { padding: 25px 14px; }
+            .tiemanh-banggia-sec, .tiemanh-quytrinh-sec, .tiemanh-feedback-sec, .tiemanh-chinhanh-sec { padding: 40px 14px; }
+
+            /* Header & Navbar gọn gàng */
+            .tiemanh-navbar { flex-direction: column; gap: 10px; padding: 12px 14px; }
+            .tiemanh-menu { gap: 10px; flex-wrap: wrap; justify-content: center; }
+            .tiemanh-menu-item a { font-size: 13px; padding: 2px 0; }
+            .tiemanh-btn-primary { padding: 9px 18px; font-size: 13px; }
+
+            /* Hero Section cực kỳ thoáng mắt */
+            .tiemanh-hero { grid-template-columns: 1fr; text-align: center; gap: 20px; padding: 24px 14px 18px 14px; }
+            .tiemanh-hero-left { gap: 12px; }
+            .tiemanh-hero-subtitle { font-size: 12px; letter-spacing: 2px; }
+            .tiemanh-hero-title { font-size: 34px; line-height: 1.15; }
+            .tiemanh-hero-desc { font-size: 13.5px; line-height: 1.55; max-width: 100%; }
+            .tiemanh-hero-btns { gap: 10px; width: 100%; justify-content: center; }
+            .tiemanh-hero-btns button { flex: 1; max-width: 175px; padding: 10px 12px; font-size: 12px; justify-content: center; }
+
+            /* Khung gợi ý 3 Polaroid nổi bật gọn nhẹ */
             .tiemanh-hero-right { width: 100%; height: auto; }
-            .tiemanh-hot-showcase { padding: 18px 12px 16px 12px; border-radius: 20px; }
-            .hot-showcase-title { font-size: 17px; }
-            .hot-badge { font-size: 10.5px; padding: 4px 14px; margin-bottom: 6px; }
-            .hot-concepts-grid { gap: 8px; }
-            .polaroid-card { padding: 6px 6px 10px 6px; border-radius: 14px; }
-            .polaroid-card img { border-radius: 10px; }
-            .polaroid-caption { font-size: 11.5px; margin-top: 6px; letter-spacing: 0; }
-            .polaroid-caption::after { font-size: 9.5px; margin-top: 1px; }
-            .tiemanh-grid { grid-template-columns: 1fr; }
-            .tiemanh-cta-panel { flex-direction: column; text-align: center; gap: 30px; padding: 30px; }
-            .tiemanh-cta-left { flex-direction: column; gap: 15px; }
-            .tiemanh-footer-grid { grid-template-columns: 1fr; gap: 35px; }
-            .tiemanh-footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            .tiemanh-hot-showcase { padding: 12px 8px 10px 8px; border-radius: 16px; }
+            .hot-showcase-title { font-size: 14px; margin-bottom: 8px; }
+            .hot-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 3px; }
+            .hot-concepts-grid { gap: 6px; }
+            .polaroid-card { padding: 4px 4px 7px 4px; border-radius: 12px; }
+            .polaroid-card img { border-radius: 8px; }
+            .polaroid-caption { font-size: 10.5px; margin-top: 4px; font-weight: 700; }
+            .polaroid-caption::after { font-size: 8.5px; margin-top: 1px; }
+
+            /* Bộ lọc chuyển thành dạng vuốt ngang (Horizontal Swipe) như app di động */
+            .tiemanh-filter-wrapper { margin-bottom: 18px; gap: 6px; }
+            .tiemanh-filter-label { font-size: 11.5px; text-align: left; padding-left: 2px; margin-bottom: 2px; }
+            .tiemanh-filter-bar {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 4px 2px 8px 2px;
+                gap: 8px;
+                justify-content: flex-start;
+            }
+            .tiemanh-filter-bar::-webkit-scrollbar { display: none; }
+            .tiemanh-filter-pill {
+                flex-shrink: 0;
+                padding: 6px 14px;
+                font-size: 12.5px;
+                white-space: nowrap;
+                border-radius: 20px;
+            }
+
+            /* Lưới Concept Card trên Mobile: 1 cột thoáng đãng, tỉ lệ chuẩn */
+            .tiemanh-grid { grid-template-columns: 1fr; gap: 20px; }
+            .tiemanh-card { border-radius: 18px; }
+            .collage-wrapper { height: 285px; padding: 6px; border-radius: 16px 16px 0 0; gap: 5px; }
+            .collage-main-img { border-radius: 10px 3px 3px 10px; }
+            .collage-side { gap: 5px; }
+            .collage-side-img.top { border-radius: 3px 10px 3px 3px; }
+            .collage-side-img.bottom { border-radius: 3px 3px 10px 3px; }
+            .tiemanh-card-footer { padding: 12px 14px 14px 14px; }
+            .tiemanh-card-icon-box { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
+            .tiemanh-card-title { font-size: 14.5px; }
+            .tiemanh-card-badge { font-size: 10.5px; padding: 2px 7px; }
+            .tiemanh-card-btn { padding: 6px 10px; font-size: 11px; }
+
+            /* Các khối danh sách khác */
+            .tiemanh-pricing-grid, .tiemanh-steps-container, .tiemanh-feedback-grid, .tiemanh-branches-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .tiemanh-price-card { padding: 26px 18px; border-radius: 18px; }
+            .tiemanh-step-card { padding: 22px 16px; border-radius: 16px; }
+            .tiemanh-branch-card { padding: 22px 16px; border-radius: 18px; }
+
+            /* CTA Section */
+            .tiemanh-cta-panel { flex-direction: column; text-align: center; gap: 18px; padding: 24px 16px; margin: 25px 0; border-radius: 18px; }
+            .tiemanh-cta-left { flex-direction: column; gap: 10px; }
+            .tiemanh-cta-left h3 { font-size: 19px; }
+            .tiemanh-cta-left p { font-size: 13px; }
+
+            /* Footer */
+            .tiemanh-footer { padding: 35px 16px 20px 16px; }
+            .tiemanh-footer-grid { grid-template-columns: 1fr; gap: 25px; }
+            .tiemanh-footer-bottom { flex-direction: column; gap: 10px; text-align: center; font-size: 12px; }
+
+            /* Modal Booking & Lightbox */
+            .tiemanh-modal-content { width: 94%; padding: 22px 16px; border-radius: 18px; max-height: 90vh; }
+            .tiemanh-modal-header h3 { font-size: 19px; }
+            .tiemanh-form-group input, .tiemanh-form-group select, .tiemanh-form-group textarea { padding: 10px 12px; font-size: 13px; }
+        }
+
+        @media (max-width: 420px) {
+            .tiemanh-hero-title { font-size: 30px; }
+            .collage-wrapper { height: 250px; }
+            .hot-showcase-title { font-size: 13px; }
+            .polaroid-caption { font-size: 9.5px; }
         }
     `;
 
