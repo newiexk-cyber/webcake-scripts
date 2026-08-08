@@ -2407,11 +2407,89 @@
     }
 
     // Hàm dọn dẹp các từ DONE, DONEE khỏi tên concept/chủ đề khi hiển thị trên web
+    // Hàm thông minh chuẩn hóa và đồng bộ tên Concept chuyên nghiệp, sang trọng theo chuẩn Studio
+    function formatSmartTitle(rawTitle, themeName, branchName) {
+        if (!rawTitle) return themeName ? `${themeName} Portrait` : "Concept Nghệ Thuật";
+        
+        let title = String(rawTitle)
+            .replace(/^(DONE+E*|DONEE*)\s*[-_]*\s*/gi, "") // Xóa tiền tố DONE, DONEE
+            .replace(/\s*[-_]*\s*(DONE+E*|DONEE*)$/gi, "") // Xóa hậu tố DONE, DONEE
+            .replace(/^(CONCEPT|CONEPT)\s*[-_:]*\s*/gi, "") // Xóa từ CONCEPT thừa ở đầu
+            .replace(/[-_]+/g, " ") // Đổi dấu gạch dưới thành khoảng trắng
+            .trim();
+
+        if (!title) return themeName ? `${themeName} Portrait` : "Concept Nghệ Thuật";
+
+        // Hàm hỗ trợ viết hoa chữ cái đầu (Title Case)
+        function toTitleCase(str) {
+            return str
+                .toLowerCase()
+                .split(' ')
+                .filter(Boolean)
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+        }
+
+        const tUpper = title.toUpperCase();
+        const thClean = themeName && themeName !== "Tất cả" ? themeName : "";
+
+        // 1. Tự động đồng bộ các concept bị đặt tên cụt ngủn theo Màu Sắc
+        const colorMap = {
+            "ĐỎ": "Sắc Đỏ Quyến Rũ",
+            "DO": "Sắc Đỏ Quyến Rũ",
+            "XANH": "Sắc Xanh Thanh Khiết",
+            "XANH LA": "Sắc Xanh Tự Nhiên",
+            "XANH DUONG": "Sắc Xanh Hy Vọng",
+            "HỒNG": "Sắc Hồng Ngọt Ngào",
+            "HONG": "Sắc Hồng Ngọt Ngào",
+            "TRẮNG": "Sắc Trắng Tinh Khôi",
+            "TRANG": "Sắc Trắng Tinh Khôi",
+            "ĐEN": "Sắc Đen Quyền Lực",
+            "DEN": "Sắc Đen Quyền Lực",
+            "VÀNG": "Sắc Vàng Rực Rỡ",
+            "VANG": "Sắc Vàng Rực Rỡ",
+            "CAM": "Sắc Cam Năng Động",
+            "TÍM": "Sắc Tím Mộng Mơ",
+            "TIM": "Sắc Tím Mộng Mơ"
+        };
+        if (colorMap[tUpper]) {
+            return thClean ? `${thClean} – ${colorMap[tUpper]}` : `Concept ${colorMap[tUpper]}`;
+        }
+
+        // 2. Tự động đồng bộ các concept đặt tên dạng "MẪU X", "MẪU 1", "MẪU 15"
+        const mauMatch = title.match(/^(MẪU|MAU|M)\s*(\d+)$/i);
+        if (mauMatch) {
+            const num = mauMatch[2].padStart(2, '0');
+            if (thClean && thClean.toLowerCase() !== "concept") {
+                return `${thClean} Style #${num}`;
+            }
+            return `Concept Nghệ Thuật #${num}`;
+        }
+
+        // 3. Nếu tên trùng hoàn toàn với tên Chủ đề (VD: Theme "Beauty", Title "Beauty" hoặc "Ngoại Cảnh")
+        if (thClean && tUpper === thClean.toUpperCase()) {
+            return `${thClean} Portrait`;
+        }
+
+        // 4. Chuẩn hóa các tên Concept quen thuộc cho hay hơn
+        if (tUpper === "MAO LƯƠNG" || tUpper === "MAO LUONG") return "Nàng Thơ Hoa Mao Lương";
+        if (tUpper === "SEN YẾM HỒNG" || tUpper === "SEN YEM HONG") return "Yếm Hồng Bên Hoa Sen";
+        if (tUpper === "BEAUTY ĐÔI" || tUpper === "BEAUTY DOI") return "Beauty Đôi Sang Trọng";
+        if (tUpper.includes("NOEL ĐỎ") || tUpper.includes("NOEL DO")) return "Noel Sắc Đỏ Rực Rỡ";
+        if (tUpper === "TẾT" || tUpper === "TET") return "Tết Sum Vầy Rạng Rỡ";
+        if (tUpper === "KỶ YẾU" || tUpper === "KY YEU") return "Kỷ Yếu Thanh Xuân";
+        if (tUpper === "GIA ĐÌNH" || tUpper === "GIA DINH") return "Gia Đình Hạnh Phúc";
+
+        // 5. Chuẩn hóa viết hoa chuẩn đẹp các từ còn lại
+        return toTitleCase(title);
+    }
+
+    // Hàm dọn dẹp các từ DONE, DONEE khỏi tên concept/chủ đề khi hiển thị trên web
     function cleanTitle(title) {
         if (!title) return "";
         return title
-            .replace(/^(DONE+E*|DONEE*)\s*[-_]*\s*/gi, "") // Xóa DONE, DONEE ở đầu
-            .replace(/\s*[-_]*\s*(DONE+E*|DONEE*)$/gi, "") // Xóa DONE, DONEE ở cuối
+            .replace(/^(DONE+E*|DONEE*)\s*[-_]*\s*/gi, "")
+            .replace(/\s*[-_]*\s*(DONE+E*|DONEE*)$/gi, "")
             .trim();
     }
 
@@ -2483,8 +2561,8 @@
                 });
 
                 // Tự động làm sạch tên concept và chuẩn hóa gộp nhóm chủ đề
-                const cleanedTitle = cleanTitle(obj.title || "Concept");
                 const cleanedTheme = normalizeThemeName(obj.theme || "");
+                const cleanedTitle = formatSmartTitle(obj.title || "Concept", cleanedTheme, obj.category);
                 const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category, obj.category);
 
                 // Tập hợp các ảnh thật từ img1 -> img10 từ Google Sheets
