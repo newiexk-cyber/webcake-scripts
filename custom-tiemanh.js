@@ -316,12 +316,12 @@
     ];
 
     const STYLES = `
-        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
         :root {
-            --tiemanh-font: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            --tiemanh-serif: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --tiemanh-cursive: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --tiemanh-font: 'Playfair Display', 'Plus Jakarta Sans', Georgia, 'Times New Roman', serif;
+            --tiemanh-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --tiemanh-cursive: 'Playfair Display', Georgia, serif;
             
             --tiemanh-primary: #fbc02d;
             --tiemanh-primary-dark: #f9a825;
@@ -1869,7 +1869,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
@@ -2460,10 +2460,13 @@
             return thClean ? `${thClean} – ${colorMap[tUpper]}` : `Concept ${colorMap[tUpper]}`;
         }
 
-        // 2. Tự động đồng bộ các concept đặt tên dạng "MẪU X", "MẪU 1", "MẪU 15"
-        const mauMatch = title.match(/^(MẪU|MAU|M)\s*(\d+)$/i);
-        if (mauMatch) {
-            const num = mauMatch[2].padStart(2, '0');
+        // 2. Tự động đồng bộ các concept đặt tên dạng "MẪU X", "MẪU 1", "MẪU 15", "M17" hoặc chỉ là số "2"
+        const mauMatch = title.match(/^(MẪU|MAU|M|MAU\s*SO|MẪU\s*SỐ)\s*(\d+)$/i);
+        const numOnlyMatch = title.match(/^(\d+)$/);
+        
+        if (mauMatch || numOnlyMatch) {
+            const rawNum = mauMatch ? mauMatch[2] : numOnlyMatch[1];
+            const num = rawNum.padStart(2, '0');
             if (thClean && thClean.toLowerCase() !== "concept") {
                 return `${thClean} Style #${num}`;
             }
@@ -2480,6 +2483,7 @@
         if (tUpper === "SEN YẾM HỒNG" || tUpper === "SEN YEM HONG") return "Yếm Hồng Bên Hoa Sen";
         if (tUpper === "BEAUTY ĐÔI" || tUpper === "BEAUTY DOI") return "Beauty Đôi Sang Trọng";
         if (tUpper.includes("NOEL ĐỎ") || tUpper.includes("NOEL DO")) return "Noel Sắc Đỏ Rực Rỡ";
+        if (tUpper.includes("KIMONO")) return "Kimono Phong Cách Nhật";
         if (tUpper === "TẾT" || tUpper === "TET") return "Tết Sum Vầy Rạng Rỡ";
         if (tUpper === "KỶ YẾU" || tUpper === "KY YEU") return "Kỷ Yếu Thanh Xuân";
         if (tUpper === "GIA ĐÌNH" || tUpper === "GIA DINH") return "Gia Đình Hạnh Phúc";
