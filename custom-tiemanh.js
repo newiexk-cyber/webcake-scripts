@@ -316,12 +316,23 @@
     ];
 
     const STYLES = `
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        @font-face {
+            font-family: 'SVN-Vogue';
+            src: local('SVN-Vogue'), local('SVN Vogue'), local('Vogue'),
+                 url('https://cdn.jsdelivr.net/gh/newiexk-cyber/webcake-scripts@main/SVN-Vogue.ttf') format('truetype'),
+                 url('https://cdn.jsdelivr.net/gh/newiexk-cyber/webcake-scripts@main/SVN-Vogue.otf') format('opentype'),
+                 url('https://cdn.jsdelivr.net/gh/newiexk-cyber/webcake-scripts@main/SVN-Vogue.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
         :root {
-            --tiemanh-font: 'Playfair Display', 'Plus Jakarta Sans', Georgia, 'Times New Roman', serif;
-            --tiemanh-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-            --tiemanh-cursive: 'Playfair Display', Georgia, serif;
+            --tiemanh-font: 'Bodoni Moda', 'SVN-Vogue', 'Cormorant Garamond', 'Plus Jakarta Sans', Georgia, serif;
+            --tiemanh-serif: 'Bodoni Moda', 'SVN-Vogue', 'Cormorant Garamond', Georgia, serif;
+            --tiemanh-cursive: 'Bodoni Moda', 'SVN-Vogue', 'Cormorant Garamond', serif;
             
             --tiemanh-primary: #fbc02d;
             --tiemanh-primary-dark: #f9a825;
@@ -1869,7 +1880,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
