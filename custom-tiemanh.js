@@ -746,7 +746,7 @@
 
         .polaroid-card img {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 9 / 16;
             height: auto;
             object-fit: cover;
             border-radius: 12px;
@@ -809,7 +809,7 @@
         }
         .skeleton-img {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 9 / 16;
             border-radius: 12px;
             background: linear-gradient(90deg, #f5f2ea 25%, #fff9e6 50%, #f5f2ea 75%);
             background-size: 200% 100%;
