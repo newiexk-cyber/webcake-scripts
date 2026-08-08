@@ -1754,14 +1754,7 @@
                 <ul class="tiemanh-menu">
                     <li class="tiemanh-menu-item"><a href="#" id="menuTrangChu">Trang chủ</a></li>
                     <li class="tiemanh-menu-item active"><a href="#" id="menuConcept">Concept</a></li>
-                    <li class="tiemanh-menu-item"><a href="#" id="menuBangGia">Bảng giá</a></li>
-                    <li class="tiemanh-menu-item"><a href="#" id="menuQuyTrinh">Quy trình</a></li>
-                    <li class="tiemanh-menu-item"><a href="#" id="menuChiNhanh">Chi nhánh</a></li>
-                    <li class="tiemanh-menu-item"><a href="#" id="menuLienHe">Liên hệ</a></li>
                 </ul>
-                <button class="tiemanh-btn-primary" id="btnDatLichHeader">
-                    📅 ĐẶT LỊCH CHỤP
-                </button>
             </header>
 
             <!-- Hero Section -->
@@ -1772,10 +1765,7 @@
                     <p class="tiemanh-hero-desc">
                         Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
                     </p>
-                    <div class="tiemanh-hero-btns">
-                        <button class="tiemanh-btn-primary" id="btnHeroTuVan">📅 ĐẶT LỊCH TƯ VẤN</button>
-                        <button class="tiemanh-btn-secondary" id="btnHeroBangGia">XEM BẢNG GIÁ</button>
-                    </div>
+
                 </div>
                 <div class="tiemanh-hero-right">
                     <div class="polaroid-stack">
@@ -1816,25 +1806,12 @@
                 <!-- Concept cards grid -->
                 <div class="tiemanh-grid" id="conceptGrid"></div>
 
-                <!-- CTA Banner -->
-                <div class="tiemanh-cta-panel">
-                    <div class="tiemanh-cta-left">
-                        <div class="tiemanh-cta-mascot">🍍</div>
-                        <div class="tiemanh-cta-textbox">
-                            <h3 class="tiemanh-cta-title">Bạn chưa tìm thấy concept phù hợp?</h3>
-                            <p class="tiemanh-cta-desc">Hãy để Trái Thơm gợi ý và thiết kế concept độc bản phù hợp riêng với bạn nhé!</p>
-                        </div>
-                    </div>
-                    <div class="tiemanh-cta-btn">
-                        <button class="tiemanh-btn-primary" id="btnCtaTuVan">💬 NHẬN TƯ VẤN NGAY</button>
-                    </div>
-                </div>
             </section>
 
-            <!-- Bảng giá Section -->
+            <!-- [Đã xóa: Bảng giá, Quy trình, Chi nhánh — trang chỉ xem ảnh] -->
             <section class="tiemanh-banggia-sec" id="banggiaSection">
                 <div class="tiemanh-sec-header">
-                    <h5 class="tiemanh-sec-subtitle">Munci Studio</h5>
+                    <h5 class="tiemanh-sec-subtitle">Tiệm Ảnh Trái Thơm</h5>
                     <h2 class="tiemanh-sec-title">BẢNG GIÁ CHỤP ẢNH CÁ NHÂN</h2>
                     <p style="font-size: 15px; font-style: italic; color: #7d4458; margin-top: -10px; margin-bottom: 45px; text-align: center;">
                         Bảng giá dành cho 1 người, áp dụng duy nhất trong tháng này
@@ -1943,7 +1920,7 @@
                     </div>
                     <div class="tiemanh-branch-card">
                         <div class="tiemanh-branch-icon">📍</div>
-                        <h4>Munci Studio – Thủ Đức</h4>
+                        <h4>Chi Nhánh Thủ Đức</h4>
                         <p>🏠 81 Chương Dương, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
                         <p class="hotline">📞 Nhắn tin qua Facebook/Instagram chính thức</p>
                     </div>
@@ -2021,7 +1998,6 @@
                             <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
                             <li class="address-line"><span class="icon">📍</span> <span>CS1: 214/19/21 Nguyễn Văn Nguyễn, Q.1, TP. Hồ Chí Minh</span></li>
-                            <li class="address-line"><span class="icon">📍</span> <span>CS2: Số 12 Đường Số 9, Linh Trung, Thủ Đức, TP. Hồ Chí Minh</span></li>
                         </ul>
                     </div>
                 </div>
@@ -2088,8 +2064,12 @@
                         <div class="tiemanh-form-group">
                             <label for="formBranch">Chi nhánh mong muốn</label>
                             <select id="formBranch" class="tiemanh-form-control">
-                                <option value="Q1">CS1: Nguyễn Văn Nguyễn, Quận 1</option>
-                                <option value="TD">CS2: Linh Trung, Thủ Đức</option>
+                                <option value="Q1">Chi nhánh Quận 1 – TP. HCM</option>
+                                <option value="TD">Chi nhánh Thủ Đức – TP. HCM</option>
+                                <option value="DN">Chi nhánh Đà Nẵng</option>
+                                <option value="BH">Chi nhánh Biên Hòa – Đồng Nai</option>
+                                <option value="CT">Chi nhánh Cần Thơ</option>
+                                <option value="BD">Chi nhánh Bình Dương</option>
                             </select>
                         </div>
                         <button type="submit" class="tiemanh-submit-btn">GỬI YÊU CẦU ĐẶT LỊCH</button>
@@ -2787,11 +2767,11 @@
                 e.preventDefault();
                 
                 // Thu thập thông tin khách hàng nhập
-                const name = document.getElementById("bookingName")?.value || "";
-                const phone = document.getElementById("bookingPhone")?.value || "";
-                const concept = document.getElementById("bookingConcept")?.value || "";
-                const branch = document.getElementById("bookingBranch")?.value || "";
-                const note = document.getElementById("bookingNote")?.value || "";
+                const name = document.getElementById("formName")?.value || document.getElementById("bookingName")?.value || "";
+                const phone = document.getElementById("formPhone")?.value || document.getElementById("bookingPhone")?.value || "";
+                const concept = document.getElementById("formConcept")?.value || document.getElementById("bookingConcept")?.value || "";
+                const branch = document.getElementById("formBranch")?.value || document.getElementById("bookingBranch")?.value || "";
+                const note = document.getElementById("formNote")?.value || document.getElementById("bookingNote")?.value || "";
                 
                 const formData = {
                     name: name,
