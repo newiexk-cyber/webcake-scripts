@@ -594,7 +594,22 @@
         .tiemanh-hero-left {
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 20px;
+        }
+        .tiemanh-hero-slogan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            color: #b45309;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 7px 18px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 4px 12px rgba(251, 192, 45, 0.2);
+            width: fit-content;
         }
         .tiemanh-hero-subtitle {
             font-family: var(--tiemanh-font);
@@ -2357,39 +2372,84 @@
         }
         .tiemanh-branch-card {
             background-color: var(--tiemanh-white);
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 22px;
+            padding: 35px 26px;
             box-shadow: var(--tiemanh-shadow-sm);
             transition: var(--tiemanh-transition);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            border: 1.5px solid #f1f5f9;
+            justify-content: space-between;
         }
         .tiemanh-branch-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--tiemanh-shadow-md);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(251, 192, 45, 0.18);
+            border-color: rgba(251, 192, 45, 0.6);
+        }
+        .tiemanh-branch-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 12px;
         }
         .tiemanh-branch-icon {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 0;
+        }
+        .tiemanh-branch-tag {
+            font-size: 11px;
+            font-weight: 700;
+            background: #fff8e1;
+            color: #b45309;
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
         }
         .tiemanh-branch-card h4 {
-            font-family: var(--tiemanh-serif);
-            font-size: 20px;
-            margin: 0 0 15px 0;
+            font-size: 18.5px;
+            font-weight: 800;
+            margin: 8px 0 12px 0;
             color: var(--tiemanh-dark);
         }
         .tiemanh-branch-card p {
             font-size: 14px;
             color: var(--tiemanh-text);
-            margin: 0 0 10px 0;
-            line-height: 1.5;
+            margin: 0 0 8px 0;
+            line-height: 1.55;
         }
         .tiemanh-branch-card .hotline {
             font-weight: 700;
-            color: var(--tiemanh-primary-dark);
-            font-size: 16px;
+            color: #d97706;
+            font-size: 14.5px;
+            margin-bottom: 14px;
+        }
+        .tiemanh-branch-map-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            color: #1e293b;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.25s ease;
+        }
+        .tiemanh-branch-map-btn:hover {
+            background: linear-gradient(135deg, var(--tiemanh-primary), #ffa000);
+            border-color: transparent;
+            color: #1e1e24;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(251, 192, 45, 0.35);
         }
 
         /* 9. Tối ưu hóa toàn diện giao diện trên Mobile & Tablet */
@@ -2565,7 +2625,8 @@
             <!-- Hero Section với 3 ảnh Polaroid nổi bật từ Concept thực tế của Studio -->
             <section class="tiemanh-hero">
                 <div class="tiemanh-hero-left">
-                    <h5 class="tiemanh-hero-subtitle">Bộ sưu tập</h5>
+                    <div class="tiemanh-hero-slogan-badge">✨ Lưu Giữ Thanh Xuân – Tỏa Sáng Nét Riêng</div>
+                    <h5 class="tiemanh-hero-subtitle">Bộ sưu tập Studio</h5>
                     <h1 class="tiemanh-hero-title">Concept<br>Đa Dạng</h1>
                     <p class="tiemanh-hero-desc">
                         Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
@@ -2732,47 +2793,104 @@
             </section>
 
             <!-- Chi nhánh Section -->
+            <!-- Chi nhánh Section -->
             <section class="tiemanh-chinhanh-sec" id="chinhanhSection">
                 <div class="tiemanh-sec-header">
                     <h5 class="tiemanh-sec-subtitle">Hệ thống phòng chụp</h5>
                     <h2 class="tiemanh-sec-title">Danh Sách Chi Nhánh</h2>
+                    <p style="font-size: 15px; font-style: italic; color: #7d4458; margin-top: -8px; margin-bottom: 25px; text-align: center;">
+                        "Lưu Giữ Thanh Xuân – Tỏa Sáng Nét Riêng" • Hệ thống 6 phòng chụp hiện đại trên toàn quốc
+                    </p>
                 </div>
                 <div class="tiemanh-branches-grid">
+                    <!-- Chi nhánh Quận 1 -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">Trụ sở chính</span>
+                        </div>
                         <h4>Chi Nhánh Quận 1 – TP. HCM</h4>
                         <p>🏠 214/19/21 Nguyễn Văn Nguyễn, Phường Tân Định, Quận 1, TP. Hồ Chí Minh</p>
                         <p class="hotline">📞 0707 453 247 – 0866 723 499</p>
+                        <a href="https://maps.google.com/?q=214/19/21+Nguy%E1%BB%85n+V%C4%83n+Nguy%E1%BB%85n,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+%C4%90%E1%BB%8Bnh,+Qu%E1%BA%ADn+1,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
+
+                    <!-- Chi nhánh Thủ Đức -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">TP. Hồ Chí Minh</span>
+                        </div>
                         <h4>Chi Nhánh Thủ Đức</h4>
                         <p>🏠 81 Chương Dương, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                        <p class="hotline">📞 Nhắn tin qua Facebook/Instagram chính thức</p>
+                        <p class="hotline">📞 0707 453 247 (Hotline Studio)</p>
+                        <a href="https://maps.google.com/?q=81+Ch%C6%B0%C6%A1ng+D%C6%B0%C6%A1ng,+Ph%C6%B0%E1%BB%9Dng+Linh+Chi%E1%BB%83u,+Th%E1%BB%A7+%C4%90%E1%BB%A9c,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
+
+                    <!-- Chi nhánh Đà Nẵng -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">Đà Nẵng</span>
+                        </div>
                         <h4>Chi Nhánh Đà Nẵng</h4>
                         <p>🏠 62 Nại Nam, Phường Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng</p>
                         <p class="hotline">📞 0337 733 455</p>
+                        <a href="https://maps.google.com/?q=62+N%E1%BA%A1i+Nam,+Ph%C6%B0%E1%BB%9Dng+H%C3%B2a+C%C6%B0%E1%BB%9Dng+B%E1%BA%AFc,+H%E1%BA%A3i+Ch%C3%A2u,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
+
+                    <!-- Chi nhánh Biên Hòa -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">Đồng Nai</span>
+                        </div>
                         <h4>Chi Nhánh Biên Hòa – Đồng Nai</h4>
                         <p>🏠 Số 8, Đường N1 (song song đường Võ Thị Sáu), Phường Thống Nhất, Biên Hòa</p>
                         <p class="hotline">📞 0366 444 426</p>
+                        <a href="https://maps.google.com/?q=S%E1%BB%91+8,+%C4%90%C6%B0%E1%BB%9Dng+N1,+Ph%C6%B0%E1%BB%9Dng+Th%E1%BB%91ng+Nh%E1%BA%A5t,+Bi%C3%AAn+H%C3%B2a,+%C4%90%E1%BB%93ng+Nai" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
+
+                    <!-- Chi nhánh Cần Thơ -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">Cần Thơ</span>
+                        </div>
                         <h4>Chi Nhánh Cần Thơ</h4>
                         <p>🏠 A12 Đường Số 1, Khu Dân Cư Nam Long, Cần Thơ</p>
                         <p class="hotline">📞 0949 533 251</p>
+                        <a href="https://maps.google.com/?q=A12+%C4%90%C6%B0%E1%BB%9Dng+S%E1%BB%91+1,+Khu+D%C3%A2n+C%C6%B0+Nam+Long,+C%E1%BA%A7n+Th%C6%A1" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
+
+                    <!-- Chi nhánh Bình Dương -->
                     <div class="tiemanh-branch-card">
-                        <div class="tiemanh-branch-icon">📍</div>
+                        <div class="tiemanh-branch-header">
+                            <div class="tiemanh-branch-icon">📍</div>
+                            <span class="tiemanh-branch-tag">Bình Dương</span>
+                        </div>
                         <h4>Chi Nhánh Bình Dương</h4>
                         <p>🏠 6 Đường Số 3, Phường Phú Hòa, TP. Thủ Dầu Một, Bình Dương</p>
                         <p class="hotline">📞 0367 416 058</p>
+                        <a href="https://maps.google.com/?q=6+%C4%90%C6%B0%E1%BB%9Dng+S%E1%BB%91+3,+Ph%C6%B0%E1%BB%9Dng+Ph%C3%BA+H%C3%B2a,+Th%E1%BB%A7+D%E1%BA%A7u+M%E1%BB%99t,+B%C3%ACnh+D%C6%B0%C6%A1ng" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
+                            <span>🗺️ Xem trên Google Maps</span>
+                            <span class="arrow">➔</span>
+                        </a>
                     </div>
                 </div>
             </section>
