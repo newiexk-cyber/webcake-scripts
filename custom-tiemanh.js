@@ -316,12 +316,12 @@
     ];
 
     const STYLES = `
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
         :root {
-            --tiemanh-font: 'Playfair Display', 'Cormorant Garamond', 'Be Vietnam Pro', Georgia, 'Times New Roman', serif;
-            --tiemanh-serif: 'Playfair Display', 'Cormorant Garamond', 'Be Vietnam Pro', Georgia, 'Times New Roman', serif;
-            --tiemanh-cursive: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+            --tiemanh-font: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --tiemanh-serif: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --tiemanh-cursive: 'Plus Jakarta Sans', 'Be Vietnam Pro', sans-serif;
             
             --tiemanh-primary: #fbc02d;
             --tiemanh-primary-dark: #f9a825;
@@ -341,8 +341,22 @@
             --tiemanh-border-radius: 16px;
         }
 
+        #tiemanh-root,
+        #tiemanh-root *,
+        #tiemanh-root button,
+        #tiemanh-root input,
+        #tiemanh-root select,
+        #tiemanh-root textarea,
+        .tiemanh-lightbox-overlay,
+        .tiemanh-lightbox-overlay *,
+        .tiemanh-modal-overlay,
+        .tiemanh-modal-overlay * {
+            font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         #tiemanh-root {
-            font-family: var(--tiemanh-font);
             background-color: var(--tiemanh-bg);
             color: var(--tiemanh-text);
             margin: 0;
@@ -906,28 +920,35 @@
         .tiemanh-filter-pill {
             background: var(--tiemanh-white);
             color: var(--tiemanh-text);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 30px;
-            padding: 8px 22px;
-            font-weight: 600;
-            font-size: 14px;
+            border: 1.5px solid #f1f5f9;
+            border-radius: 25px;
+            height: 40px;
+            padding: 0 20px;
+            font-weight: 700;
+            font-size: 13.5px;
             cursor: pointer;
-            transition: var(--tiemanh-transition);
-            box-shadow: var(--tiemanh-shadow-sm);
+            transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             flex-shrink: 0;
             white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
         .tiemanh-filter-pill:hover {
-            background: #fffde7;
-            border-color: rgba(251, 192, 45, 0.5);
+            background: #fffdf5;
+            border-color: rgba(251, 192, 45, 0.6);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 192, 45, 0.2);
         }
         .tiemanh-filter-pill.active {
             background: linear-gradient(135deg, var(--tiemanh-primary), #ffa000);
-            color: var(--tiemanh-dark);
+            color: #1e1e24;
             border-color: transparent;
-            font-weight: 700;
-            box-shadow: 0 6px 15px rgba(251, 192, 45, 0.3);
+            font-weight: 800;
+            box-shadow: 0 6px 18px rgba(251, 192, 45, 0.35);
+            transform: translateY(-1px);
         }
 
         /* 4. Concept Cards Grid */
@@ -945,8 +966,10 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             cursor: pointer;
             position: relative;
+            height: 100%;
         }
         .tiemanh-card:hover {
             transform: translateY(-10px) scale(1.015);
@@ -995,21 +1018,26 @@
             transform: scale(1.05);
         }
 
-        /* Card Content footer */
+        /* Card Content footer - Balanced & Uniform Layout */
         .tiemanh-card-footer {
-            padding: 16px 20px 18px 20px;
+            padding: 16px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
             background: #ffffff;
             position: relative;
             z-index: 2;
-            border-top: 1px solid rgba(251, 192, 45, 0.12);
+            border-top: 1px solid rgba(251, 192, 45, 0.15);
+            min-height: 86px;
+            box-sizing: border-box;
         }
         .tiemanh-card-meta {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex: 1;
+            min-width: 0;
         }
         .tiemanh-card-icon-box {
             width: 42px;
@@ -1020,17 +1048,18 @@
             justify-content: center;
             font-size: 20px;
             background: #fff8e1;
-            box-shadow: 0 4px 12px rgba(251, 192, 45, 0.15);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
             transition: var(--tiemanh-transition);
             flex-shrink: 0;
         }
         .tiemanh-card:hover .tiemanh-card-icon-box {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.08) rotate(4deg);
         }
         .tiemanh-card-title-box {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
+            min-width: 0;
         }
         .tiemanh-card-title {
             font-family: var(--tiemanh-serif);
@@ -1038,51 +1067,418 @@
             font-size: 16px;
             color: var(--tiemanh-dark);
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             transition: color 0.3s ease;
         }
         .tiemanh-card:hover .tiemanh-card-title {
             color: var(--tiemanh-primary-dark);
         }
+        .tiemanh-card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-items: center;
+        }
         .tiemanh-card-badge {
-            font-size: 11.5px;
-            font-weight: 600;
-            color: #d84315;
-            background: #fbe9e7;
-            padding: 2px 9px;
-            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2.5px 8px;
+            border-radius: 6px;
             display: inline-flex;
             align-items: center;
-            width: fit-content;
+            gap: 3px;
+            white-space: nowrap;
             letter-spacing: 0.2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
-        .tiemanh-card-btn {
+        .tiemanh-card-badge.branch-badge {
+            color: #c2410c;
+            background: #ffedd5;
+        }
+        .tiemanh-filter-bar.active-drag {
+            cursor: grabbing !important;
+            cursor: -webkit-grabbing !important;
+            user-select: none;
+        }
+
+        /* Đồng nhất & Cân đối các nút bấm trên Card */
+        .tiemanh-card-actions {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: #fffde7;
-            border: 1px solid rgba(251, 192, 45, 0.4);
-            padding: 7px 14px;
-            border-radius: 20px;
-            color: var(--tiemanh-dark);
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .tiemanh-card-download-btn {
+            height: 36px;
+            padding: 0 13px;
+            border-radius: 18px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #334155;
             font-size: 12px;
             font-weight: 700;
-            transition: all 0.35s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+        .tiemanh-card-download-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        .tiemanh-card-btn {
+            height: 36px;
+            padding: 0 15px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #fbc02d, #f59e0b);
+            border: none;
+            color: #1e1e24;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(251, 192, 45, 0.28);
+            transition: all 0.25s ease;
+        }
+        .tiemanh-card-btn:hover,
+        .tiemanh-card:hover .tiemanh-card-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
         }
         .tiemanh-card-arrow {
-            font-size: 13px;
-            transition: transform 0.3s ease;
-        }
-        .tiemanh-card:hover .tiemanh-card-btn {
-            background: linear-gradient(135deg, var(--tiemanh-primary), #ffa000);
-            color: #1e1e24;
-            box-shadow: 0 6px 16px rgba(251, 192, 45, 0.4);
-            border-color: transparent;
-            transform: translateX(2px);
+            font-size: 12px;
+            transition: transform 0.25s ease;
         }
         .tiemanh-card:hover .tiemanh-card-arrow {
-            transform: translateX(4px);
+            transform: translateX(3px);
+        }
+
+        /* Nút Cuộn Lên Đầu Trang (Back to Top) */
+        .tiemanh-back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #1e293b;
+            color: #fbbf24;
+            border: 2px solid #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
+            cursor: pointer;
+            z-index: 99999;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .tiemanh-back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .tiemanh-back-to-top:hover {
+            background: #fbbf24;
+            color: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        /* Nút Tải ảnh & Sao chép Link trong Lightbox */
+        .tiemanh-lightbox-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .tiemanh-lightbox-download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--tiemanh-primary), #f59e0b);
+            color: #1e1e24;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(251, 192, 45, 0.35);
+            width: 100%;
+        }
+        .tiemanh-lightbox-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(251, 192, 45, 0.5);
+        }
+        .tiemanh-lightbox-share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 11px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .tiemanh-lightbox-share-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Popup Zalo CTA & Dedicated Zalo Modal */
+        .tiemanh-modal-quick-contact {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .quick-contact-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        .tiemanh-zalo-direct-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #0068ff;
+            color: #ffffff !important;
+            padding: 11px 18px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 13.5px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 104, 255, 0.3);
+            transition: all 0.25s ease;
+        }
+        .tiemanh-zalo-direct-btn:hover {
+            background: #0054cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 104, 255, 0.45);
+        }
+        .tiemanh-modal-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 14px 0 4px 0;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .tiemanh-modal-divider::before, .tiemanh-modal-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        .tiemanh-modal-divider span {
+            padding: 0 10px;
+        }
+
+        /* Floating Zalo Button (Nằm thẳng đứng phía trên nút Back to top) */
+        .tiemanh-zalo-floating-btn {
+            position: fixed;
+            bottom: 92px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #0068ff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 104, 255, 0.35);
+            z-index: 99999;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 0;
+            overflow: hidden;
+        }
+        .tiemanh-zalo-floating-btn:hover {
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 12px 30px rgba(0, 104, 255, 0.65);
+        }
+        .zalo-pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #0068ff;
+            animation: zaloRingPulse 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            pointer-events: none;
+        }
+        @keyframes zaloRingPulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.45); opacity: 0; }
+            100% { transform: scale(1.45); opacity: 0; }
+        }
+        @keyframes zaloRingPulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* Dedicated Zalo Modal Card */
+        .tiemanh-zalo-modal-card {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 440px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            animation: modalFadeIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+        .zalo-card-header {
+            background: linear-gradient(135deg, #0068ff, #004ecc);
+            padding: 22px 24px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+        }
+        .zalo-header-avatar-box {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .zalo-online-status {
+            position: absolute;
+            bottom: 1px;
+            right: 1px;
+            width: 12px;
+            height: 12px;
+            background: #22c55e;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+        }
+        .zalo-header-info h4 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .zalo-header-info p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .zalo-header-info .online-dot {
+            color: #4ade80;
+            font-size: 12px;
+        }
+        .tiemanh-zalo-modal-card .tiemanh-modal-close-btn {
+            color: #ffffff;
+            opacity: 0.85;
+        }
+        .tiemanh-zalo-modal-card .tiemanh-modal-close-btn:hover {
+            color: #ffffff;
+            opacity: 1;
+        }
+        .zalo-card-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .zalo-chat-message {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px 18px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .zalo-chat-message p {
+            margin: 0 0 8px 0;
+        }
+        .zalo-chat-message p:last-child {
+            margin-bottom: 0;
+        }
+        .tiemanh-zalo-popup-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0068ff, #0052d9);
+            color: #ffffff !important;
+            padding: 15px 24px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 14.5px;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0, 104, 255, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .tiemanh-zalo-popup-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .tiemanh-zalo-popup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 104, 255, 0.55);
+            background: linear-gradient(135deg, #0054cc, #003fa8);
+        }
+        .zalo-card-hotline {
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .zalo-card-hotline a {
+            color: #0068ff;
+            text-decoration: none;
+            margin-left: 4px;
+            font-size: 14px;
         }
 
         /* 5. CTA Section */
@@ -1626,16 +2022,24 @@
             margin: 12px auto 0 auto;
             border-radius: 2px;
         }
+        /* Bảng giá Responsive: Desktop hiển thị 3 cột đủ 100%, Mobile kéo trượt Carousel */
+        .tiemanh-pricing-carousel-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 0 15px;
+        }
         .tiemanh-pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 20px 0 30px 0;
+            align-items: stretch;
         }
         .tiemanh-price-card {
             background-color: #fff2f5;
             border-radius: 25px;
-            padding: 35px 25px;
+            padding: 35px 24px;
             box-shadow: 0 10px 30px rgba(247, 196, 207, 0.35);
             transition: var(--tiemanh-transition);
             border: 2px solid #f8cbd4;
@@ -1645,6 +2049,102 @@
             flex-direction: column;
             align-items: stretch;
             text-align: left;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        /* Nút điều hướng Carousel */
+        .tiemanh-pricing-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #0f172a;
+            border: 2px solid rgba(251, 192, 45, 0.5);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.25s ease;
+        }
+        .tiemanh-pricing-nav-btn:hover {
+            background: var(--tiemanh-primary);
+            border-color: var(--tiemanh-primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .tiemanh-pricing-nav-btn.prev { left: -15px; }
+        .tiemanh-pricing-nav-btn.next { right: -15px; }
+
+        .tiemanh-pricing-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tiemanh-pricing-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            padding: 0;
+        }
+        .tiemanh-pricing-dot.active {
+            background: var(--tiemanh-primary);
+            width: 28px;
+            border-radius: 12px;
+        }
+
+        /* Ẩn nút mũi tên và dots trên màn hình lớn Desktop vì đã hiện đủ 3 gói */
+        @media (min-width: 992px) {
+            .tiemanh-pricing-nav-btn {
+                display: none !important;
+            }
+            .tiemanh-pricing-dots {
+                display: none !important;
+            }
+        }
+
+        /* Chuyển sang Carousel vuốt trượt trên Mobile & Tablet (< 992px) */
+        @media (max-width: 991px) {
+            .tiemanh-pricing-carousel-wrapper {
+                padding: 0 10px;
+            }
+            .tiemanh-pricing-grid {
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                padding: 20px 10px 30px 10px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                cursor: grab;
+                user-select: none;
+            }
+            .tiemanh-pricing-grid::-webkit-scrollbar { display: none; }
+            .tiemanh-pricing-grid.active-drag { cursor: grabbing !important; scroll-behavior: auto !important; }
+            .tiemanh-price-card {
+                flex: 0 0 85%;
+                min-width: 280px;
+                scroll-snap-align: center;
+            }
+            .tiemanh-pricing-nav-btn {
+                display: flex !important;
+            }
+            .tiemanh-pricing-dots {
+                display: flex !important;
+            }
         }
         .tiemanh-price-card:hover {
             transform: translateY(-8px);
@@ -2017,7 +2517,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
@@ -2127,66 +2627,76 @@
 
             </section>
 
-            <!-- [Đã xóa: Bảng giá, Quy trình, Chi nhánh — trang chỉ xem ảnh] -->
+            <!-- Bảng giá Section với chuyển động kéo ngang & vòng lặp 3 gói -->
             <section class="tiemanh-banggia-sec" id="banggiaSection">
                 <div class="tiemanh-sec-header">
                     <h5 class="tiemanh-sec-subtitle">Tiệm Ảnh Trái Thơm</h5>
                     <h2 class="tiemanh-sec-title">BẢNG GIÁ CHỤP ẢNH CÁ NHÂN</h2>
-                    <p style="font-size: 15px; font-style: italic; color: #7d4458; margin-top: -10px; margin-bottom: 45px; text-align: center;">
-                        Bảng giá dành cho 1 người, áp dụng duy nhất trong tháng này
+                    <p style="font-size: 15px; font-style: italic; color: #7d4458; margin-top: -10px; margin-bottom: 25px; text-align: center;">
+                        Bảng giá dành cho 1 người, áp dụng ưu đãi duy nhất trong tháng này
                     </p>
                 </div>
-                <div class="tiemanh-pricing-grid">
-                    <!-- Gói Thanh Xuân -->
-                    <div class="tiemanh-price-card">
-                        <h3>GÓI THANH XUÂN</h3>
-                        <div class="tiemanh-price-tag">750.000 <span>đ</span></div>
-                        <ul class="tiemanh-price-features">
-                            <li>01 concept tự chọn</li>
-                            <li>01 trang phục</li>
-                            <li>05 ảnh chỉnh sửa</li>
-                            <li>Thời gian chụp 30-45 phút</li>
-                            <li>Nhận full ảnh gốc trong 24h</li>
-                        </ul>
-                        <div class="price-desc-highlight">⏰ Khách hàng <strong>chụp trải nghiệm nhanh</strong></div>
-                        <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp kỷ niệm, sinh nhật.</div>
-                    </div>
+                <div class="tiemanh-pricing-carousel-wrapper">
+                    <button class="tiemanh-pricing-nav-btn prev" id="pricingPrevBtn" title="Gói trước">❮</button>
+                    <button class="tiemanh-pricing-nav-btn next" id="pricingNextBtn" title="Gói tiếp theo">❯</button>
+                    <div class="tiemanh-pricing-grid" id="pricingSlider">
+                        <!-- Gói Thanh Xuân -->
+                        <div class="tiemanh-price-card" data-pkg="0">
+                            <h3>GÓI THANH XUÂN</h3>
+                            <div class="tiemanh-price-tag">750.000 <span>đ</span></div>
+                            <ul class="tiemanh-price-features">
+                                <li>01 concept tự chọn</li>
+                                <li>01 trang phục</li>
+                                <li>05 ảnh chỉnh sửa</li>
+                                <li>Thời gian chụp 30-45 phút</li>
+                                <li>Nhận full ảnh gốc trong 24h</li>
+                            </ul>
+                            <div class="price-desc-highlight">⏰ Khách hàng <strong>chụp trải nghiệm nhanh</strong></div>
+                            <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp kỷ niệm, sinh nhật.</div>
+                        </div>
 
-                    <!-- Gói Toả Sáng -->
-                    <div class="tiemanh-price-card featured">
-                        <div class="tiemanh-price-badge">Bán chạy</div>
-                        <h3>🌸 GÓI TOẢ SÁNG</h3>
-                        <div class="tiemanh-price-tag">1.250.000 <span>đ</span></div>
-                        <ul class="tiemanh-price-features">
-                            <li>02 concept tự chọn</li>
-                            <li>02 trang phục</li>
-                            <li>10 ảnh chỉnh sửa</li>
-                            <li>Thời gian chụp 60 -90 phút</li>
-                            <li>Nhận full ảnh gốc trong 24h</li>
-                            <li>Tặng 01 ảnh in để bàn 13x18cm 🎁</li>
-                        </ul>
-                        <div class="price-desc-highlight">⚠️ <strong>Tiết kiệm</strong> hơn khi chụp nhiều concept</div>
-                        <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp ảnh cá nhân, Beauty, Sinh nhật, Profile.</div>
-                        <div class="price-best-seller">🔥 Best Seller 🔥</div>
-                    </div>
+                        <!-- Gói Toả Sáng -->
+                        <div class="tiemanh-price-card featured" data-pkg="1">
+                            <div class="tiemanh-price-badge">Bán chạy</div>
+                            <h3>🌸 GÓI TOẢ SÁNG</h3>
+                            <div class="tiemanh-price-tag">1.250.000 <span>đ</span></div>
+                            <ul class="tiemanh-price-features">
+                                <li>02 concept tự chọn</li>
+                                <li>02 trang phục</li>
+                                <li>10 ảnh chỉnh sửa</li>
+                                <li>Thời gian chụp 60 -90 phút</li>
+                                <li>Nhận full ảnh gốc trong 24h</li>
+                                <li>Tặng 01 ảnh in để bàn 13x18cm 🎁</li>
+                            </ul>
+                            <div class="price-desc-highlight">⚠️ <strong>Tiết kiệm</strong> hơn khi chụp nhiều concept</div>
+                            <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> Chụp ảnh cá nhân, Beauty, Sinh nhật, Profile.</div>
+                            <div class="price-best-seller">🔥 Best Seller 🔥</div>
+                        </div>
 
-                    <!-- Gói Hào Quang -->
-                    <div class="tiemanh-price-card">
-                        <h3>👑 GÓI HÀO QUANG</h3>
-                        <div class="tiemanh-price-tag">2.490.000 <span>đ</span></div>
-                        <ul class="tiemanh-price-features">
-                            <li>03 concept tự chọn</li>
-                            <li>03 trang phục</li>
-                            <li>20 ảnh chỉnh sửa</li>
-                            <li>Thời gian chụp 90-120 phút</li>
-                            <li>Make up V.I.P ( Take care full set)</li>
-                            <li>Nhận full ảnh gốc trong 24h</li>
-                            <li>Quay video hậu trường 🎁</li>
-                            <li>Tặng 01 ảnh lớn 20x30cm 🎁</li>
-                            <li>Ưu tiên chọn lịch giờ vàng</li>
-                        </ul>
-                        <div class="price-desc-highlight">💎 Khách hàng thích trải nghiệm <strong>cao cấp</strong>, ekip sẽ <strong>chăm sóc kỹ từng chi tiết</strong></div>
-                        <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> tất cả các concept chụp ảnh dịp quan trọng cần chỉn chu đầu tư.</div>
+                        <!-- Gói Hào Quang -->
+                        <div class="tiemanh-price-card" data-pkg="2">
+                            <h3>👑 GÓI HÀO QUANG</h3>
+                            <div class="tiemanh-price-tag">2.490.000 <span>đ</span></div>
+                            <ul class="tiemanh-price-features">
+                                <li>03 concept tự chọn</li>
+                                <li>03 trang phục</li>
+                                <li>20 ảnh chỉnh sửa</li>
+                                <li>Thời gian chụp 90-120 phút</li>
+                                <li>Make up V.I.P ( Take care full set)</li>
+                                <li>Nhận full ảnh gốc trong 24h</li>
+                                <li>Quay video hậu trường 🎁</li>
+                                <li>Tặng 01 ảnh lớn 20x30cm 🎁</li>
+                                <li>Ưu tiên chọn lịch giờ vàng</li>
+                            </ul>
+                            <div class="price-desc-highlight">💎 Khách hàng thích trải nghiệm <strong>cao cấp</strong>, ekip sẽ <strong>chăm sóc kỹ từng chi tiết</strong></div>
+                            <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> tất cả các concept chụp ảnh dịp quan trọng cần chỉn chu đầu tư.</div>
+                        </div>
+                    </div>
+                    <!-- Dots phân trang 3 gói -->
+                    <div class="tiemanh-pricing-dots" id="pricingDots">
+                        <button class="tiemanh-pricing-dot" data-index="0" title="Gói Thanh Xuân"></button>
+                        <button class="tiemanh-pricing-dot active" data-index="1" title="Gói Toả Sáng"></button>
+                        <button class="tiemanh-pricing-dot" data-index="2" title="Gói Hào Quang"></button>
                     </div>
                 </div>
             </section>
@@ -2285,7 +2795,7 @@
                             <a href="https://facebook.com" target="_blank" class="tiemanh-social-icon" title="Facebook">f</a>
                             <a href="https://instagram.com" target="_blank" class="tiemanh-social-icon" title="Instagram">📸</a>
                             <a href="https://tiktok.com" target="_blank" class="tiemanh-social-icon" title="TikTok">🎵</a>
-                            <a href="https://zalo.me" target="_blank" class="tiemanh-social-icon" title="Zalo">💬</a>
+                            <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-social-icon" title="Zalo">💬</a>
                         </div>
                     </div>
                     <div class="tiemanh-footer-col">
@@ -2301,17 +2811,18 @@
                     <div class="tiemanh-footer-col">
                         <h4 class="tiemanh-footer-title">Khám Phá</h4>
                         <ul class="tiemanh-footer-links">
-                            <li><a href="#tiemanh-banggia">Bảng báo giá dịch vụ</a></li>
-                            <li><a href="#tiemanh-quytrinh">Quy trình chụp ảnh</a></li>
-                            <li><a href="#tiemanh-chinhanh">Hệ thống chi nhánh</a></li>
+                            <li><a href="#banggiaSection">Bảng báo giá dịch vụ</a></li>
+                            <li><a href="#quytrinhSection">Quy trình chụp ảnh</a></li>
+                            <li><a href="#chinhanhSection">Hệ thống chi nhánh</a></li>
                             <li><a href="#filterBar">Bộ sưu tập 100+ Concept</a></li>
-                            <li><a href="#tiemanh-banggia">Đăng ký tư vấn miễn phí</a></li>
+                            <li><a href="https://zalo.me/3453208760470152361" target="_blank">Tư vấn nhanh qua Zalo</a></li>
                         </ul>
                     </div>
                     <div class="tiemanh-footer-col">
                         <h4 class="tiemanh-footer-title">Liên Hệ & Chi Nhánh</h4>
                         <ul class="tiemanh-footer-contacts">
-                            <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
+                            <li><span class="icon">📞</span> <span>Hotline: 0707 453 247</span></li>
+                            <li><span class="icon">💬</span> <span>Zalo: <a href="https://zalo.me/3453208760470152361" target="_blank" style="color:var(--tiemanh-primary);text-decoration:none;font-weight:700;">Nhắn tin qua Zalo OA</a></span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
                             <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1-TPHCM: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định</span></li>
                             <li class="address-line"><span class="icon">📍</span> <span>Hệ thống: Thủ Đức • Biên Hòa • Bình Dương • Cần Thơ • Đà Nẵng</span></li>
@@ -2323,6 +2834,61 @@
                     <span>Thiết kế bởi NHATLAM 💛</span>
                 </div>
             </footer>
+
+            <!-- Nút cuộn lên đầu trang -->
+            <button id="tiemanhBackToTop" class="tiemanh-back-to-top" title="Cuộn lên đầu trang">⬆</button>
+
+            <!-- Nút Nổi Zalo Chat (Nằm thẳng đứng phía trên nút Back to top) -->
+            <button class="tiemanh-zalo-floating-btn" id="zaloFloatingBtn" title="Chat Zalo với Tiệm Ảnh Trái Thơm">
+                <div class="zalo-pulse-ring"></div>
+                <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" fill="#FFFFFF"/>
+                    <!-- Nét trăng lưỡi liềm màu xanh Zalo -->
+                    <path d="M48 12C28.5 12 12 28.5 12 48C12 55.2 14.2 61.9 18 67.5L14 86L32.2 81.6C36.9 84.4 42.3 86 48 86C32 84 20 70 20 53C20 34.5 34.5 20 53 20C62 20 70.2 23.5 76.5 29.5C70.5 18.8 59.8 12 48 12Z" fill="#0068FF"/>
+                    <circle cx="54" cy="52" r="32" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3"/>
+                    <text x="54" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0068FF" text-anchor="middle" letter-spacing="-0.5px">Zalo</text>
+                </svg>
+            </button>
+
+            <!-- Dedicated Zalo Popup Modal -->
+            <div class="tiemanh-modal-overlay" id="zaloModal">
+                <div class="tiemanh-zalo-modal-card">
+                    <div class="zalo-card-header">
+                        <div class="zalo-header-avatar-box">
+                            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="48" fill="#FFFFFF"/>
+                                <path d="M48 12C28.5 12 12 28.5 12 48C12 55.2 14.2 61.9 18 67.5L14 86L32.2 81.6C36.9 84.4 42.3 86 48 86C32 84 20 70 20 53C20 34.5 34.5 20 53 20C62 20 70.2 23.5 76.5 29.5C70.5 18.8 59.8 12 48 12Z" fill="#0068FF"/>
+                                <circle cx="54" cy="52" r="32" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3"/>
+                                <text x="54" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0068FF" text-anchor="middle" letter-spacing="-0.5px">Zalo</text>
+                            </svg>
+                            <span class="zalo-online-status"></span>
+                        </div>
+                        <div class="zalo-header-info">
+                            <h4>Tiệm Ảnh Trái Thơm</h4>
+                            <p><span class="online-dot">●</span> Đang online • Phản hồi trong 1-3 phút</p>
+                        </div>
+                        <button class="tiemanh-modal-close-btn" id="zaloModalCloseBtn">&times;</button>
+                    </div>
+                    <div class="zalo-card-body">
+                        <div class="zalo-chat-message">
+                            <p>Xin chào bạn! 💕 Cảm ơn bạn đã ghé thăm <strong>Tiệm Ảnh Trái Thơm</strong>.</p>
+                            <p>Bạn đang quan tâm đến <strong>Concept nào</strong> hoặc muốn nhận <strong>Báo giá ưu đãi trong tháng này</strong>? Ekip Trái Thơm đã sẵn sàng hỗ trợ bạn ngay!</p>
+                        </div>
+                        <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-zalo-popup-btn" id="zaloPopupDirectBtn">
+                            <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="48" fill="#FFFFFF"/>
+                                <path d="M48 12C28.5 12 12 28.5 12 48C12 55.2 14.2 61.9 18 67.5L14 86L32.2 81.6C36.9 84.4 42.3 86 48 86C32 84 20 70 20 53C20 34.5 34.5 20 53 20C62 20 70.2 23.5 76.5 29.5C70.5 18.8 59.8 12 48 12Z" fill="#0068FF"/>
+                                <text x="54" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0068FF" text-anchor="middle" letter-spacing="-0.5px">Zalo</text>
+                            </svg>
+                            <span>BẮT ĐẦU CHAT QUA ZALO NGAY</span>
+                        </a>
+                        <div class="zalo-card-hotline">
+                            <span>📞 Hoặc gọi Hotline trực tiếp:</span>
+                            <a href="tel:0707453247"><strong>0707 453 247</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Lightbox Modal -->
             <div class="tiemanh-lightbox-overlay" id="lightboxOverlay">
@@ -2344,6 +2910,14 @@
                             <div style="font-weight: 700; margin-bottom: 12px; color: var(--tiemanh-white); font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.5px;">BỘ SƯU TẬP ẢNH MẪU:</div>
                             <div class="tiemanh-lightbox-img-counter" id="lightboxImgCounter">1 / 10</div>
                             <div class="tiemanh-lightbox-thumb-container" id="lightboxThumbs"></div>
+                            <div class="tiemanh-lightbox-actions">
+                                <button class="tiemanh-lightbox-download-btn" id="lightboxDownloadBtn" title="Tải ảnh này về máy">
+                                    <span>📥 Tải ảnh chất lượng cao</span>
+                                </button>
+                                <button class="tiemanh-lightbox-share-btn" id="lightboxShareBtn" title="Sao chép đường link trực tiếp dẫn tới concept này">
+                                    <span>🔗 Sao chép link Concept</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2353,11 +2927,21 @@
             <div class="tiemanh-modal-overlay" id="bookingModal">
                 <div class="tiemanh-modal-content">
                     <div class="tiemanh-modal-header">
-                        <h3 class="tiemanh-modal-title" id="modalTitle">Đặt Lịch Hẹn</h3>
-                        <p class="tiemanh-modal-subtitle">Hãy điền thông tin bên dưới, Trái Thơm sẽ liên hệ ngay lập tức!</p>
+                        <h3 class="tiemanh-modal-title" id="modalTitle">Đặt Lịch Hẹn & Tư Vấn</h3>
+                        <p class="tiemanh-modal-subtitle">Trái Thơm luôn sẵn sàng lắng nghe và hỗ trợ bạn chu đáo nhất!</p>
                         <button class="tiemanh-modal-close-btn" id="modalCloseBtn">&times;</button>
                     </div>
                     
+                    <!-- Khung kết nối Zalo OA trực tiếp 1-click -->
+                    <div class="tiemanh-modal-quick-contact">
+                        <p class="quick-contact-title">⚡ Nhắn tin tư vấn trực tiếp qua Zalo Official:</p>
+                        <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-zalo-direct-btn">
+                            <span>💬</span>
+                            <span>Chat Zalo Tư Vấn Trực Tiếp (0707 453 247)</span>
+                        </a>
+                        <div class="tiemanh-modal-divider"><span>HOẶC ĐỂ LẠI THÔNG TIN ĐỂ EKIP GỌI LẠI</span></div>
+                    </div>
+
                     <!-- Form đăng ký -->
                     <form class="tiemanh-modal-body" id="bookingForm">
                         <div class="tiemanh-form-group">
@@ -2396,7 +2980,11 @@
                         <p class="tiemanh-success-desc">
                             Cảm ơn bạn đã lựa chọn Tiệm Ảnh Trái Thơm. Ekip tư vấn viên của chúng tôi sẽ gọi điện hỗ trợ tư vấn chi tiết cho bạn trong vòng 15-30 phút tới nhé!
                         </p>
-                        <button class="tiemanh-btn-primary" id="successCloseBtn" style="padding: 10px 30px;">Tuyệt Vời 💛</button>
+                        <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-zalo-direct-btn" style="margin-bottom: 12px;">
+                            <span>💬</span>
+                            <span>Mở Zalo Nhắn Tin Với Tiệm Ngay</span>
+                        </a>
+                        <button class="tiemanh-btn-primary" id="successCloseBtn" style="padding: 10px 30px; width: 100%;">Đóng Cửa Sổ</button>
                     </div>
                 </div>
             </div>
@@ -2471,6 +3059,12 @@
                     navbar.classList.remove("scrolled");
                 }
             }
+        });
+
+        // Đặt tên theo đúng Tag chính cho các concept ban đầu
+        CONCEPTS.forEach(c => {
+            c.themes = extractMultiTagsSmart(c.tag || c.theme, c.title, c.description);
+            c.title = c.themes[0] || "Nàng Thơ";
         });
 
         // Chờ tải dữ liệu thực tế từ Google Sheets (tránh nháy ảnh mẫu không phù hợp)
@@ -2563,87 +3157,9 @@
             .toUpperCase();
     }
 
-    // Hàm thông minh chuẩn hóa và đồng bộ tên Concept chuyên nghiệp, sang trọng theo chuẩn Studio
-    function formatSmartTitle(rawTitle, themeName, branchName) {
-        if (!rawTitle) return themeName ? `${themeName} Portrait` : "Concept Nghệ Thuật";
-        
-        // Chuẩn hóa Unicode NFC (Dựng sẵn) chống triệt để lỗi tách rời dấu (ví dụ: THẦN bị tách thành THÂ`N)
-        let title = String(rawTitle)
-            .normalize("NFC")
-            .replace(/^(DONE+E*|DONEE*)\s*[-_]*\s*/gi, "") // Xóa tiền tố DONE, DONEE
-            .replace(/\s*[-_]*\s*(DONE+E*|DONEE*)$/gi, "") // Xóa hậu tố DONE, DONEE
-            .replace(/^(CONCEPT|CONEPT)\s*[-_:]*\s*/gi, "") // Xóa từ CONCEPT thừa ở đầu
-            .replace(/[-_]+/g, " ") // Đổi dấu gạch dưới thành khoảng trắng
-            .trim();
-
-        if (!title) return themeName ? `${themeName} Portrait` : "Concept Nghệ Thuật";
-
-        // Hàm hỗ trợ viết hoa chữ cái đầu (Title Case)
-        function toTitleCase(str) {
-            return str
-                .toLowerCase()
-                .split(' ')
-                .filter(Boolean)
-                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-                .join(' ');
-        }
-
-        const tUpper = title.toUpperCase();
-        const thClean = themeName && themeName !== "Tất cả" ? themeName : "";
-
-        // 1. Tự động đồng bộ các concept bị đặt tên cụt ngủn theo Màu Sắc
-        const colorMap = {
-            "ĐỎ": "Sắc Đỏ Quyến Rũ",
-            "DO": "Sắc Đỏ Quyến Rũ",
-            "XANH": "Sắc Xanh Thanh Khiết",
-            "XANH LA": "Sắc Xanh Tự Nhiên",
-            "XANH DUONG": "Sắc Xanh Hy Vọng",
-            "HỒNG": "Sắc Hồng Ngọt Ngào",
-            "HONG": "Sắc Hồng Ngọt Ngào",
-            "TRẮNG": "Sắc Trắng Tinh Khôi",
-            "TRANG": "Sắc Trắng Tinh Khôi",
-            "ĐEN": "Sắc Đen Quyền Lực",
-            "DEN": "Sắc Đen Quyền Lực",
-            "VÀNG": "Sắc Vàng Rực Rỡ",
-            "VANG": "Sắc Vàng Rực Rỡ",
-            "CAM": "Sắc Cam Năng Động",
-            "TÍM": "Sắc Tím Mộng Mơ",
-            "TIM": "Sắc Tím Mộng Mơ"
-        };
-        if (colorMap[tUpper]) {
-            return thClean ? `${thClean} – ${colorMap[tUpper]}` : `Concept ${colorMap[tUpper]}`;
-        }
-
-        // 2. Tự động đồng bộ các concept đặt tên dạng "MẪU X", "MẪU 1", "MẪU 15", "M17" hoặc chỉ là số "2"
-        const mauMatch = title.match(/^(MẪU|MAU|M|MAU\s*SO|MẪU\s*SỐ)\s*(\d+)$/i);
-        const numOnlyMatch = title.match(/^(\d+)$/);
-        
-        if (mauMatch || numOnlyMatch) {
-            const rawNum = mauMatch ? mauMatch[2] : numOnlyMatch[1];
-            const num = rawNum.padStart(2, '0');
-            if (thClean && thClean.toLowerCase() !== "concept") {
-                return `${thClean} Style #${num}`;
-            }
-            return `Concept Nghệ Thuật #${num}`;
-        }
-
-        // 3. Nếu tên trùng hoàn toàn với tên Chủ đề (VD: Theme "Beauty", Title "Beauty" hoặc "Ngoại Cảnh")
-        if (thClean && tUpper === thClean.toUpperCase()) {
-            return `${thClean} Portrait`;
-        }
-
-        // 4. Chuẩn hóa các tên Concept quen thuộc cho hay hơn
-        if (tUpper === "MAO LƯƠNG" || tUpper === "MAO LUONG") return "Nàng Thơ Hoa Mao Lương";
-        if (tUpper === "SEN YẾM HỒNG" || tUpper === "SEN YEM HONG") return "Yếm Hồng Bên Hoa Sen";
-        if (tUpper === "BEAUTY ĐÔI" || tUpper === "BEAUTY DOI") return "Beauty Đôi Sang Trọng";
-        if (tUpper.includes("NOEL ĐỎ") || tUpper.includes("NOEL DO")) return "Noel Sắc Đỏ Rực Rỡ";
-        if (tUpper.includes("KIMONO")) return "Kimono Phong Cách Nhật";
-        if (tUpper === "TẾT" || tUpper === "TET") return "Tết Sum Vầy Rạng Rỡ";
-        if (tUpper === "KỶ YẾU" || tUpper === "KY YEU") return "Kỷ Yếu Thanh Xuân";
-        if (tUpper === "GIA ĐÌNH" || tUpper === "GIA DINH") return "Gia Đình Hạnh Phúc";
-
-        // 5. Chuẩn hóa viết hoa chuẩn đẹp các từ còn lại
-        return toTitleCase(title);
+    // Hàm đặt tên Concept chuẩn tối giản: Dùng đúng tên Tag chính
+    function formatSmartTitle(rawTitle, themeName) {
+        return themeName && themeName !== "Tất cả" ? themeName : "Nàng Thơ";
     }
 
     // Hàm dọn dẹp các từ DONE, DONEE khỏi tên concept/chủ đề khi hiển thị trên web
@@ -2666,23 +3182,28 @@
             .replace(/[^A-Z0-9]/gi, "")
             .toUpperCase();
             
-        // Gộp nhóm về tên chuẩn viết hoa chữ cái đầu cho đồng bộ
-        if (clean === "COTRANG") return "Cổ Trang";
-        if (clean === "NGOAICANH") return "Ngoại Cảnh";
-        if (clean === "SINHNHAT") return "Sinh Nhật";
-        if (clean === "NANGTHO") return "Nàng Thơ";
-        if (clean === "AODAI" || clean === "AODAIYEM" || clean === "AODAIVAYEM") return "Áo Dài";
+        // Gộp nhóm về chuẩn chủ đề chính + các mùa
+        if (clean === "COTRANG" || clean === "HANPHUC" || clean === "COPHUC") return "Cổ Trang";
+        if (clean === "AODAI" || clean === "AODAIYEM" || clean === "AODAIVAYEM" || clean === "YEM" || clean === "TRUYENTHONG") return "Áo Dài";
+        if (clean === "NGOAICANH" || clean === "NATURE") return "Ngoại Cảnh";
+        if (clean === "SINHNHAT" || clean === "PARTY" || clean === "BIRTHDAY") return "Sinh Nhật";
+        if (clean === "NANGTHO" || clean === "THO" || clean === "TIENNU" || clean === "NUTINH" || clean === "DIUDANG") return "Nàng Thơ";
         if (clean === "KYYEU") return "Kỷ Yếu";
         if (clean === "GIADINH") return "Gia Đình";
-        if (clean === "BEAUTY") return "Beauty";
-        if (clean === "NOEL" || clean === "NOELDO") return "Noel";
-        if (clean === "SEXY") return "Sexy";
-        if (clean === "TET") return "Tết";
-        if (clean === "COUPLE") return "Couple";
+        if (clean === "BEAUTY" || clean === "CHANDUNG" || clean === "PROFILE" || clean === "LOOKBOOK") return "Beauty";
+        if (clean === "SEXY" || clean === "QUYENRU") return "Sexy";
+        if (clean === "CATINH" || clean === "STREET" || clean === "STREETSTYLE" || clean === "NANGDONG" || clean === "BIEN" || clean === "BIENHINH") return "Cá Tính";
+        if (clean === "COUPLE" || clean === "BANTHAN" || clean === "DOI") return "Couple";
+        
+        // Nhóm Mùa & Lễ Hội
+        if (clean === "MUAXUAN" || clean === "XUAN") return "Mùa Xuân";
+        if (clean === "MUAHE" || clean === "HE" || clean === "SUMMER") return "Mùa Hè";
+        if (clean === "MUATHU" || clean === "THU" || clean === "AUTUMN") return "Mùa Thu";
+        if (clean === "MUADONG" || clean === "DONG" || clean === "WINTER") return "Mùa Đông";
+        if (clean === "NOEL" || clean === "NOELDO" || clean === "GIANGSINH") return "Noel";
+        if (clean === "TET" || clean === "TETNGUYENDAN") return "Tết";
         if (clean === "TRUNGTHU") return "Trung Thu";
         if (clean === "INDOOR") return "Indoor";
-        if (clean === "THO") return "Thơ";
-        if (clean === "NANGDONG") return "Năng Động";
         
         // Nếu tên khác lạ, tự động viết hoa chữ cái đầu các từ
         return String(theme).normalize("NFC").trim()
@@ -2690,6 +3211,108 @@
             .split(' ')
             .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
             .join(' ');
+    }
+
+    // Hàm trích xuất Tag CHUẨN (Chỉ dùng đúng 9 Tag cho phép, không dùng Ngoại Cảnh, giữ 1 tag nếu hợp 1 tag)
+    function extractMultiTagsSmart(rawTheme, rawTitle, rawDesc) {
+        const fullText = `${rawTheme || ''} ${rawTitle || ''} ${rawDesc || ''}`
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/Đ/g, "D")
+            .replace(/đ/g, "d")
+            .toUpperCase();
+
+        const tags = [];
+        const seen = new Set();
+
+        function addTag(tagName) {
+            const key = tagName.toUpperCase();
+            if (!seen.has(key)) {
+                seen.add(key);
+                tags.push(tagName);
+            }
+        }
+
+        // 1. Áo Dài
+        if (fullText.includes("AO DAI") || fullText.includes("AODAI") || fullText.includes("YEM")) {
+            addTag("Áo Dài");
+        }
+        // 2. Cổ Trang
+        if (fullText.includes("CO TRANG") || fullText.includes("COTRANG") || fullText.includes("HAN PHUC") || fullText.includes("KIMONO")) {
+            addTag("Cổ Trang");
+        }
+        // 3. Noel
+        if (fullText.includes("NOEL") || fullText.includes("GIANG SINH")) {
+            addTag("Noel");
+        }
+        // 4. Tết
+        if (fullText.includes("TET") || fullText.includes("XUAN")) {
+            addTag("Tết");
+        }
+        // 5. Sinh Nhật
+        if (fullText.includes("SINH NHAT") || fullText.includes("SINHNHAT") || fullText.includes("SN") || fullText.includes("BIRTHDAY") || fullText.includes("PARTY")) {
+            addTag("Sinh Nhật");
+        }
+        // 6. Beauty
+        if (fullText.includes("BEAUTY") || fullText.includes("CHAN DUNG") || fullText.includes("CHANDUNG") || fullText.includes("PROFILE") || fullText.includes("LOOKBOOK")) {
+            addTag("Beauty");
+        }
+        // 7. Cá Tính & Sexy (Lọc chính xác từ khóa, không nhận nhầm Biên Hòa hay Biển)
+        const isSexyOrEdgy = (
+            /\b(SEXY|QUYEN\s*RU|GOI\s*CAM|LINGERIE|BIKINI)\b/i.test(fullText) ||
+            /\b(CA\s*TINH|CATINH|STREET\s*STYLE|STREETSTYLE|EDGY|PUNK|BIEN\s*HINH)\b/i.test(fullText)
+        );
+        if (isSexyOrEdgy) {
+            addTag("Cá Tính & Sexy");
+        }
+        // 8. Couple
+        if (fullText.includes("COUPLE") || fullText.includes("DOI") || fullText.includes("BAN THAN") || fullText.includes("TINH YEU")) {
+            addTag("Couple");
+        }
+        // 9. Nàng Thơ (Chỉ gán nếu có từ khóa Nàng Thơ hoặc chưa có tag nào)
+        if (fullText.includes("NANG THO") || fullText.includes("NANGTHO") || fullText.includes("THO") || fullText.includes("TIEN NU") || fullText.includes("MAO LUONG")) {
+            addTag("Nàng Thơ");
+        }
+
+        // Nếu hoàn toàn không khớp tag nào, mặc định là Nàng Thơ
+        if (tags.length === 0) {
+            tags.push("Nàng Thơ");
+        }
+
+        return tags;
+    }
+
+    // Hàm lấy Icon và Màu sắc chủ đạo tương ứng với 9 Chủ Đề Chuẩn
+    function getThemeInfo(themeName) {
+        const clean = cleanTextForMatching(themeName);
+        if (clean.includes("NANGTHO") || clean.includes("THO") || clean.includes("TIENNU")) {
+            return { icon: "🌸", color: "#ff758f", bg: "rgba(255,117,143,0.12)" };
+        }
+        if (clean.includes("COTRANG") || clean.includes("HANPHUC") || clean.includes("KIMONO")) {
+            return { icon: "🏮", color: "#7209b7", bg: "rgba(114,9,183,0.12)" };
+        }
+        if (clean.includes("AODAI") || clean.includes("YEM")) {
+            return { icon: "👗", color: "#d97706", bg: "rgba(217,119,6,0.12)" };
+        }
+        if (clean.includes("BEAUTY") || clean.includes("CHANDUNG") || clean.includes("PROFILE")) {
+            return { icon: "👤", color: "#2563eb", bg: "rgba(37,99,235,0.12)" };
+        }
+        if (clean.includes("SINHNHAT") || clean.includes("BIRTHDAY") || clean.includes("SN")) {
+            return { icon: "🎂", color: "#d97706", bg: "rgba(217,119,6,0.12)" };
+        }
+        if (clean.includes("CATINH") || clean.includes("SEXY") || clean.includes("BIEN") || clean.includes("STREET")) {
+            return { icon: "🔥", color: "#dc2626", bg: "rgba(220,38,38,0.12)" };
+        }
+        if (clean.includes("COUPLE") || clean.includes("DOI") || clean.includes("BANTHAN")) {
+            return { icon: "💖", color: "#db2777", bg: "rgba(219,39,119,0.12)" };
+        }
+        if (clean.includes("NOEL") || clean.includes("GIANGSINH")) {
+            return { icon: "🎄", color: "#dc2626", bg: "rgba(220,38,38,0.12)" };
+        }
+        if (clean.includes("TET") || clean.includes("XUAN")) {
+            return { icon: "🧧", color: "#ea580c", bg: "rgba(234,88,12,0.12)" };
+        }
+        return { icon: "✨", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" };
     }
 
     // Hàm chuẩn hóa tên chi nhánh (Đổi Q1, Quận 1 thành Quận 1-TPHCM)
@@ -2707,7 +3330,7 @@
         return raw || "Concept";
     }
 
-    // Xử lý dữ liệu nhận được từ Google Sheets JSONP
+    // Xử lý dữ liệu nhận được từ Google Sheets JSONP (Hỗ trợ Multi-tag đa chủ đề)
     function handleSheetsData(data) {
         try {
             const rows = data.table.rows;
@@ -2722,10 +3345,22 @@
                     obj[colName] = cell ? String(cell.v ?? "").normalize("NFC").trim() : "";
                 });
 
-                // Tự động làm sạch tên concept và chuẩn hóa gộp nhóm chủ đề
-                const cleanedTheme = normalizeThemeName(obj.theme || "");
-                const cleanedTitle = formatSmartTitle(obj.title || "Concept", cleanedTheme, obj.category);
+                // Kiểm tra hộp kiểm Ẩn/Hiện (status === FALSE -> Ẩn concept khỏi web)
+                const isHidden = (
+                    String(obj.status || '').toUpperCase() === 'FALSE' ||
+                    String(obj.status || '').toUpperCase() === 'AN' ||
+                    String(obj.status || '') === '0' ||
+                    String(obj.active || '').toUpperCase() === 'FALSE'
+                );
+                if (isHidden) return null;
+
+                // Trích xuất Tag chuẩn
+                const cleanedThemes = extractMultiTagsSmart(obj.theme, obj.title, obj.description);
+                const primaryTheme = cleanedThemes[0] || "Nàng Thơ";
+                const themeInfo = getThemeInfo(primaryTheme);
+
                 const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category, obj.category);
+                const cleanedTitle = primaryTheme;
 
                 // Tập hợp các ảnh thật từ img1 -> img10 từ Google Sheets
                 let realImages = [];
@@ -2750,17 +3385,20 @@
                     images = DEFAULT_PLACEHOLDERS[fallbackKey];
                 }
 
-                const bgColor = (obj.bgColor || "rgba(251,192,45,0.1)").replace(/-/g, ",");
+                const bgColor = obj.bgColor ? obj.bgColor.replace(/-/g, ",") : themeInfo.bg;
+                const iconColor = obj.iconColor || themeInfo.color;
+                const icon = obj.icon || themeInfo.icon;
 
                 return {
                     id: parseInt(obj.id || obj.concept_id) || rowIdx + 1,
                     branch: obj.branch || "",
-                    theme: cleanedTheme,
+                    theme: primaryTheme,
+                    themes: cleanedThemes, // Danh sách tất cả các tag
                     title: cleanedTitle,
                     category: obj.category || "nutinh",
                     tag: cleanedBranch,
-                    icon: obj.icon || "📸",
-                    iconColor: obj.iconColor || "#fbc02d",
+                    icon: icon,
+                    iconColor: iconColor,
                     bgColor: bgColor,
                     description: obj.description || "",
                     images: images,
@@ -2777,6 +3415,7 @@
                 setupGallery();
                 randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
                 renderFilterBar();
+                checkUrlAndOpenConcept();
                 console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept ngẫu nhiên từ Google Sheets.`);
             }
         } catch (e) {
@@ -2894,6 +3533,12 @@
             const img2 = concept.images[2] || "";
             const placeholderStyle = "background:linear-gradient(135deg,#f0f0f0,#e0e0e0);min-height:80px;";
 
+            const themesList = (concept.themes && concept.themes.length > 0) ? concept.themes : [concept.theme || "Nàng Thơ"];
+            const badgesHtml = themesList.map(t => {
+                const info = getThemeInfo(t);
+                return `<span class="tiemanh-card-badge" style="background:${info.bg};color:${info.color};">${info.icon} ${t}</span>`;
+            }).join("");
+
             card.innerHTML = `
                 <div class="collage-wrapper">
                     <img data-src="${img0}" class="collage-main-img" alt="${concept.title}" style="${img0 ? placeholderStyle : 'display:none'}">
@@ -2909,12 +3554,20 @@
                         </div>
                         <div class="tiemanh-card-title-box">
                             <h4 class="tiemanh-card-title">${concept.title}</h4>
-                            <span class="tiemanh-card-badge">📍 ${concept.tag || concept.category}</span>
+                            <div class="tiemanh-card-badges">
+                                ${badgesHtml}
+                                <span class="tiemanh-card-badge branch-badge">📍 ${concept.tag || concept.category}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="tiemanh-card-btn">
-                        <span>Xem album</span>
-                        <span class="tiemanh-card-arrow">➔</span>
+                    <div class="tiemanh-card-actions">
+                        <button class="tiemanh-card-download-btn" title="Tải ảnh bìa concept này về máy" data-download-url="${img0}" data-concept-title="${concept.title}">
+                            <span>📥 Tải ảnh</span>
+                        </button>
+                        <div class="tiemanh-card-btn" title="Xem trọn bộ album ảnh">
+                            <span>Xem album</span>
+                            <span class="tiemanh-card-arrow">➔</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -2925,6 +3578,17 @@
                     imgObserver.observe(img);
                 }
             });
+
+            // Xử lý tải ảnh riêng không kích hoạt lightbox
+            const downloadBtn = card.querySelector(".tiemanh-card-download-btn");
+            if (downloadBtn) {
+                downloadBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const url = downloadBtn.getAttribute("data-download-url");
+                    const title = downloadBtn.getAttribute("data-concept-title") || "concept";
+                    downloadConceptImage(url, title);
+                });
+            }
 
             // Click mở Lightbox
             card.addEventListener("click", () => {
@@ -2954,8 +3618,8 @@
 
         if (!overlay || !lightboxImg) return;
 
-        const displayTheme = concept.theme || concept.tag || "";
-        lightboxCat.textContent = displayTheme ? `CONCEPT ${displayTheme.toUpperCase()}` : "CONCEPT NGHỆ THUẬT";
+        const displayThemes = (concept.themes && concept.themes.length > 0) ? concept.themes.join(" • ") : (concept.theme || concept.tag || "");
+        lightboxCat.textContent = displayThemes ? `CONCEPT ${displayThemes.toUpperCase()}` : "CONCEPT NGHỆ THUẬT";
         lightboxTitle.textContent = concept.title;
         
         let desc = String(concept.description || "").trim();
@@ -2990,10 +3654,31 @@
         const counter = document.getElementById("lightboxImgCounter");
         if (counter) counter.textContent = `1 / ${totalImages}`;
 
-        // Set ảnh chính ban đầu
-        lightboxImg.src = concept.images[0];
+        // Set ảnh chính hiển thị ban đầu
+        if (concept.images && concept.images.length > 0) {
+            lightboxImg.src = concept.images[0];
+        }
+
+        // Cập nhật URL Deep Link để người xem có link riêng tới concept này
+        try {
+            const url = new URL(window.location.href);
+            url.searchParams.set("concept", concept.id);
+            window.history.replaceState({ conceptId: concept.id }, "", url.toString());
+        } catch (e) {
+            window.location.hash = `concept-${concept.id}`;
+        }
         
         overlay.classList.add("active");
+    }
+
+    function closeLightbox() {
+        const overlay = document.getElementById("lightboxOverlay");
+        if (overlay) overlay.classList.remove("active");
+        try {
+            const url = new URL(window.location.href);
+            url.searchParams.delete("concept");
+            window.history.replaceState({}, "", url.pathname + (url.search ? url.search : ""));
+        } catch (e) {}
     }
 
     function selectLightboxImage(idx) {
@@ -3124,16 +3809,14 @@
         const lightboxImg = document.getElementById("lightboxImg");
 
         if (lightboxClose) {
-            lightboxClose.addEventListener("click", () => {
-                if (lightboxOverlay) lightboxOverlay.classList.remove("active");
-            });
+            lightboxClose.addEventListener("click", closeLightbox);
         }
 
         if (lightboxOverlay) {
             // Click ra ngoài đóng
             lightboxOverlay.addEventListener("click", (e) => {
                 if (e.target === lightboxOverlay) {
-                    lightboxOverlay.classList.remove("active");
+                    closeLightbox();
                 }
             });
         }
@@ -3188,6 +3871,29 @@
         if (bookingModal) {
             bookingModal.addEventListener("click", (e) => {
                 if (e.target === bookingModal) closeBookingModal();
+            });
+        }
+
+        // Xử lý Popup Zalo chuyên nghiệp
+        const zaloModal = document.getElementById("zaloModal");
+        const zaloModalCloseBtn = document.getElementById("zaloModalCloseBtn");
+        const zaloFloatingBtn = document.getElementById("zaloFloatingBtn");
+        const zaloBubble = document.getElementById("zaloBubble");
+        const zaloBubbleClose = document.getElementById("zaloBubbleClose");
+
+        function openZaloModal() {
+            if (zaloModal) zaloModal.classList.add("active");
+        }
+
+        function closeZaloModal() {
+            if (zaloModal) zaloModal.classList.remove("active");
+        }
+
+        if (zaloFloatingBtn) zaloFloatingBtn.addEventListener("click", openZaloModal);
+        if (zaloModalCloseBtn) zaloModalCloseBtn.addEventListener("click", closeZaloModal);
+        if (zaloModal) {
+            zaloModal.addEventListener("click", (e) => {
+                if (e.target === zaloModal) closeZaloModal();
             });
         }
 
@@ -3340,6 +4046,70 @@
             });
         }
 
+        // Xử lý nút tải ảnh trong Lightbox
+        const lightboxDownloadBtn = document.getElementById("lightboxDownloadBtn");
+        if (lightboxDownloadBtn) {
+            lightboxDownloadBtn.addEventListener("click", () => {
+                if (activeConcept && activeConcept.images[activeImgIdx]) {
+                    const url = activeConcept.images[activeImgIdx];
+                    const title = `${activeConcept.title}_anh_${activeImgIdx + 1}`;
+                    downloadConceptImage(url, title);
+                }
+            });
+        }
+
+        // Xử lý nút Sao chép Link Concept
+        const lightboxShareBtn = document.getElementById("lightboxShareBtn");
+        if (lightboxShareBtn) {
+            lightboxShareBtn.addEventListener("click", () => {
+                if (!activeConcept) return;
+                const shareUrl = new URL(window.location.href);
+                shareUrl.searchParams.set("concept", activeConcept.id);
+                const fullLink = shareUrl.toString();
+
+                function showCopiedStatus() {
+                    const originalHtml = lightboxShareBtn.innerHTML;
+                    lightboxShareBtn.innerHTML = "<span>✅ Đã sao chép link!</span>";
+                    lightboxShareBtn.style.background = "#10b981";
+                    lightboxShareBtn.style.borderColor = "#10b981";
+                    lightboxShareBtn.style.color = "#ffffff";
+                    setTimeout(() => {
+                        lightboxShareBtn.innerHTML = originalHtml;
+                        lightboxShareBtn.style.background = "";
+                        lightboxShareBtn.style.borderColor = "";
+                        lightboxShareBtn.style.color = "";
+                    }, 2200);
+                }
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(fullLink).then(() => showCopiedStatus()).catch(() => {
+                        copyFallback(fullLink);
+                    });
+                } else {
+                    copyFallback(fullLink);
+                }
+
+                function copyFallback(text) {
+                    const temp = document.createElement("input");
+                    temp.value = text;
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                    showCopiedStatus();
+                }
+            });
+        }
+
+        // Kích hoạt nút cuộn lên đầu trang (Back to top)
+        setupBackToTop();
+
+        // Kiểm tra URL xem khách có vào bằng link concept riêng không
+        checkUrlAndOpenConcept();
+
+        // Kích hoạt Bảng giá Carousel kéo trượt & vòng lặp 3 gói
+        setupPricingCarousel();
+
         // Xử lý cuộn mượt cho các liên kết ở Footer
         const footerLinks = document.querySelectorAll(".tiemanh-footer-links a");
         footerLinks.forEach(link => {
@@ -3348,18 +4118,230 @@
                 if (href && href.startsWith("#")) {
                     e.preventDefault();
                     const targetId = href.substring(1);
-                    if (targetId === "tiemanh-banggia") smoothScrollToSection("banggiaSection");
-                    else if (targetId === "tiemanh-quytrinh") smoothScrollToSection("quytrinhSection");
-                    else if (targetId === "tiemanh-chinhanh") smoothScrollToSection("chinhanhSection");
+                    if (targetId === "banggiaSection") smoothScrollToSection("banggiaSection");
+                    else if (targetId === "quytrinhSection") smoothScrollToSection("quytrinhSection");
+                    else if (targetId === "chinhanhSection") smoothScrollToSection("chinhanhSection");
                     else if (targetId === "filterBar") smoothScrollToSection("filterBar");
                 }
             });
         });
     }
 
-    // 9. Hàm hỗ trợ vẽ lại Bộ lọc & Sự kiện động (Hỗ trợ bộ lọc kép thông minh)
+    // Hàm kiểm tra đường link chia sẻ concept riêng khi người dùng truy cập
+    function checkUrlAndOpenConcept() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const conceptParam = urlParams.get("concept");
+            const hashMatch = window.location.hash.match(/concept-(\d+)/);
+            const targetId = conceptParam || (hashMatch ? hashMatch[1] : null);
+
+            if (targetId && CONCEPTS && CONCEPTS.length > 0) {
+                const targetConcept = CONCEPTS.find(c => String(c.id) === String(targetId));
+                if (targetConcept) {
+                    setTimeout(() => {
+                        openLightbox(targetConcept);
+                        const targetCard = document.querySelector(`[data-id="${targetId}"]`);
+                        if (targetCard) {
+                            targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }
+                    }, 400);
+                }
+            }
+        } catch (err) {
+            console.warn("Lỗi kiểm tra link concept:", err);
+        }
+    }
+
+    // Hàm tải ảnh chất lượng cao về máy dạng file .jpg trực tiếp
+    function downloadConceptImage(url, filename) {
+        if (!url) return;
+
+        const safeName = (filename || "tiem-anh-trai-thom-concept")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D")
+            .toLowerCase()
+            .replace(/[^a-z0-9_-]/gi, "-")
+            .replace(/-+/g, "-");
+
+        // 1. Trường hợp ảnh từ Google Drive -> Gọi link export download trực tiếp file gốc
+        const driveMatch = url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (driveMatch && driveMatch[1]) {
+            const fileId = driveMatch[1];
+            const driveDirectDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = driveDirectDownloadUrl;
+            a.setAttribute("download", `${safeName}.jpg`);
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                if (document.body.contains(a)) document.body.removeChild(a);
+            }, 1500);
+            return;
+        }
+
+        // 2. Trường hợp ảnh thông thường -> Chuyển thành Blob tải về dạng .jpg
+        fetch(url)
+            .then(res => res.blob())
+            .then(blob => {
+                const blobUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = blobUrl;
+                a.download = `${safeName}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(blobUrl);
+                    if (document.body.contains(a)) document.body.removeChild(a);
+                }, 1000);
+            })
+            .catch(() => {
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = `${safeName}.jpg`;
+                a.target = "_blank";
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    if (document.body.contains(a)) document.body.removeChild(a);
+                }, 1000);
+            });
+    }
+
+    // Hàm quản lý nút Cuộn lên đầu trang (Back to top)
+    function setupBackToTop() {
+        const btn = document.getElementById("tiemanhBackToTop");
+        if (!btn) return;
+
+        function checkScroll() {
+            const scrollY = window.scrollY || document.documentElement.scrollTop || (document.getElementById("tiemanh-container") ? document.getElementById("tiemanh-container").scrollTop : 0);
+            if (scrollY > 350) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        }
+
+        window.addEventListener("scroll", checkScroll, { passive: true });
+        const container = document.getElementById("tiemanh-container");
+        if (container) container.addEventListener("scroll", checkScroll, { passive: true });
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (container) container.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    // Hàm quản lý Bảng giá Carousel kéo trượt & vòng lặp 3 gói
+    function setupPricingCarousel() {
+        const slider = document.getElementById("pricingSlider");
+        const prevBtn = document.getElementById("pricingPrevBtn");
+        const nextBtn = document.getElementById("pricingNextBtn");
+        const dots = document.querySelectorAll(".tiemanh-pricing-dot");
+        if (!slider) return;
+
+        let currentIndex = 1; // Mặc định ở gói Toả Sáng (Best seller)
+        const totalCards = 3;
+
+        function scrollToPackage(index) {
+            // Vòng lặp giữa 3 gói giá (0 -> 1 -> 2 -> 0)
+            currentIndex = (index + totalCards) % totalCards;
+            const cards = slider.querySelectorAll(".tiemanh-price-card");
+            if (cards[currentIndex]) {
+                cards[currentIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
+            dots.forEach((d, i) => {
+                d.classList.toggle("active", i === currentIndex);
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                scrollToPackage(currentIndex - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                scrollToPackage(currentIndex + 1);
+            });
+        }
+
+        dots.forEach(dot => {
+            dot.addEventListener("click", () => {
+                const idx = parseInt(dot.getAttribute("data-index")) || 0;
+                scrollToPackage(idx);
+            });
+        });
+
+        // Hỗ trợ kéo chuột mượt mà
+        enableDragScroll(slider);
+
+        // Cập nhật dot active khi người dùng vuốt/kéo trên mobile/desktop
+        slider.addEventListener("scroll", () => {
+            const scrollLeft = slider.scrollLeft;
+            const cardWidth = slider.querySelector(".tiemanh-price-card")?.offsetWidth || 300;
+            const approxIndex = Math.round(scrollLeft / (cardWidth + 25));
+            const safeIndex = Math.max(0, Math.min(approxIndex, totalCards - 1));
+            dots.forEach((d, i) => {
+                d.classList.toggle("active", i === safeIndex);
+            });
+            currentIndex = safeIndex;
+        }, { passive: true });
+    }
+
+    // Hàm kích hoạt kéo chuột mượt mà (Drag to Scroll) cho PC và hỗ trợ cảm ứng Mobile
+    function enableDragScroll(slider) {
+        if (!slider || slider.hasDragListener) return;
+        slider.hasDragListener = true;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            slider.classList.add('active-drag');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active-drag');
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active-drag');
+            setTimeout(() => { isDragging = false; }, 50);
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            if (Math.abs(walk) > 4) isDragging = true;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Ngăn chặn click nhầm khi đang kéo trượt
+        slider.addEventListener('click', (e) => {
+            if (isDragging) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        }, true);
+    }
+
+    // 9. Hàm hỗ trợ vẽ lại Bộ lọc & Sự kiện động (Hỗ trợ bộ lọc kép thông minh & Multi-tag)
     function renderFilterBar() {
         const branchBar = document.getElementById("branchFilterBar");
+        const themeBar = document.getElementById("themeFilterBar");
         if (!branchBar) return;
 
         // 1. Trích xuất các chi nhánh duy nhất (Cố định danh sách Chi nhánh)
@@ -3384,34 +4366,39 @@
         renderThemeFilterBar();
         
         setupFilterEvents();
+
+        // Kích hoạt kéo chuột mượt mà cho cả 2 thanh bộ lọc
+        enableDragScroll(branchBar);
+        enableDragScroll(themeBar);
     }
 
-    // Hàm vẽ lại bộ lọc chủ đề dựa theo Chi nhánh được chọn để tránh bị trùng lặp hoặc trống kết quả
+    // Hàm vẽ lại bộ lọc chủ đề ĐỒNG BỘ TOÀN DIỆN CHO TẤT CẢ CHI NHÁNH
     function renderThemeFilterBar() {
         const themeBar = document.getElementById("themeFilterBar");
         if (!themeBar) return;
 
-        // Lọc các concept của chi nhánh hiện tại để tìm các chủ đề tương ứng
-        const availableConcepts = selectedBranch === "all" 
-            ? CONCEPTS 
-            : CONCEPTS.filter(c => c.category === selectedBranch);
+        // Bộ danh mục chủ đề chuẩn hóa toàn hệ thống (Đồng bộ tuyệt đối cho tất cả chi nhánh)
+        const UNIVERSAL_THEMES = [
+            { slug: "all", name: "Tất cả", icon: "✨" },
+            { slug: "NÀNG THƠ", name: "Nàng Thơ", icon: "🌸", keywords: ["NANG THO", "THO", "TIEN NU"] },
+            { slug: "CỔ TRANG", name: "Cổ Trang", icon: "🏮", keywords: ["CO TRANG", "HAN PHUC", "KIMONO"] },
+            { slug: "ÁO DÀI", name: "Áo Dài", icon: "👗", keywords: ["AO DAI", "YEM", "TRUYEN THONG"] },
+            { slug: "BEAUTY", name: "Beauty", icon: "👤", keywords: ["BEAUTY", "CHAN DUNG", "PROFILE", "LOOKBOOK"] },
+            { slug: "SINH NHẬT", name: "Sinh Nhật", icon: "🎂", keywords: ["SINH NHAT", "SN", "BIRTHDAY", "PARTY"] },
+            { slug: "CÁ TÍNH", name: "Cá Tính & Sexy", icon: "🔥", keywords: ["CA TINH", "SEXY", "BIEN", "STREET"] },
+            { slug: "COUPLE", name: "Couple", icon: "💖", keywords: ["COUPLE", "DOI", "BAN THAN"] },
+            { slug: "TẾT", name: "Tết", icon: "🧧", keywords: ["TET", "XUAN", "MUA XUAN"] },
+            { slug: "NOEL", name: "Noel", icon: "🎄", keywords: ["NOEL", "GIANG SINH", "MUA DONG"] }
+        ];
 
-        const themes = [{ slug: "all", name: "Tất cả" }];
-        const seenThemes = new Set();
-        availableConcepts.forEach(c => {
-            if (c.theme) {
-                const themeUpper = c.theme.trim().toUpperCase();
-                if (!seenThemes.has(themeUpper)) {
-                    seenThemes.add(themeUpper);
-                    themes.push({ slug: themeUpper, name: c.theme.trim() });
-                }
-            }
-        });
-
-        // Vẽ danh sách chủ đề động
-        themeBar.innerHTML = themes.map(t => 
-            `<button class="tiemanh-filter-pill ${t.slug === selectedTheme ? 'active' : ''}" data-theme="${t.slug}">${t.name}</button>`
+        // Vẽ danh sách chủ đề đồng bộ kèm icon trực quan
+        themeBar.innerHTML = UNIVERSAL_THEMES.map(t => 
+            `<button class="tiemanh-filter-pill ${t.slug === selectedTheme ? 'active' : ''}" data-theme="${t.slug}">
+                <span>${t.icon}</span> <span>${t.name}</span>
+            </button>`
         ).join("");
+
+        enableDragScroll(themeBar);
     }
 
     function setupFilterEvents() {
@@ -3424,11 +4411,6 @@
                 branchPills.forEach(p => p.classList.remove("active"));
                 pill.classList.add("active");
                 selectedBranch = pill.getAttribute("data-branch");
-                
-                // Khi đổi Chi nhánh, reset Chủ đề về "Tất cả" và vẽ lại thanh chủ đề tương ứng của chi nhánh đó
-                selectedTheme = "all";
-                renderThemeFilterBar();
-                setupFilterEvents(); // Đăng ký lại sự kiện click cho các nút chủ đề mới sinh ra
                 applyDoubleFilter();
             };
         });
@@ -3447,7 +4429,25 @@
     function applyDoubleFilter() {
         const filtered = CONCEPTS.filter(c => {
             const matchBranch = (selectedBranch === "all" || c.category === selectedBranch);
-            const matchTheme = (selectedTheme === "all" || (c.theme && c.theme.toUpperCase() === selectedTheme));
+            
+            if (selectedTheme === "all") return matchBranch;
+
+            // Kiểm tra so khớp thông minh giữa chủ đề đã chọn và concept
+            const themeUpper = selectedTheme.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
+            const conceptThemes = ((c.themes && c.themes.length > 0) ? c.themes : [c.theme || ""]).map(t => 
+                t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase()
+            );
+            const titleUpper = (c.title || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
+
+            const matchTheme = conceptThemes.some(t => {
+                if (themeUpper === "CA TINH") return t.includes("CA TINH") || t.includes("SEXY") || t.includes("STREET");
+                if (themeUpper === "CO TRANG") return t.includes("CO TRANG") || t.includes("HAN PHUC") || t.includes("KIMONO");
+                if (themeUpper === "AO DAI") return t.includes("AO DAI") || t.includes("YEM");
+                if (themeUpper === "NOEL") return t.includes("NOEL") || t.includes("GIANG SINH");
+                if (themeUpper === "TET") return t.includes("TET") || t.includes("XUAN");
+                return t.includes(themeUpper) || themeUpper.includes(t);
+            });
+
             return matchBranch && matchTheme;
         });
 
