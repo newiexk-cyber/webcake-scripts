@@ -11,8 +11,9 @@
         redirectUrl: "", // Đường dẫn trang Cảm ơn nếu muốn chuyển hướng
         targetId: "w-naljqcdc", // ID phần tử trên Webcake để chèn giao diện
         // 🔑 ID của Google Sheet quản lý concept (nhân viên sửa tại đây)
-        // Lấy từ URL: https://docs.google.com/spreadsheets/d/[ID Ở ĐÂY]/edit
-        sheetId: "1hhUOljIvpXuVo0U0b0H0Pu6SVon3mPADD8yXRlnddg8",
+        // Lấy từ URL: https://docs.google.com/spreadsheets/d/1Sv3pxheEfamWKTSY96vwzQOi8bXK_lqJ1wB_wnZefCU/edit?gid=43962598
+        sheetId: "1Sv3pxheEfamWKTSY96vwzQOi8bXK_lqJ1wB_wnZefCU",
+        sheetGid: "43962598", // GID tab sheet quản lý concept
         sheetName: "concepts_template_clean" // Tên tab sheet của bạn
     };
 
@@ -3591,14 +3592,17 @@
     // 4b. Tải dữ liệu concept từ Google Sheets (CMS dạng bảng đơn - JSONP để bypass CORS)
     async function fetchConceptsFromSheets() {
         if (!CONFIG.sheetId) return;
-        const apiUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:json`;
+        const gidParam = CONFIG.sheetGid ? `&gid=${CONFIG.sheetGid}` : "";
+        const apiUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:json${gidParam}`;
 
         // Định nghĩa callback toàn cục để Google Sheets gọi vào
         window.google = window.google || {};
         window.google.visualization = window.google.visualization || {};
         window.google.visualization.Query = window.google.visualization.Query || {};
         
+        let hasLoaded = false;
         window.google.visualization.Query.setResponse = function(response) {
+            hasLoaded = true;
             handleSheetsData(response);
             const scriptTag = document.getElementById("tiemanh-sheets-jsonp");
             if (scriptTag) scriptTag.remove();
@@ -3611,7 +3615,30 @@
         const script = document.createElement("script");
         script.id = "tiemanh-sheets-jsonp";
         script.src = apiUrl;
+        script.onerror = function() {
+            console.warn("[TiệmẢnh] Không thể kết nối Google Sheets (Sheet có thể đang bị đặt Riêng tư / 401). Đang hiển thị danh sách concept mặc định.");
+            if (!hasLoaded) {
+                currentFiltered = [...CONCEPTS];
+                setupGallery();
+                randomizeHeroPolaroids();
+                renderFilterBar();
+            }
+        };
         document.head.appendChild(script);
+
+        // Fallback Timeout: Nếu sau 3 giây Sheet không phản hồi, tự động render concept để không bị trắng trang
+        setTimeout(() => {
+            if (!hasLoaded && CONCEPTS.length > 0) {
+                const grid = document.getElementById("conceptGrid");
+                if (grid && grid.children.length === 0) {
+                    console.warn("[TiệmẢnh] Quá thời gian chờ Google Sheet, tự động hiển thị dữ liệu dự phòng.");
+                    currentFiltered = [...CONCEPTS];
+                    setupGallery();
+                    randomizeHeroPolaroids();
+                    renderFilterBar();
+                }
+            }
+        }, 3000);
     }
 
     // 5. Quản lý danh sách Concept và Bộ Lọc (Lọc kép)
