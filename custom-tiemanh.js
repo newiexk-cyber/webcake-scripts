@@ -887,21 +887,7 @@
         }
         .tiemanh-filter-scroll-wrap::before,
         .tiemanh-filter-scroll-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 40px;
-            pointer-events: none;
-            z-index: 2;
-        }
-        .tiemanh-filter-scroll-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, var(--tiemanh-bg) 0%, transparent 100%);
-        }
-        .tiemanh-filter-scroll-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, var(--tiemanh-bg) 0%, transparent 100%);
+            display: none !important;
         }
 
         .tiemanh-filter-bar {
@@ -1516,22 +1502,24 @@
             border: 2px solid #fbc02d !important;
             animation: tooltipFloat 2s ease-in-out infinite !important;
             transition: all 0.3s ease !important;
-            cursor: pointer;
+            cursor: default;
         }
         .tiemanh-zalo-guide-tooltip .guide-close-btn {
             position: absolute;
-            top: 6px;
-            right: 8px;
-            font-size: 14px;
-            color: #94a3b8;
+            top: 4px;
+            right: 4px;
+            font-size: 15px;
+            color: #64748b;
             cursor: pointer;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
+            padding-bottom: 2px;
             border-radius: 50%;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
         .tiemanh-zalo-guide-tooltip .guide-close-btn:hover {
             background: #f1f5f9;
@@ -1734,7 +1722,7 @@
         }
         .tiemanh-footer-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+            grid-template-columns: 1.2fr 0.8fr 1.2fr;
             gap: 50px;
             margin-bottom: 60px;
         }
@@ -1911,6 +1899,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
+            padding-bottom: 4px;
             cursor: pointer;
             z-index: 10;
             transition: var(--tiemanh-transition);
@@ -2088,6 +2078,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
+            padding-bottom: 2px;
             cursor: pointer;
             transition: var(--tiemanh-transition);
         }
@@ -2228,12 +2220,12 @@
             align-items: stretch;
         }
         .tiemanh-price-card {
-            background-color: #fff2f5;
+            background-color: #ffffff;
             border-radius: 25px;
             padding: 35px 24px;
-            box-shadow: 0 10px 30px rgba(247, 196, 207, 0.35);
+            box-shadow: 0 10px 30px rgba(244, 63, 94, 0.06);
             transition: var(--tiemanh-transition);
-            border: 2px solid #f8cbd4;
+            border: 2px solid #fbcfe8;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -2261,6 +2253,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
+            padding-bottom: 2px;
             cursor: pointer;
             z-index: 10;
             transition: all 0.25s ease;
@@ -2339,25 +2333,32 @@
         }
         .tiemanh-price-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(247, 196, 207, 0.5);
-            border-color: #f5a3b4;
+            box-shadow: 0 18px 38px rgba(244, 63, 94, 0.12);
+            border-color: #f43f5e;
         }
         .tiemanh-price-card.featured {
-            border-color: var(--tiemanh-primary);
-            background: linear-gradient(180deg, #ffffff 0%, #fffcf5 100%);
-            box-shadow: 0 15px 35px rgba(251, 192, 45, 0.25);
+            border: 3px solid #fbbf24 !important;
+            background: #ffffff;
+            box-shadow: 0 18px 38px rgba(245, 158, 11, 0.15) !important;
+        }
+        .tiemanh-price-card.featured:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 42px rgba(245, 158, 11, 0.25) !important;
+            border-color: #f59e0b !important;
         }
         .tiemanh-price-badge {
             position: absolute;
-            top: 15px;
-            right: -35px;
-            background-color: var(--tiemanh-primary);
-            color: var(--tiemanh-dark);
-            font-size: 10px;
-            font-weight: 700;
-            padding: 5px 40px;
+            top: 20px;
+            right: -32px;
+            background-color: #fbbf24;
+            color: #5c1d30;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 35px;
             transform: rotate(45deg);
             text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            letter-spacing: 0.5px;
         }
         .tiemanh-price-card h3 {
             font-family: var(--tiemanh-serif);
@@ -2412,18 +2413,18 @@
             line-height: 1.4;
         }
         .price-best-seller {
-            background: #ffeb3b;
-            color: #5c1d30;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #ffffff;
             font-weight: 800;
-            font-size: 13px;
-            padding: 5px 15px;
+            font-size: 12.5px;
+            padding: 6px 20px;
             border-radius: 20px;
             text-align: center;
-            margin: 15px auto 0 auto;
+            margin: 18px auto 0 auto;
             width: fit-content;
-            box-shadow: 0 4px 10px rgba(255,235,59,0.3);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         
         /* 5. Quy trình Section */
@@ -2645,7 +2646,7 @@
 
         @media (max-width: 768px) {
             /* Khoảng cách & cỡ chữ thanh thoát, không bị ngợp */
-            .tiemanh-section-title { font-size: 26px; }
+            .tiemanh-sec-title, .tiemanh-section-title { font-size: 24px; }
             .tiemanh-section-subtitle { font-size: 12px; letter-spacing: 1.5px; }
             .tiemanh-section-desc { font-size: 13.5px; margin-bottom: 22px; line-height: 1.5; }
             .tiemanh-section-container { padding: 25px 14px; }
@@ -2653,8 +2654,24 @@
 
             /* Header & Navbar gọn gàng */
             .tiemanh-navbar { flex-direction: column; gap: 10px; padding: 12px 14px; }
-            .tiemanh-menu { gap: 10px; flex-wrap: wrap; justify-content: center; }
-            .tiemanh-menu-item a { font-size: 13px; padding: 2px 0; }
+            .tiemanh-menu { 
+                gap: 16px; 
+                flex-wrap: nowrap; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                width: 100%; 
+                padding: 4px 10px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE and Edge */
+            }
+            .tiemanh-menu::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
+            .tiemanh-menu-item {
+                flex-shrink: 0;
+            }
+            .tiemanh-menu-item a { font-size: 13.5px; padding: 4px 0; }
             .tiemanh-btn-primary { padding: 9px 18px; font-size: 13px; }
 
             /* Hero Section cực kỳ thoáng mắt */
@@ -2736,6 +2753,9 @@
             .tiemanh-modal-content { width: 94%; padding: 22px 16px; border-radius: 18px; max-height: 90vh; }
             .tiemanh-modal-header h3 { font-size: 19px; }
             .tiemanh-form-group input, .tiemanh-form-group select, .tiemanh-form-group textarea { padding: 10px 12px; font-size: 13px; }
+            .tiemanh-lightbox-arrow { width: 38px; height: 38px; font-size: 16px; }
+            .tiemanh-lightbox-arrow.left { left: 10px; }
+            .tiemanh-lightbox-arrow.right { right: 10px; }
         }
 
         @media (max-width: 420px) {
@@ -2864,7 +2884,7 @@
                     </p>
                     <div class="tiemanh-hero-btns">
                         <button class="tiemanh-btn-primary" id="btnHeroBangGia">🍍 Xem Bảng Giá</button>
-                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">🍍 Xem Thêm Concept ➔</button>
+                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">🍍 Xem Thêm Concept</button>
                     </div>
                 </div>
                 <div class="tiemanh-hero-right">
@@ -3149,16 +3169,7 @@
                             <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-social-icon" title="Zalo">💬</a>
                         </div>
                     </div>
-                    <div class="tiemanh-footer-col">
-                        <h4 class="tiemanh-footer-title">Dịch Vụ Concept</h4>
-                        <ul class="tiemanh-footer-links">
-                            <li><a href="#filterBar">Concept Nàng Thơ & Beauty</a></li>
-                            <li><a href="#filterBar">Concept Sinh Nhật & Kỷ Niệm</a></li>
-                            <li><a href="#filterBar">Concept Tết & Áo Dài</a></li>
-                            <li><a href="#filterBar">Concept Cổ Trang Nghệ Thuật</a></li>
-                            <li><a href="#filterBar">Concept Sexy & Năng Động</a></li>
-                        </ul>
-                    </div>
+
                     <div class="tiemanh-footer-col">
                         <h4 class="tiemanh-footer-title">Khám Phá</h4>
                         <ul class="tiemanh-footer-links">
@@ -3175,8 +3186,12 @@
                             <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
                             <li><span class="icon">💬</span> <span>Zalo: <a href="https://zalo.me/3453208760470152361" target="_blank" style="color:var(--tiemanh-primary);text-decoration:none;font-weight:700;">Nhắn tin qua Zalo OA</a></span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
-                            <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1-TPHCM: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định</span></li>
-                            <li class="address-line"><span class="icon">📍</span> <span>Hệ thống: Thủ Đức • Biên Hòa • Bình Dương • Cần Thơ • Đà Nẵng</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định, Q.1</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Thủ Đức: 81 Chương Dương, P. Linh Chiểu, TP. Thủ Đức</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Bình Dương: 6 Đường Số 3, P. Phú Hòa, TP. Thủ Dầu Một</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Biên Hòa: Số 8, Đường N1, P. Thống Nhất, Biên Hòa</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Cần Thơ: A12 Đường Số 1, KDC Nam Long, Cần Thơ</span></li>
+                            <li class="address-line"><span class="icon">📍</span> <span>CS Đà Nẵng: 62 Nại Nam, P. Hòa Cường Bắc, Q. Hải Châu</span></li>
                         </ul>
                     </div>
                 </div>
@@ -3265,12 +3280,12 @@
             <!-- Lightbox Modal -->
             <div class="tiemanh-lightbox-overlay" id="lightboxOverlay">
                 <button class="tiemanh-lightbox-close" id="lightboxClose">&times;</button>
-                <button class="tiemanh-lightbox-arrow left" id="lightboxPrev">&#10094;</button>
-                <button class="tiemanh-lightbox-arrow right" id="lightboxNext">&#10095;</button>
                 
                 <div class="tiemanh-lightbox-container">
                     <div class="tiemanh-lightbox-viewer">
+                        <button class="tiemanh-lightbox-arrow left" id="lightboxPrev">&#10094;</button>
                         <img src="" alt="Full view" class="tiemanh-lightbox-img" id="lightboxImg">
+                        <button class="tiemanh-lightbox-arrow right" id="lightboxNext">&#10095;</button>
                     </div>
                     <div class="tiemanh-lightbox-panel">
                         <div>
@@ -3886,6 +3901,120 @@
         }, 3000);
     }
 
+    // 4c. Tải dữ liệu bảng giá tự động từ tab "cấu hình gói giá" của Google Sheets qua JSONP (Bypass CORS)
+    async function fetchPricingFromSheets() {
+        if (!CONFIG.sheetId) {
+            setupPricingCarousel();
+            return;
+        }
+
+        const apiUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent("cấu hình gói giá")}&tqx=responseHandler:handlePricingSheetsData&t=${Date.now()}`;
+
+        // Nhúng thẻ script để load dữ liệu (vượt qua hoàn toàn CORS trên cả local file và web online)
+        const oldScript = document.getElementById("tiemanh-pricing-sheets-jsonp");
+        if (oldScript) oldScript.remove();
+
+        const script = document.createElement("script");
+        script.id = "tiemanh-pricing-sheets-jsonp";
+        script.src = apiUrl;
+        script.onerror = function () {
+            console.warn("[TiệmẢnh] Không thể kết nối Google Sheets để lấy bảng giá. Đang hiển thị bảng giá mặc định.");
+            setupPricingCarousel();
+        };
+        document.head.appendChild(script);
+    }
+
+    // Callback toàn cục để xử lý dữ liệu JSON trả về từ Google Sheets
+    window.handlePricingSheetsData = function (response) {
+        if (!response || !response.table || !response.table.rows) {
+            console.warn("[TiệmẢnh] Dữ liệu bảng giá từ Sheets trống hoặc sai cấu trúc.");
+            setupPricingCarousel();
+            return;
+        }
+
+        const rows = response.table.rows;
+        const packages = [];
+
+        rows.forEach(row => {
+            if (!row || !row.c || row.c.length < 2) return;
+            
+            // Lấy giá trị an toàn từ ô
+            const getVal = (idx) => {
+                const cell = row.c[idx];
+                if (!cell) return "";
+                // Ưu tiên lấy giá trị hiển thị .f (Formatted value) để giữ nguyên định dạng số tiền như 750.000
+                return (cell.f !== undefined && cell.f !== null) ? String(cell.f).trim() : (cell.v !== undefined && cell.v !== null ? String(cell.v).trim() : "");
+            };
+
+            const name = getVal(0);
+            if (!name || name.toLowerCase().includes("tên gói")) return; // Bỏ qua dòng header nếu có
+
+            const pkg = {
+                name: name,
+                price: getVal(1),
+                features: getVal(2),
+                highlight: getVal(3),
+                fit: getVal(4),
+                ribbon: getVal(5),
+                bestSeller: getVal(6),
+                featured: getVal(7).toLowerCase() === "true" || getVal(7).toLowerCase() === "có" || getVal(7).toLowerCase() === "yes"
+            };
+            packages.push(pkg);
+        });
+
+        if (packages.length > 0) {
+            renderPricingCards(packages);
+        }
+        setupPricingCarousel();
+
+        // Xóa thẻ script tạm sau khi load xong
+        const scriptTag = document.getElementById("tiemanh-pricing-sheets-jsonp");
+        if (scriptTag) scriptTag.remove();
+    };
+
+    // Vẽ giao diện các price card từ mảng dữ liệu lấy được
+    function renderPricingCards(packages) {
+        const slider = document.getElementById("pricingSlider");
+        if (!slider) return;
+
+        let html = "";
+        packages.forEach((pkg, index) => {
+            const isFeatured = pkg.featured ? "featured" : "";
+            const featureList = pkg.features.split(/[|\n]/)
+                .map(f => f.trim())
+                .filter(f => f.length > 0)
+                .map(f => `<li>${f}</li>`)
+                .join("");
+
+            html += `
+                <!-- Gói ${pkg.name} -->
+                <div class="tiemanh-price-card ${isFeatured}" data-pkg="${index}">
+                    ${pkg.ribbon ? `<div class="tiemanh-price-badge">${pkg.ribbon}</div>` : ""}
+                    <h3>${pkg.name}</h3>
+                    <div class="tiemanh-price-tag">${pkg.price} <span>đ</span></div>
+                    <ul class="tiemanh-price-features">
+                        ${featureList}
+                    </ul>
+                    ${pkg.highlight ? `<div class="price-desc-highlight">${pkg.highlight}</div>` : ""}
+                    ${pkg.fit ? `<div class="price-desc-fit">${pkg.fit}</div>` : ""}
+                    ${pkg.bestSeller ? `<div class="price-best-seller">${pkg.bestSeller}</div>` : ""}
+                </div>
+            `;
+        });
+        slider.innerHTML = html;
+
+        // Cập nhật lại dots phân trang ở dưới
+        const dotsContainer = document.getElementById("pricingDots");
+        if (dotsContainer) {
+            let dotsHtml = "";
+            packages.forEach((pkg, index) => {
+                const activeClass = index === 1 ? "active" : "";
+                dotsHtml += `<button class="tiemanh-pricing-dot ${activeClass}" data-index="${index}" title="${pkg.name}"></button>`;
+            });
+            dotsContainer.innerHTML = dotsHtml;
+        }
+    }
+
     // 5. Quản lý danh sách Concept, Phân trang và Bộ Lọc (Lọc kép)
     let currentFiltered = [...CONCEPTS];
     let selectedBranch = "all";
@@ -4406,16 +4535,12 @@
         }
 
         // Xử lý tooltip hướng dẫn chỉa vào Zalo
-        if (zaloGuideTooltip) {
-            zaloGuideTooltip.addEventListener("click", (e) => {
-                if (e.target === zaloGuideCloseBtn || zaloGuideCloseBtn?.contains(e.target)) {
-                    e.stopPropagation();
-                    zaloGuideTooltip.style.opacity = "0";
-                    zaloGuideTooltip.style.transform = "translateY(15px) scale(0.9)";
-                    setTimeout(() => { zaloGuideTooltip.style.display = "none"; }, 300);
-                    return;
-                }
-                openZaloModal("Tư Vấn Concept & Báo Giá Ưu Đãi");
+        if (zaloGuideCloseBtn && zaloGuideTooltip) {
+            zaloGuideCloseBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                zaloGuideTooltip.style.opacity = "0";
+                zaloGuideTooltip.style.transform = "translateY(15px) scale(0.9)";
+                setTimeout(() => { zaloGuideTooltip.style.display = "none"; }, 300);
             });
         }
 
@@ -4619,8 +4744,8 @@
         // Kiểm tra URL xem khách có vào bằng link concept riêng không
         checkUrlAndOpenConcept();
 
-        // Kích hoạt Bảng giá Carousel kéo trượt & vòng lặp 3 gói
-        setupPricingCarousel();
+        // Kích hoạt Bảng giá (tải tự động từ Sheets hoặc dùng mặc định)
+        fetchPricingFromSheets();
 
         // Xử lý cuộn mượt cho các liên kết ở Footer
         const footerLinks = document.querySelectorAll(".tiemanh-footer-links a");
@@ -4746,6 +4871,11 @@
             });
             currentIndex = safeIndex;
         }, { passive: true });
+
+        // Tự động cuộn đến gói Tỏa Sáng (index 1) trên mobile khi trang web được tải
+        setTimeout(() => {
+            scrollToPackage(1);
+        }, 800);
     }
 
     // Hàm kích hoạt kéo chuột mượt mà (Drag to Scroll) cho PC và hỗ trợ cảm ứng Mobile
