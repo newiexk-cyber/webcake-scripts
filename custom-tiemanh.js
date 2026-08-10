@@ -1126,30 +1126,7 @@
             align-items: center;
             gap: 8px;
             flex-shrink: 0;
-        }
-        .tiemanh-card-download-btn {
-            height: 36px;
-            padding: 0 13px;
-            border-radius: 18px;
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            white-space: nowrap;
-            transition: all 0.25s ease;
-        }
-        .tiemanh-card-download-btn:hover {
-            background: #e2e8f0;
-            color: #0f172a;
-            border-color: #cbd5e1;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            width: 100%;
         }
         .tiemanh-card-btn {
             height: 36px;
@@ -1163,6 +1140,8 @@
             cursor: pointer;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            flex-grow: 1;
             justify-content: center;
             gap: 6px;
             white-space: nowrap;
@@ -1495,6 +1474,179 @@
             text-decoration: none;
             margin-left: 4px;
             font-size: 14px;
+        }
+
+        /* Dòng note / Bubble hướng dẫn chỉa vào nút Zalo */
+        .tiemanh-zalo-guide-tooltip {
+            position: fixed !important;
+            bottom: 154px !important;
+            right: 20px !important;
+            background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%) !important;
+            color: #1e1e24 !important;
+            padding: 12px 16px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 12px 30px rgba(251, 192, 45, 0.25), 0 4px 10px rgba(0,0,0,0.08) !important;
+            z-index: 2147483640 !important; /* Cực kỳ cao để đè mọi thứ */
+            font-size: 13.5px !important;
+            line-height: 1.4 !important;
+            width: 250px !important;
+            border: 2px solid #fbc02d !important;
+            animation: tooltipFloat 2s ease-in-out infinite !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-close-btn {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 14px;
+            color: #94a3b8;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-close-btn:hover {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding-right: 12px;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-icon {
+            font-size: 22px;
+            animation: wave 1.5s ease-in-out infinite alternate;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-text strong {
+            color: #d97706;
+            font-weight: 700;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-text span {
+            color: #475569;
+            font-size: 12.5px;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-arrow {
+            position: absolute;
+            bottom: -10px;
+            right: 35px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fbc02d;
+        }
+        .tiemanh-zalo-guide-tooltip .guide-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #fffbeb;
+        }
+        @keyframes tooltipFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(15deg); }
+        }
+
+        /* CSS cho Zalo Popup cải tiến */
+        .zalo-selected-badge {
+            background: #fff9e6;
+            border: 1px dashed #fbc02d;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #d97706;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .zalo-quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .zalo-quick-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .zalo-quick-btn:hover {
+            background: #e2e8f0 !important;
+            color: #1e293b !important;
+            border-color: #94a3b8;
+        }
+
+        /* CSS cho Phân trang */
+        .tiemanh-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        .tiemanh-page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .tiemanh-page-btn:hover {
+            border-color: #fbc02d;
+            color: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(251, 192, 45, 0.15);
+        }
+        .tiemanh-page-btn.active {
+            background: linear-gradient(135deg, #fbc02d 0%, #f57f17 100%) !important;
+            color: #ffffff !important;
+            border-color: #fbc02d !important;
+            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.4) !important;
+        }
+        .tiemanh-page-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         /* 5. CTA Section */
@@ -2524,11 +2676,18 @@
             .collage-side { gap: 5px; }
             .collage-side-img.top { border-radius: 3px 10px 3px 3px; }
             .collage-side-img.bottom { border-radius: 3px 3px 10px 3px; }
-            .tiemanh-card-footer { padding: 12px 14px 14px 14px; }
+            .tiemanh-card-footer { 
+                padding: 12px 14px 14px 14px; 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 12px; 
+                min-height: auto; 
+            }
+            .tiemanh-card-meta { width: 100%; }
             .tiemanh-card-icon-box { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
             .tiemanh-card-title { font-size: 14.5px; }
             .tiemanh-card-badge { font-size: 10.5px; padding: 2px 7px; }
-            .tiemanh-card-btn { padding: 6px 10px; font-size: 11px; }
+            .tiemanh-card-btn { padding: 8px 10px; font-size: 12px; width: 100%; display: flex; justify-content: center; }
 
             /* Các khối danh sách khác */
             .tiemanh-pricing-grid, .tiemanh-steps-container, .tiemanh-feedback-grid, .tiemanh-branches-grid {
@@ -2686,6 +2845,8 @@
 
                 <!-- Concept cards grid -->
                 <div class="tiemanh-grid" id="conceptGrid"></div>
+                <!-- Pagination -->
+                <div class="tiemanh-pagination" id="tiemanhPagination"></div>
 
             </section>
 
@@ -2812,7 +2973,7 @@
                         </div>
                         <h4>Chi Nhánh Quận 1 – TP. HCM</h4>
                         <p>🏠 214/19/21 Nguyễn Văn Nguyễn, Phường Tân Định, Quận 1, TP. Hồ Chí Minh</p>
-                        <p class="hotline">📞 0707 453 247 – 0866 723 499</p>
+                        <p class="hotline">📞 0908 447 308 – 0866 723 499</p>
                         <a href="https://maps.google.com/?q=214/19/21+Nguy%E1%BB%85n+V%C4%83n+Nguy%E1%BB%85n,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+%C4%90%E1%BB%8Bnh,+Qu%E1%BA%ADn+1,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -2827,7 +2988,7 @@
                         </div>
                         <h4>Chi Nhánh Thủ Đức</h4>
                         <p>🏠 81 Chương Dương, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                        <p class="hotline">📞 0707 453 247 (Hotline Studio)</p>
+                        <p class="hotline">📞 0908 447 308 (Hotline Studio)</p>
                         <a href="https://maps.google.com/?q=81+Ch%C6%B0%C6%A1ng+D%C6%B0%C6%A1ng,+Ph%C6%B0%E1%BB%9Dng+Linh+Chi%E1%BB%83u,+Th%E1%BB%A7+%C4%90%E1%BB%A9c,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -2940,7 +3101,7 @@
                     <div class="tiemanh-footer-col">
                         <h4 class="tiemanh-footer-title">Liên Hệ & Chi Nhánh</h4>
                         <ul class="tiemanh-footer-contacts">
-                            <li><span class="icon">📞</span> <span>Hotline: 0707 453 247</span></li>
+                            <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
                             <li><span class="icon">💬</span> <span>Zalo: <a href="https://zalo.me/3453208760470152361" target="_blank" style="color:var(--tiemanh-primary);text-decoration:none;font-weight:700;">Nhắn tin qua Zalo OA</a></span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
                             <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1-TPHCM: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định</span></li>
@@ -2956,6 +3117,19 @@
 
             <!-- Nút cuộn lên đầu trang -->
             <button id="tiemanhBackToTop" class="tiemanh-back-to-top" title="Cuộn lên đầu trang">⬆</button>
+
+            <!-- Dòng Note / Tooltip chỉa vào nút Zalo hướng dẫn khách hàng -->
+            <div class="tiemanh-zalo-guide-tooltip" id="zaloGuideTooltip">
+                <span class="guide-close-btn" id="zaloGuideCloseBtn" title="Đóng hướng dẫn">✕</span>
+                <div class="guide-content">
+                    <span class="guide-icon">🍍</span>
+                    <div class="guide-text">
+                        <strong>Tư Vấn & Đặt Lịch Chụp!</strong>
+                        <span>Nhấp vào đây để nhận báo giá & xem concept ngay 👇</span>
+                    </div>
+                </div>
+                <div class="guide-arrow"></div>
+            </div>
 
             <!-- Nút Nổi Zalo Chat (Nằm thẳng đứng phía trên nút Back to top) -->
             <button class="tiemanh-zalo-floating-btn" id="zaloFloatingBtn" title="Chat Zalo với Tiệm Ảnh Trái Thơm">
@@ -2973,13 +3147,8 @@
             <div class="tiemanh-modal-overlay" id="zaloModal">
                 <div class="tiemanh-zalo-modal-card">
                     <div class="zalo-card-header">
-                        <div class="zalo-header-avatar-box">
-                            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="48" fill="#FFFFFF"/>
-                                <path d="M48 12C28.5 12 12 28.5 12 48C12 55.2 14.2 61.9 18 67.5L14 86L32.2 81.6C36.9 84.4 42.3 86 48 86C32 84 20 70 20 53C20 34.5 34.5 20 53 20C62 20 70.2 23.5 76.5 29.5C70.5 18.8 59.8 12 48 12Z" fill="#0068FF"/>
-                                <circle cx="54" cy="52" r="32" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="3 3"/>
-                                <text x="54" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0068FF" text-anchor="middle" letter-spacing="-0.5px">Zalo</text>
-                            </svg>
+                        <div class="zalo-header-avatar-box" style="font-size: 28px; display: flex; align-items: center; justify-content: center; background: #fffbeb;">
+                            🍍
                             <span class="zalo-online-status"></span>
                         </div>
                         <div class="zalo-header-info">
@@ -2989,6 +3158,10 @@
                         <button class="tiemanh-modal-close-btn" id="zaloModalCloseBtn">&times;</button>
                     </div>
                     <div class="zalo-card-body">
+                        <!-- Badge thông tin dịch vụ quan tâm (Concept / Gói dịch vụ) -->
+                        <div class="zalo-selected-badge" id="zaloSelectedBadge" style="display: none;">
+                            <span class="badge-icon">🍍</span> <strong>Dịch vụ quan tâm:</strong> <span id="zaloBadgeText">...</span>
+                        </div>
                         <div class="zalo-chat-message">
                             <p>Xin chào bạn! 💕 Cảm ơn bạn đã ghé thăm <strong>Tiệm Ảnh Trái Thơm</strong>.</p>
                             <p>Bạn đang quan tâm đến <strong>Concept nào</strong> hoặc muốn nhận <strong>Báo giá ưu đãi trong tháng này</strong>? Ekip Trái Thơm đã sẵn sàng hỗ trợ bạn ngay!</p>
@@ -2999,11 +3172,20 @@
                                 <path d="M48 12C28.5 12 12 28.5 12 48C12 55.2 14.2 61.9 18 67.5L14 86L32.2 81.6C36.9 84.4 42.3 86 48 86C32 84 20 70 20 53C20 34.5 34.5 20 53 20C62 20 70.2 23.5 76.5 29.5C70.5 18.8 59.8 12 48 12Z" fill="#0068FF"/>
                                 <text x="54" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0068FF" text-anchor="middle" letter-spacing="-0.5px">Zalo</text>
                             </svg>
-                            <span>BẮT ĐẦU CHAT QUA ZALO NGAY</span>
+                            <span>CHAT ZALO ĐẶT LỊCH & TƯ VẤN NGAY</span>
                         </a>
+                        <!-- Cụm 2 nút hành động nhanh tiện ích -->
+                        <div class="zalo-quick-actions">
+                            <button class="zalo-quick-btn pricing" id="zaloQuickPricingBtn">
+                                💎 Xem Bảng Giá
+                            </button>
+                            <button class="zalo-quick-btn branch" id="zaloQuickBranchBtn">
+                                📍 Xem Chi Nhánh
+                            </button>
+                        </div>
                         <div class="zalo-card-hotline">
                             <span>📞 Hoặc gọi Hotline trực tiếp:</span>
-                            <a href="tel:0707453247"><strong>0707 453 247</strong></a>
+                            <a href="tel:0908447308"><strong>0908 447 308</strong></a>
                         </div>
                     </div>
                 </div>
@@ -3030,10 +3212,7 @@
                             <div class="tiemanh-lightbox-img-counter" id="lightboxImgCounter">1 / 10</div>
                             <div class="tiemanh-lightbox-thumb-container" id="lightboxThumbs"></div>
                             <div class="tiemanh-lightbox-actions">
-                                <button class="tiemanh-lightbox-download-btn" id="lightboxDownloadBtn" title="Tải ảnh này về máy">
-                                    <span>📥 Tải ảnh chất lượng cao</span>
-                                </button>
-                                <button class="tiemanh-lightbox-share-btn" id="lightboxShareBtn" title="Sao chép đường link trực tiếp dẫn tới concept này">
+                                <button class="tiemanh-lightbox-share-btn" id="lightboxShareBtn" title="Sao chép đường link trực tiếp dẫn tới concept này" style="width: 100%;">
                                     <span>🔗 Sao chép link Concept</span>
                                 </button>
                             </div>
@@ -3056,7 +3235,7 @@
                         <p class="quick-contact-title">⚡ Nhắn tin tư vấn trực tiếp qua Zalo Official:</p>
                         <a href="https://zalo.me/3453208760470152361" target="_blank" class="tiemanh-zalo-direct-btn">
                             <span>💬</span>
-                            <span>Chat Zalo Tư Vấn Trực Tiếp (0707 453 247)</span>
+                            <span>Chat Zalo Tư Vấn Trực Tiếp (0908 447 308)</span>
                         </a>
                         <div class="tiemanh-modal-divider"><span>HOẶC ĐỂ LẠI THÔNG TIN ĐỂ EKIP GỌI LẠI</span></div>
                     </div>
@@ -3147,7 +3326,7 @@
         } else {
             const body = document.body;
             if (body) {
-                const isEmpty = body.innerText.trim().length <= 50; 
+                const isEmpty = body.innerText.trim().length <= 50;
                 if (isEmpty) {
                     body.innerHTML = HTML_STRUCTURE;
                 } else {
@@ -3169,7 +3348,7 @@
         }
 
 
-        window.addEventListener("scroll", function() {
+        window.addEventListener("scroll", function () {
             const navbar = document.getElementById("tiemanh-navbar");
             if (navbar) {
                 if (window.scrollY > 50) {
@@ -3194,24 +3373,24 @@
     // Hàm chuyển Google Drive share link → thumbnail URL ổn định (không bị chặn cross-origin)
     function driveToDirectUrl(url) {
         if (!url) return url;
-        
+
         // Helper: trích xuất FILE_ID và trả về thumbnail URL
         function toThumbnail(fileId) {
             return `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
         }
-        
+
         // Dạng: drive.google.com/file/d/FILE_ID
         const m1 = url.match(/drive\.google\.com\/file\/d\/([^/&#?]+)/);
         if (m1) return toThumbnail(m1[1]);
-        
+
         // Dạng: drive.google.com/open?id=FILE_ID
         const m2 = url.match(/drive\.google\.com\/open\?id=([^&#?]+)/);
         if (m2) return toThumbnail(m2[1]);
-        
+
         // Dạng: drive.google.com/uc?export=view&id=FILE_ID hoặc uc?id=FILE_ID
         const m3 = url.match(/id=([^&#?]+)/);
         if (m3 && url.includes("drive.google.com")) return toThumbnail(m3[1]);
-        
+
         return url;
     }
 
@@ -3300,7 +3479,7 @@
             .replace(/đ/g, "d")
             .replace(/[^A-Z0-9]/gi, "")
             .toUpperCase();
-            
+
         // Gộp nhóm về chuẩn chủ đề chính + các mùa
         if (clean === "COTRANG" || clean === "HANPHUC" || clean === "COPHUC") return "Cổ Trang";
         if (clean === "AODAI" || clean === "AODAIYEM" || clean === "AODAIVAYEM" || clean === "YEM" || clean === "TRUYENTHONG") return "Áo Dài";
@@ -3313,7 +3492,7 @@
         if (clean === "SEXY" || clean === "QUYENRU") return "Sexy";
         if (clean === "CATINH" || clean === "STREET" || clean === "STREETSTYLE" || clean === "NANGDONG" || clean === "BIEN" || clean === "BIENHINH") return "Cá Tính";
         if (clean === "COUPLE" || clean === "BANTHAN" || clean === "DOI") return "Couple";
-        
+
         // Nhóm Mùa & Lễ Hội
         if (clean === "MUAXUAN" || clean === "XUAN") return "Mùa Xuân";
         if (clean === "MUAHE" || clean === "HE" || clean === "SUMMER") return "Mùa Hè";
@@ -3323,7 +3502,7 @@
         if (clean === "TET" || clean === "TETNGUYENDAN") return "Tết";
         if (clean === "TRUNGTHU") return "Trung Thu";
         if (clean === "INDOOR") return "Indoor";
-        
+
         // Nếu tên khác lạ, tự động viết hoa chữ cái đầu các từ
         return String(theme).normalize("NFC").trim()
             .replace(/^(CONCEPT|CONEPT)\s*[-_]*\s*/gi, "")
@@ -3576,7 +3755,7 @@
                     <img src="${concept.images[0]}" alt="${concept.title}">
                     <div class="polaroid-caption">${concept.title}</div>
                 `;
-                
+
                 // Gán sự kiện click để mở trực tiếp Lightbox của concept tương ứng
                 card.onclick = (e) => {
                     e.preventDefault();
@@ -3599,9 +3778,9 @@
         window.google = window.google || {};
         window.google.visualization = window.google.visualization || {};
         window.google.visualization.Query = window.google.visualization.Query || {};
-        
+
         let hasLoaded = false;
-        window.google.visualization.Query.setResponse = function(response) {
+        window.google.visualization.Query.setResponse = function (response) {
             hasLoaded = true;
             handleSheetsData(response);
             const scriptTag = document.getElementById("tiemanh-sheets-jsonp");
@@ -3615,7 +3794,7 @@
         const script = document.createElement("script");
         script.id = "tiemanh-sheets-jsonp";
         script.src = apiUrl;
-        script.onerror = function() {
+        script.onerror = function () {
             console.warn("[TiệmẢnh] Không thể kết nối Google Sheets (Sheet có thể đang bị đặt Riêng tư / 401). Đang hiển thị danh sách concept mặc định.");
             if (!hasLoaded) {
                 currentFiltered = [...CONCEPTS];
@@ -3641,16 +3820,24 @@
         }, 3000);
     }
 
-    // 5. Quản lý danh sách Concept và Bộ Lọc (Lọc kép)
+    // 5. Quản lý danh sách Concept, Phân trang và Bộ Lọc (Lọc kép)
     let currentFiltered = [...CONCEPTS];
     let selectedBranch = "all";
     let selectedTheme = "all";
+    let currentPage = 1;
+    const ITEMS_PER_PAGE = 6;
 
     function setupGallery() {
         const grid = document.getElementById("conceptGrid");
         if (!grid) return;
 
         grid.innerHTML = "";
+
+        // Tính toán phân trang
+        const totalPages = Math.ceil(currentFiltered.length / ITEMS_PER_PAGE);
+        if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const pageConcepts = currentFiltered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
         // Intersection Observer để lazy load ảnh khi xuất hiện trong viewport
         const imgObserver = new IntersectionObserver((entries, observer) => {
@@ -3668,7 +3855,7 @@
             });
         }, { rootMargin: "200px 0px", threshold: 0.01 });
 
-        currentFiltered.forEach((concept, index) => {
+        pageConcepts.forEach((concept, index) => {
             const card = document.createElement("div");
             card.className = "tiemanh-card";
             card.setAttribute("data-id", concept.id);
@@ -3705,15 +3892,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tiemanh-card-actions">
-                        <button class="tiemanh-card-download-btn" title="Tải ảnh bìa concept này về máy" data-download-url="${img0}" data-concept-title="${concept.title}">
-                            <span>📥 Tải ảnh</span>
-                        </button>
-                        <div class="tiemanh-card-btn" title="Xem trọn bộ album ảnh">
-                            <span>Xem album</span>
-                            <span class="tiemanh-card-arrow">➔</span>
-                        </div>
-                    </div>
                 </div>
             `;
 
@@ -3724,23 +3902,85 @@
                 }
             });
 
-            // Xử lý tải ảnh riêng không kích hoạt lightbox
-            const downloadBtn = card.querySelector(".tiemanh-card-download-btn");
-            if (downloadBtn) {
-                downloadBtn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    const url = downloadBtn.getAttribute("data-download-url");
-                    const title = downloadBtn.getAttribute("data-concept-title") || "concept";
-                    downloadConceptImage(url, title);
-                });
-            }
-
             // Click mở Lightbox
             card.addEventListener("click", () => {
                 openLightbox(concept);
             });
             grid.appendChild(card);
         });
+
+        // Vẽ thanh phân trang
+        const paginationContainer = document.getElementById("tiemanhPagination");
+        if (paginationContainer) {
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = "";
+            } else {
+                let html = "";
+
+                // Nút Prev
+                html += `<button class="tiemanh-page-btn prev ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">❮</button>`;
+
+                const maxVisiblePages = 5;
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+                if (endPage - startPage + 1 < maxVisiblePages) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                }
+
+                // Trang đầu tiên và dấu ba chấm bên trái
+                if (startPage > 1) {
+                    html += `<button class="tiemanh-page-btn" data-page="1">1</button>`;
+                    if (startPage > 2) {
+                        html += `<span style="color:#94a3b8; font-weight:700; padding:0 8px; display:inline-block; align-self:center; user-select:none;">...</span>`;
+                    }
+                }
+
+                // Các trang ở giữa
+                for (let i = startPage; i <= endPage; i++) {
+                    html += `<button class="tiemanh-page-btn ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</button>`;
+                }
+
+                // Dấu ba chấm bên phải và trang cuối cùng
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        html += `<span style="color:#94a3b8; font-weight:700; padding:0 8px; display:inline-block; align-self:center; user-select:none;">...</span>`;
+                    }
+                    html += `<button class="tiemanh-page-btn" data-page="${totalPages}">${totalPages}</button>`;
+                }
+
+                // Nút Next
+                html += `<button class="tiemanh-page-btn next ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">❯</button>`;
+
+                paginationContainer.innerHTML = html;
+
+                // Gắn sự kiện click bằng Event Delegation (Ủy quyền sự kiện) đảm bảo luôn hoạt động ổn định
+                if (!paginationContainer.hasListener) {
+                    paginationContainer.hasListener = true;
+                    paginationContainer.addEventListener("click", (e) => {
+                        const btn = e.target.closest(".tiemanh-page-btn");
+                        if (!btn || btn.classList.contains("disabled")) return;
+
+                        const targetPage = parseInt(btn.getAttribute("data-page"));
+                        if (targetPage && targetPage !== currentPage) {
+                            currentPage = targetPage;
+
+                            // Cuộn mượt lên vị trí lọc/danh sách concept (được bọc try-catch an toàn)
+                            try {
+                                const filterBar = document.getElementById("filterBar") || document.getElementById("conceptGrid");
+                                if (filterBar) {
+                                    smoothScrollToSection(filterBar.id);
+                                }
+                            } catch (err) {
+                                console.warn("Lỗi cuộn trang:", err);
+                            }
+
+                            setupGallery();
+                        }
+                    });
+                }
+            }
+        }
     }
 
 
@@ -3766,7 +4006,7 @@
         const displayThemes = (concept.themes && concept.themes.length > 0) ? concept.themes.join(" • ") : (concept.theme || concept.tag || "");
         lightboxCat.textContent = displayThemes ? `CONCEPT ${displayThemes.toUpperCase()}` : "CONCEPT NGHỆ THUẬT";
         lightboxTitle.textContent = concept.title;
-        
+
         let desc = String(concept.description || "").trim();
         if (desc.toLowerCase().startsWith("concept done")) {
             desc = desc.replace(/^(concept done|concept done mẫu|concept)\s*/gi, "").trim();
@@ -3776,7 +4016,7 @@
             desc = `Bộ ảnh ${concept.title} được đầu tư kỹ lưỡng từ trang phục, makeup và bối cảnh nghệ thuật độc quyền tại Tiệm Ảnh Trái Thơm.`;
         }
         lightboxDesc.textContent = desc;
-        
+
         // Cập nhật zoom state về mặc định
         lightboxImg.className = "tiemanh-lightbox-img";
 
@@ -3812,7 +4052,7 @@
         } catch (e) {
             window.location.hash = `concept-${concept.id}`;
         }
-        
+
         overlay.classList.add("active");
     }
 
@@ -3823,14 +4063,14 @@
             const url = new URL(window.location.href);
             url.searchParams.delete("concept");
             window.history.replaceState({}, "", url.pathname + (url.search ? url.search : ""));
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function selectLightboxImage(idx) {
         if (!activeConcept) return;
         activeImgIdx = idx;
         isZoomed = false;
-        
+
         const lightboxImg = document.getElementById("lightboxImg");
         lightboxImg.src = activeConcept.images[idx];
         lightboxImg.className = "tiemanh-lightbox-img";
@@ -3903,7 +4143,7 @@
             return Math.random() * (max - min) + min;
         }
 
-        const interval = setInterval(function() {
+        const interval = setInterval(function () {
             const timeLeft = animationEnd - Date.now();
 
             if (timeLeft <= 0) {
@@ -3911,7 +4151,7 @@
             }
 
             const particleCount = 20 * (timeLeft / duration);
-            
+
             // Tạo các mẩu confetti giả lập bằng DOM
             for (let i = 0; i < particleCount; i++) {
                 const conf = document.createElement("div");
@@ -3924,7 +4164,7 @@
                 conf.style.top = "-10px";
                 conf.style.zIndex = "9999";
                 conf.style.opacity = "0.8";
-                
+
                 document.body.appendChild(conf);
 
                 // Animate rơi xuống
@@ -3988,25 +4228,25 @@
             lightboxBookBtn.addEventListener("click", () => {
                 if (lightboxOverlay) lightboxOverlay.classList.remove("active");
                 if (activeConcept) {
-                    openBookingModal(activeConcept.title);
+                    openZaloModal(`Concept: ${activeConcept.title}`);
                 } else {
-                    openBookingModal();
+                    openZaloModal("Đặt Lịch Chụp Ảnh");
                 }
             });
         }
 
 
 
-        // Bấm các nút mở booking modal
+        // Bấm các nút mở Zalo modal thay thế cho booking modal
         const btnDatLichHeader = document.getElementById("btnDatLichHeader");
         const btnHeroTuVan = document.getElementById("btnHeroTuVan");
         const btnCtaTuVan = document.getElementById("btnCtaTuVan");
 
-        if (btnDatLichHeader) btnDatLichHeader.addEventListener("click", () => openBookingModal());
-        if (btnHeroTuVan) btnHeroTuVan.addEventListener("click", () => openBookingModal());
-        if (btnCtaTuVan) btnCtaTuVan.addEventListener("click", () => openBookingModal());
+        if (btnDatLichHeader) btnDatLichHeader.addEventListener("click", () => openZaloModal("Đặt Lịch Chụp Ảnh"));
+        if (btnHeroTuVan) btnHeroTuVan.addEventListener("click", () => openZaloModal("Tư Vấn Concept & Đặt Lịch"));
+        if (btnCtaTuVan) btnCtaTuVan.addEventListener("click", () => openZaloModal("Đăng Ký Nhận Ưu Đãi Tháng Này"));
 
-        // Bấm nút đóng modal
+        // Bấm nút đóng booking modal (vẫn giữ để tránh lỗi tham chiếu)
         const modalCloseBtn = document.getElementById("modalCloseBtn");
         const successCloseBtn = document.getElementById("successCloseBtn");
         const bookingModal = document.getElementById("bookingModal");
@@ -4019,14 +4259,26 @@
             });
         }
 
-        // Xử lý Popup Zalo chuyên nghiệp
+        // Xử lý Popup Zalo chuyên nghiệp cải tiến
         const zaloModal = document.getElementById("zaloModal");
         const zaloModalCloseBtn = document.getElementById("zaloModalCloseBtn");
         const zaloFloatingBtn = document.getElementById("zaloFloatingBtn");
-        const zaloBubble = document.getElementById("zaloBubble");
-        const zaloBubbleClose = document.getElementById("zaloBubbleClose");
+        const zaloQuickPricingBtn = document.getElementById("zaloQuickPricingBtn");
+        const zaloQuickBranchBtn = document.getElementById("zaloQuickBranchBtn");
+        const zaloGuideTooltip = document.getElementById("zaloGuideTooltip");
+        const zaloGuideCloseBtn = document.getElementById("zaloGuideCloseBtn");
 
-        function openZaloModal() {
+        function openZaloModal(contextText = "") {
+            const badge = document.getElementById("zaloSelectedBadge");
+            const badgeText = document.getElementById("zaloBadgeText");
+
+            if (contextText && badge && badgeText) {
+                badgeText.textContent = contextText;
+                badge.style.display = "flex";
+            } else if (badge) {
+                badge.style.display = "none";
+            }
+
             if (zaloModal) zaloModal.classList.add("active");
         }
 
@@ -4034,11 +4286,39 @@
             if (zaloModal) zaloModal.classList.remove("active");
         }
 
-        if (zaloFloatingBtn) zaloFloatingBtn.addEventListener("click", openZaloModal);
+        if (zaloFloatingBtn) zaloFloatingBtn.addEventListener("click", () => openZaloModal());
         if (zaloModalCloseBtn) zaloModalCloseBtn.addEventListener("click", closeZaloModal);
         if (zaloModal) {
             zaloModal.addEventListener("click", (e) => {
                 if (e.target === zaloModal) closeZaloModal();
+            });
+        }
+
+        // Click 2 nút nhanh trong Zalo Modal
+        if (zaloQuickPricingBtn) {
+            zaloQuickPricingBtn.addEventListener("click", () => {
+                closeZaloModal();
+                smoothScrollToSection("banggiaSection");
+            });
+        }
+        if (zaloQuickBranchBtn) {
+            zaloQuickBranchBtn.addEventListener("click", () => {
+                closeZaloModal();
+                smoothScrollToSection("chinhanhSection");
+            });
+        }
+
+        // Xử lý tooltip hướng dẫn chỉa vào Zalo
+        if (zaloGuideTooltip) {
+            zaloGuideTooltip.addEventListener("click", (e) => {
+                if (e.target === zaloGuideCloseBtn || zaloGuideCloseBtn?.contains(e.target)) {
+                    e.stopPropagation();
+                    zaloGuideTooltip.style.opacity = "0";
+                    zaloGuideTooltip.style.transform = "translateY(15px) scale(0.9)";
+                    setTimeout(() => { zaloGuideTooltip.style.display = "none"; }, 300);
+                    return;
+                }
+                openZaloModal("Tư Vấn Concept & Báo Giá Ưu Đãi");
             });
         }
 
@@ -4049,14 +4329,14 @@
         if (bookingForm && successBox) {
             bookingForm.addEventListener("submit", async (e) => {
                 e.preventDefault();
-                
+
                 // Thu thập thông tin khách hàng nhập
                 const name = document.getElementById("formName")?.value || document.getElementById("bookingName")?.value || "";
                 const phone = document.getElementById("formPhone")?.value || document.getElementById("bookingPhone")?.value || "";
                 const concept = document.getElementById("formConcept")?.value || document.getElementById("bookingConcept")?.value || "";
                 const branch = document.getElementById("formBranch")?.value || document.getElementById("bookingBranch")?.value || "";
                 const note = document.getElementById("formNote")?.value || document.getElementById("bookingNote")?.value || "";
-                
+
                 const formData = {
                     name: name,
                     phone: phone,
@@ -4151,12 +4431,12 @@
             if (el) {
                 el.addEventListener("click", (e) => {
                     e.preventDefault();
-                    
+
                     // Loại bỏ class active ở tất cả menu items
                     document.querySelectorAll(".tiemanh-menu-item").forEach(item => {
                         item.classList.remove("active");
                     });
-                    
+
                     // Thêm class active cho thẻ cha li
                     el.closest(".tiemanh-menu-item")?.classList.add("active");
 
@@ -4165,12 +4445,12 @@
             }
         });
 
-        // Bấm chọn từ bảng giá sẽ tự động mở modal và điền concept tương ứng
+        // Bấm chọn từ bảng giá sẽ tự động mở modal Zalo và điền gói tương ứng
         const priceBtns = document.querySelectorAll(".btn-price-select");
         priceBtns.forEach(btn => {
             btn.addEventListener("click", () => {
                 const conceptName = btn.getAttribute("data-concept") || "";
-                openBookingModal(conceptName);
+                openZaloModal("Gói: " + conceptName);
             });
         });
 
@@ -4191,17 +4471,7 @@
             });
         }
 
-        // Xử lý nút tải ảnh trong Lightbox
-        const lightboxDownloadBtn = document.getElementById("lightboxDownloadBtn");
-        if (lightboxDownloadBtn) {
-            lightboxDownloadBtn.addEventListener("click", () => {
-                if (activeConcept && activeConcept.images[activeImgIdx]) {
-                    const url = activeConcept.images[activeImgIdx];
-                    const title = `${activeConcept.title}_anh_${activeImgIdx + 1}`;
-                    downloadConceptImage(url, title);
-                }
-            });
-        }
+
 
         // Xử lý nút Sao chép Link Concept
         const lightboxShareBtn = document.getElementById("lightboxShareBtn");
@@ -4297,66 +4567,7 @@
         }
     }
 
-    // Hàm tải ảnh chất lượng cao về máy dạng file .jpg trực tiếp
-    function downloadConceptImage(url, filename) {
-        if (!url) return;
 
-        const safeName = (filename || "tiem-anh-trai-thom-concept")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/đ/g, "d")
-            .replace(/Đ/g, "D")
-            .toLowerCase()
-            .replace(/[^a-z0-9_-]/gi, "-")
-            .replace(/-+/g, "-");
-
-        // 1. Trường hợp ảnh từ Google Drive -> Gọi link export download trực tiếp file gốc
-        const driveMatch = url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (driveMatch && driveMatch[1]) {
-            const fileId = driveMatch[1];
-            const driveDirectDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            
-            const a = document.createElement("a");
-            a.style.display = "none";
-            a.href = driveDirectDownloadUrl;
-            a.setAttribute("download", `${safeName}.jpg`);
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-                if (document.body.contains(a)) document.body.removeChild(a);
-            }, 1500);
-            return;
-        }
-
-        // 2. Trường hợp ảnh thông thường -> Chuyển thành Blob tải về dạng .jpg
-        fetch(url)
-            .then(res => res.blob())
-            .then(blob => {
-                const blobUrl = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.style.display = "none";
-                a.href = blobUrl;
-                a.download = `${safeName}.jpg`;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                    window.URL.revokeObjectURL(blobUrl);
-                    if (document.body.contains(a)) document.body.removeChild(a);
-                }, 1000);
-            })
-            .catch(() => {
-                const a = document.createElement("a");
-                a.style.display = "none";
-                a.href = url;
-                a.download = `${safeName}.jpg`;
-                a.target = "_blank";
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                    if (document.body.contains(a)) document.body.removeChild(a);
-                }, 1000);
-            });
-    }
 
     // Hàm quản lý nút Cuộn lên đầu trang (Back to top)
     function setupBackToTop() {
@@ -4502,14 +4713,14 @@
 
         // Vẽ danh sách chi nhánh
         if (branches.length > 1) {
-            branchBar.innerHTML = branches.map(b => 
+            branchBar.innerHTML = branches.map(b =>
                 `<button class="tiemanh-filter-pill ${b.slug === selectedBranch ? 'active' : ''}" data-branch="${b.slug}">${b.name}</button>`
             ).join("");
         }
 
         // 2. Vẽ lại thanh Chủ đề dựa theo chi nhánh đang chọn
         renderThemeFilterBar();
-        
+
         setupFilterEvents();
 
         // Kích hoạt kéo chuột mượt mà cho cả 2 thanh bộ lọc
@@ -4537,7 +4748,7 @@
         ];
 
         // Vẽ danh sách chủ đề đồng bộ kèm icon trực quan
-        themeBar.innerHTML = UNIVERSAL_THEMES.map(t => 
+        themeBar.innerHTML = UNIVERSAL_THEMES.map(t =>
             `<button class="tiemanh-filter-pill ${t.slug === selectedTheme ? 'active' : ''}" data-theme="${t.slug}">
                 <span>${t.icon}</span> <span>${t.name}</span>
             </button>`
@@ -4572,14 +4783,15 @@
     }
 
     function applyDoubleFilter() {
+        currentPage = 1;
         const filtered = CONCEPTS.filter(c => {
             const matchBranch = (selectedBranch === "all" || c.category === selectedBranch);
-            
+
             if (selectedTheme === "all") return matchBranch;
 
             // Kiểm tra so khớp thông minh giữa chủ đề đã chọn và concept
             const themeUpper = selectedTheme.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
-            const conceptThemes = ((c.themes && c.themes.length > 0) ? c.themes : [c.theme || ""]).map(t => 
+            const conceptThemes = ((c.themes && c.themes.length > 0) ? c.themes : [c.theme || ""]).map(t =>
                 t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase()
             );
             const titleUpper = (c.title || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
