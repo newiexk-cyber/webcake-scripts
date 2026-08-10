@@ -879,10 +879,10 @@
         .tiemanh-quytrinh-sec,
         .tiemanh-chinhanh-sec,
         .tiemanh-footer {
-            scroll-margin-top: 85px;
+            scroll-margin-top: 0; /* Offset xử lý thủ công trong JS */
         }
         .tiemanh-section-container {
-            padding: 60px 8%;
+            padding: 24px 8% 60px; /* Top gọn để không có khoảng trắng khi scroll tới */
         }
         /* Wrapper tạo hiệu ứng fade ở 2 cạnh gợi ý còn nội dung */
         .tiemanh-filter-scroll-wrap {
@@ -2173,7 +2173,7 @@
 
         /* 4. Bảng giá Section */
         .tiemanh-banggia-sec {
-            padding: 80px 8%;
+            padding: 24px 8% 80px; /* Top gọn để không có khoảng trắng khi scroll tới */
             background-color: #fffbf0;
             text-align: center;
         }
@@ -2311,6 +2311,7 @@
             }
             .tiemanh-pricing-grid {
                 display: flex;
+                align-items: stretch !important; /* Kéo giãn chiều cao cả 3 card bằng nhau 100% */
                 gap: 16px;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
@@ -2327,6 +2328,7 @@
                 flex: 0 0 78%;
                 min-width: 280px;
                 scroll-snap-align: center;
+                height: auto !important; /* Đảm bảo flex stretch hoạt động kéo giãn chiều cao */
             }
             .tiemanh-pricing-nav-btn {
                 display: flex !important;
@@ -2433,7 +2435,7 @@
         
         /* 5. Quy trình Section */
         .tiemanh-quytrinh-sec {
-            padding: 80px 8%;
+            padding: 24px 8% 80px; /* Top gọn */
             background-color: #fffdf6;
             text-align: center;
         }
@@ -2654,7 +2656,7 @@
             .tiemanh-section-subtitle { font-size: 12px; letter-spacing: 1.5px; }
             .tiemanh-section-desc { font-size: 13.5px; margin-bottom: 22px; line-height: 1.5; }
             .tiemanh-section-container { padding: 25px 14px; }
-            .tiemanh-banggia-sec, .tiemanh-quytrinh-sec, .tiemanh-feedback-sec, .tiemanh-chinhanh-sec { padding: 40px 14px; }
+            .tiemanh-banggia-sec, .tiemanh-quytrinh-sec, .tiemanh-feedback-sec, .tiemanh-chinhanh-sec { padding: 20px 14px 40px; }
 
             /* Header & Navbar gọn gàng */
             .tiemanh-navbar { flex-direction: column; gap: 10px; padding: 12px 14px; }
@@ -2816,6 +2818,201 @@
             box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
             text-transform: uppercase;
         }
+
+        /* --- CẤU HÌNH TYPOGRAPHY BOLD HIỆN ĐẠI (SỬ DỤNG PHÔNG MẶC ĐỊNH, KHÔNG LO BỊ CHẶN FONT) --- */
+        .tiemanh-hero-title-new {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.15; /* Tăng từ 1.05 lên 1.15 để chữ không bị đè dòng */
+            color: #2e0813;
+            margin: 0 0 24px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Tăng khoảng cách giữa các dòng chữ cho thoáng */
+            align-items: flex-start;
+            font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', sans-serif;
+        }
+        .tiemanh-hero-title-new .title-serif {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: 0.5px; /* Giãn chữ ra thay vì co âm */
+            text-transform: uppercase;
+            color: #2e0813;
+            font-family: inherit;
+        }
+        .tiemanh-hero-title-new .title-script {
+            font-size: 78px;
+            font-weight: 900;
+            color: #d97706; /* Màu vàng hổ phách sẫm */
+            line-height: 1; /* Tăng line-height cho thoải mái */
+            margin-left: 0;
+            letter-spacing: -0.5px; /* Giãn ra đáng kể để dễ thở */
+            text-transform: uppercase;
+            text-shadow: 0 4px 15px rgba(217, 119, 6, 0.12);
+            font-family: inherit;
+            display: inline-block;
+        }
+        .tiemanh-hero-title-new .title-serif-sub {
+            font-size: 44px;
+            font-weight: 700;
+            align-self: flex-start;
+            margin-left: 80px; /* Đẩy lùi sang phải nhiều hơn cho thoáng */
+            text-transform: lowercase;
+            color: #5c3d46; /* Màu nâu nhạt hơn */
+            font-family: inherit;
+            letter-spacing: 0.5px;
+        }
+        .tiemanh-hero-desc {
+            color: #5c3d46 !important; /* Đổi màu chữ mô tả sẫm dễ đọc */
+            font-size: 15.5px;
+            max-width: 520px;
+            line-height: 1.75;
+        }
+
+        /* Khung thông số Stats */
+        .tiemanh-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 28px 0;
+            width: 100%;
+            max-width: 480px;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff; /* Nền trắng tinh tế nổi bật */
+            border: 1.5px solid rgba(251, 192, 45, 0.25); /* Viền vàng sẫm nhẹ */
+            padding: 10px 14px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.08); /* Đổ bóng nhẹ */
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .stat-item:hover {
+            background: #fffbeb; /* Vàng kem cực nhạt khi hover */
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.15);
+        }
+        .stat-icon {
+            font-size: 16px;
+            background: rgba(251, 192, 45, 0.15);
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #b45309; /* Vàng cam sẫm */
+        }
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        .stat-num {
+            font-size: 15px;
+            font-weight: 800;
+            color: #2e0813; /* Nâu đậm sắc nét */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #5c3d46; /* Nâu xám sẫm */
+            font-family: 'Be Vietnam Pro', sans-serif;
+            text-transform: none;
+        }
+
+        /* Nút Hero mới */
+        .tiemanh-btn-primary-new {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #2e0813 !important;
+            font-weight: 800;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .tiemanh-btn-primary-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(245, 158, 11, 0.4);
+            filter: brightness(1.05);
+        }
+        .tiemanh-btn-secondary-new {
+            background: transparent;
+            color: #2e0813 !important; /* Đổi màu chữ sang nâu đậm */
+            font-weight: 700;
+            border: 2px solid rgba(46, 8, 19, 0.25); /* Viền nâu mờ */
+            padding: 12px 26px;
+            border-radius: 100px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .tiemanh-btn-secondary-new:hover {
+            background: rgba(46, 8, 19, 0.05);
+            border-color: #2e0813;
+            color: #2e0813 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Phản hồi di động cho Hero mới */
+        @media (max-width: 991px) {
+            .tiemanh-hero-title-new {
+                font-size: 38px;
+                align-items: center;
+                text-align: center;
+                margin: 0 0 20px 0;
+            }
+            .tiemanh-hero-title-new .title-serif {
+                font-size: 36px;
+            }
+            .tiemanh-hero-title-new .title-script {
+                font-size: 58px;
+                margin-left: 0;
+            }
+            .tiemanh-hero-title-new .title-serif-sub {
+                font-size: 32px;
+                margin-left: 0;
+                align-self: center;
+            }
+            .tiemanh-hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin: 20px 0;
+                max-width: 100%;
+            }
+            .stat-item {
+                padding: 8px 10px;
+            }
+            .tiemanh-hero-btns {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            .tiemanh-btn-primary-new, .tiemanh-btn-secondary-new {
+                width: 100%;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+        }
     `;
 
     // 2. Chèn Google Fonts và CSS vào trang
@@ -2832,7 +3029,7 @@
 
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Prata&family=Charm:wght@700&family=Dancing+Script:wght@700&display=swap';
     document.head.appendChild(fontLink);
 
     const styleTag = document.createElement("style");
@@ -2880,15 +3077,50 @@
             <!-- Hero Section với 3 ảnh Polaroid nổi bật từ Concept thực tế của Studio -->
             <section class="tiemanh-hero">
                 <div class="tiemanh-hero-left">
-                    <div class="tiemanh-hero-slogan-badge">✨ Lưu Giữ Thanh Xuân – Tỏa Sáng Nét Riêng</div>
-                    <h5 class="tiemanh-hero-subtitle">Bộ sưu tập Studio</h5>
-                    <h1 class="tiemanh-hero-title">Concept<br>Đa Dạng</h1>
+                    <h1 class="tiemanh-hero-title-new">
+                        <span class="title-serif">Chụp lại</span>
+                        <span class="title-script">giấc mơ</span>
+                        <span class="title-serif-sub">của bạn</span>
+                    </h1>
                     <p class="tiemanh-hero-desc">
-                        Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
+                        Tiệm ảnh Trái Thơm – Nơi lưu giữ những khoảnh khắc thanh xuân rực rỡ và cảm xúc nhất của bạn.
                     </p>
+                    
+                    <!-- Stats Section (Thông số) -->
+                    <div class="tiemanh-hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">📍</div>
+                            <div class="stat-info">
+                                <span class="stat-num">5+</span>
+                                <span class="stat-label">chi nhánh</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-info">
+                                <span class="stat-num">30.000+</span>
+                                <span class="stat-label">khách hàng</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-info">
+                                <span class="stat-num">4.9★</span>
+                                <span class="stat-label">đánh giá</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">📸</div>
+                            <div class="stat-info">
+                                <span class="stat-num">5 năm+</span>
+                                <span class="stat-label">kinh nghiệm</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="tiemanh-hero-btns">
-                        <button class="tiemanh-btn-primary" id="btnHeroBangGia">🍍 Xem Bảng Giá</button>
-                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">🍍 Xem Thêm Concept</button>
+                        <button class="tiemanh-btn-primary-new" id="btnHeroDatLich">📅 ĐẶT LỊCH NGAY</button>
+                        <button class="tiemanh-btn-secondary-new" id="btnHeroExplore">XEM CONCEPT</button>
                     </div>
                 </div>
                 <div class="tiemanh-hero-right">
@@ -3068,7 +3300,7 @@
                         </div>
                         <h4>Chi Nhánh Quận 1 – TP. HCM</h4>
                         <p>🏠 214/19/21 Nguyễn Văn Nguyễn, Phường Tân Định, Quận 1, TP. Hồ Chí Minh</p>
-                        <p class="hotline">📞 0908 447 308 – 0866 723 499</p>
+                        <p class="hotline">📞 <a href="tel:0908447308" style="color:inherit;text-decoration:none;font-weight:700;">0908 447 308</a> – <a href="tel:0866723499" style="color:inherit;text-decoration:none;font-weight:700;">0866 723 499</a></p>
                         <a href="https://maps.google.com/?q=214/19/21+Nguy%E1%BB%85n+V%C4%83n+Nguy%E1%BB%85n,+Ph%C6%B0%E1%BB%9Dng+T%C3%A2n+%C4%90%E1%BB%8Bnh,+Qu%E1%BA%ADn+1,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3083,7 +3315,7 @@
                         </div>
                         <h4>Chi Nhánh Thủ Đức</h4>
                         <p>🏠 81 Chương Dương, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh</p>
-                        <p class="hotline">📞 0908 447 308 (Hotline Studio)</p>
+                        <p class="hotline">📞 <a href="tel:0366367438" style="color:inherit;text-decoration:none;font-weight:700;">036 636 7438</a></p>
                         <a href="https://maps.google.com/?q=81+Ch%C6%B0%C6%A1ng+D%C6%B0%C6%A1ng,+Ph%C6%B0%E1%BB%9Dng+Linh+Chi%E1%BB%83u,+Th%E1%BB%A7+%C4%90%E1%BB%A9c,+TP.+H%E1%BB%93+Ch%C3%AD+Minh" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3098,7 +3330,7 @@
                         </div>
                         <h4>Chi Nhánh Đà Nẵng</h4>
                         <p>🏠 62 Nại Nam, Phường Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng</p>
-                        <p class="hotline">📞 0337 733 455</p>
+                        <p class="hotline">📞 <a href="tel:0337733455" style="color:inherit;text-decoration:none;font-weight:700;">0337 733 455</a></p>
                         <a href="https://maps.google.com/?q=62+N%E1%BA%A1i+Nam,+Ph%C6%B0%E1%BB%9Dng+H%C3%B2a+C%C6%B0%E1%BB%9Dng+B%E1%BA%AFc,+H%E1%BA%A3i+Ch%C3%A2u,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3113,7 +3345,7 @@
                         </div>
                         <h4>Chi Nhánh Biên Hòa – Đồng Nai</h4>
                         <p>🏠 Số 8, Đường N1 (song song đường Võ Thị Sáu), Phường Thống Nhất, Biên Hòa</p>
-                        <p class="hotline">📞 0366 444 426</p>
+                        <p class="hotline">📞 <a href="tel:0366444426" style="color:inherit;text-decoration:none;font-weight:700;">0366 444 426</a></p>
                         <a href="https://maps.google.com/?q=S%E1%BB%91+8,+%C4%90%C6%B0%E1%BB%9Dng+N1,+Ph%C6%B0%E1%BB%9Dng+Th%E1%BB%91ng+Nh%E1%BA%A5t,+Bi%C3%AAn+H%C3%B2a,+%C4%90%E1%BB%93ng+Nai" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3128,7 +3360,7 @@
                         </div>
                         <h4>Chi Nhánh Cần Thơ</h4>
                         <p>🏠 A12 Đường Số 1, Khu Dân Cư Nam Long, Cần Thơ</p>
-                        <p class="hotline">📞 0949 533 251</p>
+                        <p class="hotline">📞 <a href="tel:0949533251" style="color:inherit;text-decoration:none;font-weight:700;">0949 533 251</a></p>
                         <a href="https://maps.google.com/?q=A12+%C4%90%C6%B0%E1%BB%9Dng+S%E1%BB%91+1,+Khu+D%C3%A2n+C%C6%B0+Nam+Long,+C%E1%BA%A7n+Th%C6%A1" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3143,7 +3375,7 @@
                         </div>
                         <h4>Chi Nhánh Bình Dương</h4>
                         <p>🏠 6 Đường Số 3, Phường Phú Hòa, TP. Thủ Dầu Một, Bình Dương</p>
-                        <p class="hotline">📞 0367 416 058</p>
+                        <p class="hotline">📞 <a href="tel:0367416058" style="color:inherit;text-decoration:none;font-weight:700;">0367 416 058</a></p>
                         <a href="https://maps.google.com/?q=6+%C4%90%C6%B0%E1%BB%9Dng+S%E1%BB%91+3,+Ph%C6%B0%E1%BB%9Dng+Ph%C3%BA+H%C3%B2a,+Th%E1%BB%A7+D%E1%BA%A7u+M%E1%BB%99t,+B%C3%ACnh+D%C6%B0%C6%A1ng" target="_blank" rel="noopener" class="tiemanh-branch-map-btn" title="Xem vị trí và chỉ đường trên Google Maps">
                             <span>🗺️ Xem trên Google Maps</span>
                             <span class="arrow">➔</span>
@@ -3187,7 +3419,7 @@
                     <div class="tiemanh-footer-col">
                         <h4 class="tiemanh-footer-title">Liên Hệ & Chi Nhánh</h4>
                         <ul class="tiemanh-footer-contacts">
-                            <li><span class="icon">📞</span> <span>Hotline: 0908 447 308</span></li>
+                            <li><span class="icon">📞</span> <span>Hotline: <a href="tel:0908447308" style="color:var(--tiemanh-primary);text-decoration:none;font-weight:700;">0908 447 308</a></span></li>
                             <li><span class="icon">💬</span> <span>Zalo: <a href="https://zalo.me/3453208760470152361" target="_blank" style="color:var(--tiemanh-primary);text-decoration:none;font-weight:700;">Nhắn tin qua Zalo OA</a></span></li>
                             <li><span class="icon">✉️</span> <span>Email: tiemanhtraithom@gmail.com</span></li>
                             <li class="address-line"><span class="icon">📍</span> <span>CS Quận 1: 214/19/21 Nguyễn Văn Nguyễn, P. Tân Định, Q.1</span></li>
@@ -3911,6 +4143,7 @@
     let selectedTheme = "all";
     let currentPage = 1;
     const ITEMS_PER_PAGE = 6;
+    let activePricingScrollFn = null; // Lưu hàm cuộn bảng giá di động
 
     function setupGallery() {
         const grid = document.getElementById("conceptGrid");
@@ -4517,14 +4750,30 @@
             const navbar = document.getElementById("tiemanh-navbar");
             const navHeight = navbar ? navbar.offsetHeight : 70;
 
-            // Sử dụng scrollIntoView chuẩn kết hợp scroll-margin-top
-            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Tính vị trí section so với document
+            const rect = targetEl.getBoundingClientRect();
+            const absoluteTop = window.pageYOffset + rect.top;
 
-            // Hỗ trợ trường hợp phần tử nằm trong khung overlay cuộn độc lập
+            // Cuộn window đến section (trừ chiều cao navbar sticky để nội dung không bị che)
+            window.scrollTo({ top: Math.max(0, absoluteTop - navHeight), behavior: "smooth" });
+
+            // Cũng thử cuộn container nếu trang nhúng trong div scrollable (Webcake iframe)
             const container = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
-            if (container && container.scrollHeight > container.clientHeight && getComputedStyle(container).overflowY === "auto") {
-                const topPos = targetEl.offsetTop - navHeight - 10;
-                container.scrollTo({ top: Math.max(0, topPos), behavior: "smooth" });
+            if (container && getComputedStyle(container).overflowY !== "visible") {
+                let el = targetEl;
+                let topPos = 0;
+                while (el && el !== container) {
+                    topPos += el.offsetTop;
+                    el = el.offsetParent;
+                }
+                container.scrollTo({ top: Math.max(0, topPos - navHeight), behavior: "smooth" });
+            }
+
+            // GẮN CHẶT MOBILE CAROUSEL GÓI TOẢ SÁNG
+            if (targetId === "banggiaSection" && window.innerWidth <= 991 && activePricingScrollFn) {
+                setTimeout(() => {
+                    activePricingScrollFn(1);
+                }, 300);
             }
         }
 
@@ -4567,11 +4816,11 @@
         });
 
         // Xử lý nút bấm trên Hero Section
-        const btnHeroBangGia = document.getElementById("btnHeroBangGia");
-        if (btnHeroBangGia) {
-            btnHeroBangGia.addEventListener("click", (e) => {
+        const btnHeroDatLich = document.getElementById("btnHeroDatLich");
+        if (btnHeroDatLich) {
+            btnHeroDatLich.addEventListener("click", (e) => {
                 e.preventDefault();
-                smoothScrollToSection("banggiaSection");
+                openZaloModal("Đặt Lịch Chụp Ảnh");
             });
         }
 
@@ -4772,6 +5021,8 @@
         setTimeout(() => {
             scrollToPackage(1);
         }, 1000);
+
+        activePricingScrollFn = scrollToPackage; // Lưu lại tham chiếu hàm cuộn
     }
 
     // Hàm kích hoạt kéo chuột mượt mà (Drag to Scroll) cho PC và hỗ trợ cảm ứng Mobile
