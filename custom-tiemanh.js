@@ -14,7 +14,7 @@
         // Lấy từ URL: https://docs.google.com/spreadsheets/d/1Sv3pxheEfamWKTSY96vwzQOi8bXK_lqJ1wB_wnZefCU/edit?gid=43962598
         sheetId: "1Sv3pxheEfamWKTSY96vwzQOi8bXK_lqJ1wB_wnZefCU",
         sheetGid: "43962598", // GID tab sheet quản lý concept
-        sheetName: "concepts_template_clean" // Tên tab sheet của bạn
+        sheetName: "đồng bộ concept" // Tên tab sheet của bạn
     };
 
     // 1. Dữ liệu từng Concept cụ thể (mỗi card = 1 concept riêng biệt)
@@ -1226,6 +1226,29 @@
         .tiemanh-lightbox-download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(251, 192, 45, 0.5);
+        }
+        .tiemanh-lightbox-booking-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #1e293b;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+        }
+        .tiemanh-lightbox-booking-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+            filter: brightness(1.1);
         }
         .tiemanh-lightbox-share-btn {
             display: inline-flex;
@@ -2721,6 +2744,54 @@
             .hot-showcase-title { font-size: 13px; }
             .polaroid-caption { font-size: 9.5px; }
         }
+
+        /* Nhãn Best Seller lấp lánh sang trọng */
+        .tiemanh-card {
+            position: relative;
+        }
+        .concept-best-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 50px;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: badgePulse 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes badgePulse {
+            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+            100% { transform: scale(1.05); box-shadow: 0 6px 16px rgba(239, 68, 68, 0.6); }
+        }
+
+        /* Badge trên Polaroid card ở Hero banner */
+        .polaroid-card {
+            position: relative;
+        }
+        .polaroid-best-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 5;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+            text-transform: uppercase;
+        }
     `;
 
     // 2. Chèn Google Fonts và CSS vào trang
@@ -2792,8 +2863,8 @@
                         Hơn 100+ concept nghệ thuật được đầu tư trang phục, makeup và bối cảnh thiết kế bài bản, chỉn chu giúp bạn tự tin tỏa sáng theo phong cách rất riêng của chính mình.
                     </p>
                     <div class="tiemanh-hero-btns">
-                        <button class="tiemanh-btn-primary" id="btnHeroBangGia">💎 Xem Bảng Giá</button>
-                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">✨ Xem Thêm Concept ➔</button>
+                        <button class="tiemanh-btn-primary" id="btnHeroBangGia">🍍 Xem Bảng Giá</button>
+                        <button class="tiemanh-btn-secondary" id="btnHeroExplore">🍍 Xem Thêm Concept ➔</button>
                     </div>
                 </div>
                 <div class="tiemanh-hero-right">
@@ -2911,8 +2982,8 @@
                                 <li>Tặng 01 ảnh lớn 20x30cm 🎁</li>
                                 <li>Ưu tiên chọn lịch giờ vàng</li>
                             </ul>
-                            <div class="price-desc-highlight">💎 Khách hàng thích trải nghiệm <strong>cao cấp</strong>, ekip sẽ <strong>chăm sóc kỹ từng chi tiết</strong></div>
-                            <div class="price-desc-fit">⭐ <strong>Phù hợp:</strong> tất cả các concept chụp ảnh dịp quan trọng cần chỉn chu đầu tư.</div>
+                            <div class="price-desc-highlight">🍍 Khách hàng thích trải nghiệm <strong>cao cấp</strong>, ekip sẽ <strong>chăm sóc kỹ từng chi tiết</strong></div>
+                            <div class="price-desc-fit">🍍 <strong>Phù hợp:</strong> tất cả các concept chụp ảnh dịp quan trọng cần chỉn chu đầu tư.</div>
                         </div>
                     </div>
                     <!-- Dots phân trang 3 gói -->
@@ -3058,7 +3129,7 @@
             </section>
 
             <!-- Footer -->
-            <footer class="tiemanh-footer">
+            <footer class="tiemanh-footer" id="tiemanh-footer">
                 <div class="tiemanh-footer-grid">
                     <div class="tiemanh-footer-col">
                         <a class="tiemanh-logo tiemanh-footer-logo">
@@ -3177,7 +3248,7 @@
                         <!-- Cụm 2 nút hành động nhanh tiện ích -->
                         <div class="zalo-quick-actions">
                             <button class="zalo-quick-btn pricing" id="zaloQuickPricingBtn">
-                                💎 Xem Bảng Giá
+                                🍍 Xem Bảng Giá
                             </button>
                             <button class="zalo-quick-btn branch" id="zaloQuickBranchBtn">
                                 📍 Xem Chi Nhánh
@@ -3212,6 +3283,9 @@
                             <div class="tiemanh-lightbox-img-counter" id="lightboxImgCounter">1 / 10</div>
                             <div class="tiemanh-lightbox-thumb-container" id="lightboxThumbs"></div>
                             <div class="tiemanh-lightbox-actions">
+                                <button class="tiemanh-lightbox-booking-btn" id="lightboxBookBtn" title="Đặt lịch chụp & Tư vấn trực tiếp qua Zalo">
+                                    <span>🍍 Đặt Lịch & Tư Vấn Ngay</span>
+                                </button>
                                 <button class="tiemanh-lightbox-share-btn" id="lightboxShareBtn" title="Sao chép đường link trực tiếp dẫn tới concept này" style="width: 100%;">
                                     <span>🔗 Sao chép link Concept</span>
                                 </button>
@@ -3291,6 +3365,9 @@
 
     // 4. Khởi tạo gắn giao diện lên trang
     function init() {
+        // Xóa sạch toàn bộ dữ liệu demo tĩnh cũ để bộ lọc tự động sinh chính xác từ Google Sheets
+        CONCEPTS.length = 0;
+
         // Tự động ghi đè chiều cao của khung Webcake để không bị giới hạn chiều cao ảnh
         if (CONFIG.targetId) {
             const targetEl = document.getElementById(CONFIG.targetId);
@@ -3511,74 +3588,20 @@
             .join(' ');
     }
 
-    // Hàm trích xuất Tag CHUẨN (Chỉ dùng đúng 9 Tag cho phép, không dùng Ngoại Cảnh, giữ 1 tag nếu hợp 1 tag)
+    // Hàm trích xuất Tag CHUẨN (Hỗ trợ nạp trực tiếp danh sách phân tách bởi dấu phẩy từ Sheet, hoặc tự động bóc tách từ khóa nếu trống)
     function extractMultiTagsSmart(rawTheme, rawTitle, rawDesc) {
-        const fullText = `${rawTheme || ''} ${rawTitle || ''} ${rawDesc || ''}`
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/Đ/g, "D")
-            .replace(/đ/g, "d")
-            .toUpperCase();
-
-        const tags = [];
-        const seen = new Set();
-
-        function addTag(tagName) {
-            const key = tagName.toUpperCase();
-            if (!seen.has(key)) {
-                seen.add(key);
-                tags.push(tagName);
-            }
+        // Nếu có rawTheme (chủ đề do người dùng nhập từ Sheet), phân tách bằng dấu phẩy và trả về trực tiếp
+        if (rawTheme && String(rawTheme).trim().length > 0) {
+            return String(rawTheme)
+                .split(",")
+                .map(t => t.trim())
+                .filter(Boolean);
         }
 
-        // 1. Áo Dài
-        if (fullText.includes("AO DAI") || fullText.includes("AODAI") || fullText.includes("YEM")) {
-            addTag("Áo Dài");
-        }
-        // 2. Cổ Trang
-        if (fullText.includes("CO TRANG") || fullText.includes("COTRANG") || fullText.includes("HAN PHUC") || fullText.includes("KIMONO")) {
-            addTag("Cổ Trang");
-        }
-        // 3. Noel
-        if (fullText.includes("NOEL") || fullText.includes("GIANG SINH")) {
-            addTag("Noel");
-        }
-        // 4. Tết
-        if (fullText.includes("TET") || fullText.includes("XUAN")) {
-            addTag("Tết");
-        }
-        // 5. Sinh Nhật
-        if (fullText.includes("SINH NHAT") || fullText.includes("SINHNHAT") || fullText.includes("SN") || fullText.includes("BIRTHDAY") || fullText.includes("PARTY")) {
-            addTag("Sinh Nhật");
-        }
-        // 6. Beauty
-        if (fullText.includes("BEAUTY") || fullText.includes("CHAN DUNG") || fullText.includes("CHANDUNG") || fullText.includes("PROFILE") || fullText.includes("LOOKBOOK")) {
-            addTag("Beauty");
-        }
-        // 7. Cá Tính & Sexy (Lọc chính xác từ khóa, không nhận nhầm Biên Hòa hay Biển)
-        const isSexyOrEdgy = (
-            /\b(SEXY|QUYEN\s*RU|GOI\s*CAM|LINGERIE|BIKINI)\b/i.test(fullText) ||
-            /\b(CA\s*TINH|CATINH|STREET\s*STYLE|STREETSTYLE|EDGY|PUNK|BIEN\s*HINH)\b/i.test(fullText)
-        );
-        if (isSexyOrEdgy) {
-            addTag("Cá Tính & Sexy");
-        }
-        // 8. Couple
-        if (fullText.includes("COUPLE") || fullText.includes("DOI") || fullText.includes("BAN THAN") || fullText.includes("TINH YEU")) {
-            addTag("Couple");
-        }
-        // 9. Nàng Thơ (Chỉ gán nếu có từ khóa Nàng Thơ hoặc chưa có tag nào)
-        if (fullText.includes("NANG THO") || fullText.includes("NANGTHO") || fullText.includes("THO") || fullText.includes("TIEN NU") || fullText.includes("MAO LUONG")) {
-            addTag("Nàng Thơ");
-        }
-
-        // Nếu hoàn toàn không khớp tag nào, mặc định là Nàng Thơ
-        if (tags.length === 0) {
-            tags.push("Nàng Thơ");
-        }
-
-        return tags;
+        // Nếu hoàn toàn không có chủ đề, mặc định là "Concept"
+        return ["Concept"];
     }
+
 
     // Hàm lấy Icon và Màu sắc chủ đạo tương ứng với 9 Chủ Đề Chuẩn
     function getThemeInfo(themeName) {
@@ -3598,8 +3621,11 @@
         if (clean.includes("SINHNHAT") || clean.includes("BIRTHDAY") || clean.includes("SN")) {
             return { icon: "🎂", color: "#d97706", bg: "rgba(217,119,6,0.12)" };
         }
-        if (clean.includes("CATINH") || clean.includes("SEXY") || clean.includes("BIEN") || clean.includes("STREET")) {
+        if (clean.includes("CATINH") || clean.includes("SEXY") || clean.includes("STREET")) {
             return { icon: "🔥", color: "#dc2626", bg: "rgba(220,38,38,0.12)" };
+        }
+        if (clean.includes("BIEN") || clean.includes("OCEAN") || clean.includes("BEACH")) {
+            return { icon: "🌊", color: "#0284c7", bg: "rgba(2,132,199,0.12)" };
         }
         if (clean.includes("COUPLE") || clean.includes("DOI") || clean.includes("BANTHAN")) {
             return { icon: "💖", color: "#db2777", bg: "rgba(219,39,119,0.12)" };
@@ -3610,7 +3636,7 @@
         if (clean.includes("TET") || clean.includes("XUAN")) {
             return { icon: "🧧", color: "#ea580c", bg: "rgba(234,88,12,0.12)" };
         }
-        return { icon: "✨", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" };
+        return { icon: "🍍", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" };
     }
 
     // Hàm chuẩn hóa tên chi nhánh (Đổi Q1, Quận 1 thành Quận 1-TPHCM)
@@ -3628,6 +3654,72 @@
         return raw || "Concept";
     }
 
+    // Phân tích dòng dữ liệu từ Google Sheets sang Object Concept chuẩn
+    function parseSheetsRow(obj, rowIdx) {
+        // Kiểm tra hộp kiểm Ẩn/Hiện (status/Ẩn === TRUE -> Ẩn concept khỏi web)
+        const isHidden = (
+            String(obj.status || obj['Ẩn'] || '').toUpperCase() === 'TRUE' ||
+            String(obj.status || '').toUpperCase() === 'AN' ||
+            String(obj.status || '') === '0' ||
+            String(obj.active || '').toUpperCase() === 'FALSE'
+        );
+
+        // Trích xuất Tag chủ đề đa tag từ cột Chủ đề/theme
+        const cleanedThemes = extractMultiTagsSmart(obj.theme || obj['Chủ đề'], obj.title || obj['Tên concept'] || obj.concept, obj.description || obj['Mô tả']);
+        const primaryTheme = cleanedThemes[0] || "Nàng Thơ";
+        const themeInfo = getThemeInfo(primaryTheme);
+
+        const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category || obj['Chi nhánh'], obj.category);
+        const cleanedTitle = obj['Tên concept'] || obj.title || primaryTheme;
+
+        // Tập hợp các ảnh thật từ img1 -> img12 từ Google Sheets (mới hỗ trợ 12 ảnh)
+        let realImages = [];
+        for (let n = 1; n <= 12; n++) {
+            const imgVal = driveToDirectUrl(obj[`img${n}`]);
+            if (imgVal) realImages.push(imgVal);
+        }
+
+        const hasRealImages = realImages.length > 0;
+        let images = [...realImages];
+
+        // Nếu concept chưa có ảnh trên Drive thì mới dự phòng ảnh placeholder
+        if (images.length === 0) {
+            const titleNorm = cleanTextForMatching(cleanedTitle);
+            let fallbackKey = "GENERAL";
+            for (const key in DEFAULT_PLACEHOLDERS) {
+                if (titleNorm.includes(key)) {
+                    fallbackKey = key;
+                    break;
+                }
+            }
+            images = DEFAULT_PLACEHOLDERS[fallbackKey];
+        }
+
+        const bgColor = obj.bgColor ? obj.bgColor.replace(/-/g, ",") : themeInfo.bg;
+        const iconColor = obj.iconColor || themeInfo.color;
+        const icon = obj.icon || themeInfo.icon;
+
+        const isBestSeller = String(obj['Best Seller'] || obj.bestseller || '').toUpperCase() === 'TRUE';
+
+        return {
+            id: parseInt(obj.id || obj.concept_id || obj['STT']) || rowIdx + 1,
+            branch: obj.branch || obj['Chi nhánh'] || "",
+            theme: primaryTheme,
+            themes: cleanedThemes, // Danh sách tất cả các tag
+            title: cleanedTitle,
+            category: obj.category || "nutinh",
+            tag: cleanedBranch,
+            icon: icon,
+            iconColor: iconColor,
+            bgColor: bgColor,
+            description: obj.description || obj['Mô tả'] || "",
+            images: images,
+            hasRealImages: hasRealImages,
+            isHidden: isHidden,
+            isBestSeller: isBestSeller
+        };
+    }
+
     // Xử lý dữ liệu nhận được từ Google Sheets JSONP (Hỗ trợ Multi-tag đa chủ đề)
     function handleSheetsData(data) {
         try {
@@ -3643,65 +3735,9 @@
                     obj[colName] = cell ? String(cell.v ?? "").normalize("NFC").trim() : "";
                 });
 
-                // Kiểm tra hộp kiểm Ẩn/Hiện (status === FALSE -> Ẩn concept khỏi web)
-                const isHidden = (
-                    String(obj.status || '').toUpperCase() === 'FALSE' ||
-                    String(obj.status || '').toUpperCase() === 'AN' ||
-                    String(obj.status || '') === '0' ||
-                    String(obj.active || '').toUpperCase() === 'FALSE'
-                );
-                if (isHidden) return null;
-
-                // Trích xuất Tag chuẩn
-                const cleanedThemes = extractMultiTagsSmart(obj.theme, obj.title, obj.description);
-                const primaryTheme = cleanedThemes[0] || "Nàng Thơ";
-                const themeInfo = getThemeInfo(primaryTheme);
-
-                const cleanedBranch = normalizeBranchName(obj.tag || obj.branch || obj.category, obj.category);
-                const cleanedTitle = primaryTheme;
-
-                // Tập hợp các ảnh thật từ img1 -> img10 từ Google Sheets
-                let realImages = [];
-                for (let n = 1; n <= 10; n++) {
-                    const imgVal = driveToDirectUrl(obj[`img${n}`]);
-                    if (imgVal) realImages.push(imgVal);
-                }
-
-                const hasRealImages = realImages.length > 0;
-                let images = [...realImages];
-
-                // Nếu concept chưa có ảnh trên Drive thì mới dự phòng ảnh placeholder
-                if (images.length === 0) {
-                    const titleNorm = cleanTextForMatching(cleanedTitle);
-                    let fallbackKey = "GENERAL";
-                    for (const key in DEFAULT_PLACEHOLDERS) {
-                        if (titleNorm.includes(key)) {
-                            fallbackKey = key;
-                            break;
-                        }
-                    }
-                    images = DEFAULT_PLACEHOLDERS[fallbackKey];
-                }
-
-                const bgColor = obj.bgColor ? obj.bgColor.replace(/-/g, ",") : themeInfo.bg;
-                const iconColor = obj.iconColor || themeInfo.color;
-                const icon = obj.icon || themeInfo.icon;
-
-                return {
-                    id: parseInt(obj.id || obj.concept_id) || rowIdx + 1,
-                    branch: obj.branch || "",
-                    theme: primaryTheme,
-                    themes: cleanedThemes, // Danh sách tất cả các tag
-                    title: cleanedTitle,
-                    category: obj.category || "nutinh",
-                    tag: cleanedBranch,
-                    icon: icon,
-                    iconColor: iconColor,
-                    bgColor: bgColor,
-                    description: obj.description || "",
-                    images: images,
-                    hasRealImages: hasRealImages
-                };
+                const concept = parseSheetsRow(obj, rowIdx);
+                if (concept.isHidden) return null;
+                return concept;
             }).filter(Boolean);
 
             if (parsed.length > 0) {
@@ -3732,26 +3768,56 @@
     }
 
     // Hàm chọn 3 concept từ bộ dữ liệu thật của studio để đưa lên Hero banner
+    // Hàm lựa chọn 3 concept cho Hero Polaroid (Ưu tiên Best Seller)
+    function selectHeroConcepts(concepts) {
+        if (!concepts || concepts.length === 0) return [];
+        // Chỉ chọn các concept có ảnh thật từ Google Sheets của studio (tuyệt đối không lấy ảnh mẫu)
+        let realConcepts = concepts.filter(c => c.hasRealImages && c.images && c.images.length > 0 && !c.images[0].includes("unsplash"));
+        if (realConcepts.length === 0) {
+            realConcepts = concepts.filter(c => c.hasRealImages);
+        }
+        if (realConcepts.length === 0) {
+            realConcepts = concepts;
+        }
+
+        // Tách Best Seller và Concept thường
+        const bestSellers = realConcepts.filter(c => c.isBestSeller);
+        const normals = realConcepts.filter(c => !c.isBestSeller);
+
+        let selected = [];
+
+        // Trộn ngẫu nhiên Best Seller và lấy tối đa 3
+        const shuffledBest = [...bestSellers].sort(() => 0.5 - Math.random());
+        selected = shuffledBest.slice(0, 3);
+
+        // Nếu thiếu thì bù đắp bằng các bộ thường trộn ngẫu nhiên
+        if (selected.length < 3) {
+            const shuffledNormal = [...normals].sort(() => 0.5 - Math.random());
+            const needed = 3 - selected.length;
+            selected = selected.concat(shuffledNormal.slice(0, needed));
+        }
+
+        return selected.slice(0, 3);
+    }
+
     function randomizeHeroPolaroids() {
         if (!CONCEPTS || CONCEPTS.length === 0) return;
         const polaroids = document.querySelectorAll(".polaroid-card");
         if (polaroids.length === 0) return;
 
-        // Chỉ chọn các concept có ảnh thật từ Google Sheets của studio (tuyệt đối không lấy ảnh mẫu)
-        const realConcepts = CONCEPTS.filter(c => c.hasRealImages && c.images && c.images.length > 0 && !c.images[0].includes("unsplash"));
-        const candidateList = realConcepts.length > 0 ? realConcepts : CONCEPTS.filter(c => c.hasRealImages);
-
-        if (candidateList.length === 0) return;
-
-        // Xáo trộn ngẫu nhiên danh sách concepts thật của studio
-        const shuffled = [...candidateList].sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, Math.min(3, shuffled.length));
+        const selected = selectHeroConcepts(CONCEPTS);
+        if (selected.length === 0) return;
 
         polaroids.forEach((card, i) => {
             if (i < selected.length) {
                 const concept = selected[i];
                 card.classList.remove("loading-skeleton");
+                
+                // Thêm nhãn ngọn lửa nhỏ nếu bộ concept là Best Seller
+                const flameHtml = concept.isBestSeller ? `<span class="polaroid-best-badge">🔥 Hot</span>` : "";
+
                 card.innerHTML = `
+                    ${flameHtml}
                     <img src="${concept.images[0]}" alt="${concept.title}">
                     <div class="polaroid-caption">${concept.title}</div>
                 `;
@@ -3866,12 +3932,19 @@
             const placeholderStyle = "background:linear-gradient(135deg,#f0f0f0,#e0e0e0);min-height:80px;";
 
             const themesList = (concept.themes && concept.themes.length > 0) ? concept.themes : [concept.theme || "Nàng Thơ"];
-            const badgesHtml = themesList.map(t => {
+            const filteredThemesList = themesList.filter(t => {
+                const cleanT = t.trim().toUpperCase();
+                return cleanT !== "CONCEPT" && cleanT !== "CONEPT";
+            });
+            const badgesHtml = filteredThemesList.map(t => {
                 const info = getThemeInfo(t);
                 return `<span class="tiemanh-card-badge" style="background:${info.bg};color:${info.color};">${info.icon} ${t}</span>`;
             }).join("");
 
+            const bestSellerHtml = concept.isBestSeller ? `<span class="concept-best-badge">🔥 Best Seller</span>` : "";
+
             card.innerHTML = `
+                ${bestSellerHtml}
                 <div class="collage-wrapper">
                     <img data-src="${img0}" class="collage-main-img" alt="${concept.title}" style="${img0 ? placeholderStyle : 'display:none'}">
                     <div class="collage-side">
@@ -4003,7 +4076,11 @@
 
         if (!overlay || !lightboxImg) return;
 
-        const displayThemes = (concept.themes && concept.themes.length > 0) ? concept.themes.join(" • ") : (concept.theme || concept.tag || "");
+        const filteredThemes = (concept.themes || []).filter(t => {
+            const cleanT = t.trim().toUpperCase();
+            return cleanT !== "CONCEPT" && cleanT !== "CONEPT";
+        });
+        const displayThemes = filteredThemes.length > 0 ? filteredThemes.join(" • ") : (concept.tag || "");
         lightboxCat.textContent = displayThemes ? `CONCEPT ${displayThemes.toUpperCase()}` : "CONCEPT NGHỆ THUẬT";
         lightboxTitle.textContent = concept.title;
 
@@ -4220,6 +4297,26 @@
                     lightboxImg.classList.remove("zoomed");
                 }
             });
+
+            // 🔥 Thêm chức năng vuốt (Swipe) trên Mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            lightboxImg.addEventListener("touchstart", (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            lightboxImg.addEventListener("touchend", (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diffX = touchEndX - touchStartX;
+                // Ngưỡng vuốt tối thiểu là 50px
+                if (Math.abs(diffX) > 50) {
+                    if (diffX < 0) {
+                        nextLightboxImage(); // Vuốt sang trái -> Xem ảnh tiếp theo
+                    } else {
+                        prevLightboxImage(); // Vuốt sang phải -> Xem ảnh trước đó
+                    }
+                }
+            }, { passive: true });
         }
 
         // Nhấp nút Đặt lịch trên Lightbox panel
@@ -4700,14 +4797,14 @@
         const themeBar = document.getElementById("themeFilterBar");
         if (!branchBar) return;
 
-        // 1. Trích xuất các chi nhánh duy nhất (Cố định danh sách Chi nhánh)
+        // 1. Trích xuất các chi nhánh duy nhất từ dữ liệu thực tế (cột Chi nhánh)
         const branches = [{ slug: "all", name: "Tất cả" }];
         const seenBranches = new Set();
         CONCEPTS.forEach(c => {
-            if (c.category && !seenBranches.has(c.category)) {
-                seenBranches.add(c.category);
-                const bName = normalizeBranchName(c.tag || c.category, c.category);
-                branches.push({ slug: c.category, name: bName });
+            const branchName = c.tag || c.branch;
+            if (branchName && !seenBranches.has(branchName)) {
+                seenBranches.add(branchName);
+                branches.push({ slug: branchName, name: branchName });
             }
         });
 
@@ -4728,27 +4825,36 @@
         enableDragScroll(themeBar);
     }
 
-    // Hàm vẽ lại bộ lọc chủ đề ĐỒNG BỘ TOÀN DIỆN CHO TẤT CẢ CHI NHÁNH
+    // Hàm vẽ lại bộ lọc chủ đề tự động quét từ dữ liệu Sheet (không code cứng)
     function renderThemeFilterBar() {
         const themeBar = document.getElementById("themeFilterBar");
         if (!themeBar) return;
 
-        // Bộ danh mục chủ đề chuẩn hóa toàn hệ thống (Đồng bộ tuyệt đối cho tất cả chi nhánh)
-        const UNIVERSAL_THEMES = [
-            { slug: "all", name: "Tất cả", icon: "✨" },
-            { slug: "NÀNG THƠ", name: "Nàng Thơ", icon: "🌸", keywords: ["NANG THO", "THO", "TIEN NU"] },
-            { slug: "CỔ TRANG", name: "Cổ Trang", icon: "🏮", keywords: ["CO TRANG", "HAN PHUC", "KIMONO"] },
-            { slug: "ÁO DÀI", name: "Áo Dài", icon: "👗", keywords: ["AO DAI", "YEM", "TRUYEN THONG"] },
-            { slug: "BEAUTY", name: "Beauty", icon: "👤", keywords: ["BEAUTY", "CHAN DUNG", "PROFILE", "LOOKBOOK"] },
-            { slug: "SINH NHẬT", name: "Sinh Nhật", icon: "🎂", keywords: ["SINH NHAT", "SN", "BIRTHDAY", "PARTY"] },
-            { slug: "CÁ TÍNH", name: "Cá Tính & Sexy", icon: "🔥", keywords: ["CA TINH", "SEXY", "BIEN", "STREET"] },
-            { slug: "COUPLE", name: "Couple", icon: "💖", keywords: ["COUPLE", "DOI", "BAN THAN"] },
-            { slug: "TẾT", name: "Tết", icon: "🧧", keywords: ["TET", "XUAN", "MUA XUAN"] },
-            { slug: "NOEL", name: "Noel", icon: "🎄", keywords: ["NOEL", "GIANG SINH", "MUA DONG"] }
+        // Trích xuất các chủ đề duy nhất từ c.themes thực tế của các concept, chèn sẵn nút Best Seller ở đầu
+        const themes = [
+            { slug: "all", name: "Tất cả", icon: "🍍" },
+            { slug: "bestseller", name: "Best Seller", icon: "🔥" }
         ];
+        const seenThemes = new Set();
+        
+        CONCEPTS.forEach(c => {
+            if (c.themes) {
+                c.themes.forEach(t => {
+                    const cleanT = t.trim().toUpperCase();
+                    // Loại bỏ tag "Concept" hoặc "Conept" làm rác bộ lọc
+                    if (cleanT === "CONCEPT" || cleanT === "CONEPT") return;
+
+                    if (t && !seenThemes.has(cleanT)) {
+                        seenThemes.add(cleanT);
+                        const info = getThemeInfo(t);
+                        themes.push({ slug: t, name: t, icon: info.icon });
+                    }
+                });
+            }
+        });
 
         // Vẽ danh sách chủ đề đồng bộ kèm icon trực quan
-        themeBar.innerHTML = UNIVERSAL_THEMES.map(t =>
+        themeBar.innerHTML = themes.map(t =>
             `<button class="tiemanh-filter-pill ${t.slug === selectedTheme ? 'active' : ''}" data-theme="${t.slug}">
                 <span>${t.icon}</span> <span>${t.name}</span>
             </button>`
@@ -4785,25 +4891,18 @@
     function applyDoubleFilter() {
         currentPage = 1;
         const filtered = CONCEPTS.filter(c => {
-            const matchBranch = (selectedBranch === "all" || c.category === selectedBranch);
+            // Lọc theo Chi nhánh (so khớp với tag/branch)
+            const matchBranch = (selectedBranch === "all" || c.tag === selectedBranch || c.branch === selectedBranch);
 
-            if (selectedTheme === "all") return matchBranch;
-
-            // Kiểm tra so khớp thông minh giữa chủ đề đã chọn và concept
-            const themeUpper = selectedTheme.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
-            const conceptThemes = ((c.themes && c.themes.length > 0) ? c.themes : [c.theme || ""]).map(t =>
-                t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase()
-            );
-            const titleUpper = (c.title || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toUpperCase();
-
-            const matchTheme = conceptThemes.some(t => {
-                if (themeUpper === "CA TINH") return t.includes("CA TINH") || t.includes("SEXY") || t.includes("STREET");
-                if (themeUpper === "CO TRANG") return t.includes("CO TRANG") || t.includes("HAN PHUC") || t.includes("KIMONO");
-                if (themeUpper === "AO DAI") return t.includes("AO DAI") || t.includes("YEM");
-                if (themeUpper === "NOEL") return t.includes("NOEL") || t.includes("GIANG SINH");
-                if (themeUpper === "TET") return t.includes("TET") || t.includes("XUAN");
-                return t.includes(themeUpper) || themeUpper.includes(t);
-            });
+            // Kiểm tra so khớp chủ đề hoặc bộ lọc Best Seller
+            let matchTheme = false;
+            if (selectedTheme === "all") {
+                matchTheme = true;
+            } else if (selectedTheme === "bestseller") {
+                matchTheme = c.isBestSeller;
+            } else {
+                matchTheme = c.themes && c.themes.some(t => t.toUpperCase() === selectedTheme.toUpperCase());
+            }
 
             return matchBranch && matchTheme;
         });
@@ -4821,10 +4920,22 @@
         }
     }
 
-    // 10. Khởi chạy hệ thống sau khi DOM load
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", init);
-    } else {
-        init();
+    // 10. Khởi chạy hệ thống sau khi DOM load (chỉ chạy trong môi trường trình duyệt, bỏ qua khi chạy test Node.js)
+    if (typeof window !== 'undefined' && typeof document !== 'undefined' && !(typeof global !== 'undefined' && global.IS_TEST_ENVIRONMENT)) {
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", init);
+        } else {
+            init();
+        }
+    }
+
+    // Export các hàm để chạy Unit Test bằng Node.js nếu ở môi trường test
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = {
+            parseSheetsRow,
+            normalizeBranchName,
+            extractMultiTagsSmart,
+            selectHeroConcepts
+        };
     }
 })();
