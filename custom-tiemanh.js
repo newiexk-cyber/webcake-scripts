@@ -751,28 +751,28 @@
             background: #ffffff;
             padding: 12px 12px 16px 12px;
             border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            border: 1.5px solid rgba(251, 192, 45, 0.25);
+            box-shadow: 0 8px 24px rgba(255, 214, 0, 0.15); /* Bóng đổ vàng tươi cho card đề xuất */
+            border: 2px solid #ffd600; /* Màu vàng tươi sáng rực rỡ */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible; /* Cho phép vương miện nhỏ lòi ra ngoài góc ảnh (nửa trong nửa ngoài) */
             width: 100%;
             box-sizing: border-box;
         }
         
-        /* Hiệu ứng bồng bềnh so le nhẹ nhàng, nhịp điệu sinh động */
+        /* Hiệu ứng bồng bềnh so le kết hợp nhấp nháy viền vàng tươi sáng */
         .polaroid-card.p1 {
-            animation: gentleFloat1 5s infinite alternate ease-in-out;
+            animation: gentleFloat1 5s infinite alternate ease-in-out, polaroidBorderPulse 3s infinite ease-in-out;
         }
         .polaroid-card.p2 {
-            animation: gentleFloat2 5.6s infinite alternate ease-in-out 0.4s;
+            animation: gentleFloat2 5.6s infinite alternate ease-in-out 0.4s, polaroidBorderPulse 3s infinite ease-in-out;
         }
         .polaroid-card.p3 {
-            animation: gentleFloat3 5.2s infinite alternate ease-in-out 0.8s;
+            animation: gentleFloat3 5.2s infinite alternate ease-in-out 0.8s, polaroidBorderPulse 3s infinite ease-in-out;
         }
         
         @keyframes gentleFloat1 {
@@ -798,7 +798,7 @@
             transition: transform 0.45s ease;
         }
         .polaroid-card:hover img {
-            transform: scale(1.07);
+            transform: none; /* Tắt zoom ảnh để bảo toàn bố cục nghệ thuật gốc */
         }
         .polaroid-caption {
             font-family: var(--tiemanh-font);
@@ -834,7 +834,7 @@
             animation: none !important;
             transform: translateY(-12px) scale(1.04) !important;
             box-shadow: 0 20px 45px rgba(251, 192, 45, 0.45), 0 8px 20px rgba(0, 0, 0, 0.08) !important;
-            border-color: rgba(251, 192, 45, 0.95);
+            border-color: #ff8f00 !important; /* Viền vàng đậm rực rỡ hơn khi hover */
             z-index: 10;
         }
         .polaroid-card:hover .polaroid-caption {
@@ -967,8 +967,8 @@
             background: #ffffff;
             border-radius: 22px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            border: 1.5px solid rgba(251, 192, 45, 0.22);
+            overflow: visible; /* Để vương miện lòi ra ngoài góc card (nửa trong nửa ngoài) */
+            border: 1.5px solid rgba(251, 192, 45, 0.12); /* Giảm nhẹ viền card thường để tôn vinh card Best Seller viền vàng */
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
@@ -976,11 +976,57 @@
             cursor: pointer;
             position: relative;
             height: 100%;
+            /* Khắc phục lỗi tràn góc bo tròn của ảnh con trên trình duyệt Safari */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
         }
         .tiemanh-card:hover {
-            transform: translateY(-10px) scale(1.015);
-            box-shadow: 0 22px 45px rgba(251, 192, 45, 0.28), 0 8px 20px rgba(0, 0, 0, 0.06);
-            border-color: rgba(251, 192, 45, 0.85);
+            transform: translateY(-4px); /* Giảm độ nảy lên để triệt tiêu lỗi flicker/jitter rung lắc */
+            box-shadow: 0 16px 36px rgba(251, 192, 45, 0.22), 0 6px 16px rgba(0, 0, 0, 0.04);
+            border-color: rgba(251, 192, 45, 0.8);
+        }
+        
+        /* Viền vàng nổi bật dành riêng cho các concept Best Seller */
+        .tiemanh-card.bestseller-featured {
+            border: 2.5px solid #ffd600 !important; /* Viền vàng tươi sáng dày dặn, nổi bật hẳn lên */
+            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.15) !important;
+            animation: bestsellerBorderPulse 3s infinite ease-in-out;
+        }
+        .tiemanh-card.bestseller-featured:hover {
+            animation: none !important; /* Tắt animation khi hover để giữ tương tác nhạy */
+            border-color: #ffea00 !important; /* Đổi màu vàng neon sáng rực khi hover */
+            box-shadow: 0 16px 36px rgba(255, 234, 0, 0.38) !important;
+        }
+        
+        @keyframes polaroidBorderPulse {
+            0% {
+                border-color: #ffd600;
+                box-shadow: 0 8px 24px rgba(255, 214, 0, 0.15);
+            }
+            50% {
+                border-color: #ffea00;
+                box-shadow: 0 8px 28px rgba(255, 234, 0, 0.35), 0 0 10px rgba(255, 214, 0, 0.2);
+            }
+            100% {
+                border-color: #ffd600;
+                box-shadow: 0 8px 24px rgba(255, 214, 0, 0.15);
+            }
+        }
+        @keyframes bestsellerBorderPulse {
+            0% {
+                border-color: #ffd600;
+                box-shadow: 0 10px 30px rgba(255, 214, 0, 0.15);
+            }
+            50% {
+                border-color: #ffea00;
+                box-shadow: 0 10px 34px rgba(255, 234, 0, 0.35), 0 0 12px rgba(255, 214, 0, 0.25);
+            }
+            100% {
+                border-color: #ffd600;
+                box-shadow: 0 10px 30px rgba(255, 214, 0, 0.15);
+            }
         }
 
         /* Collage inside card */
@@ -990,12 +1036,19 @@
             gap: 6px;
             height: 380px;
             padding: 8px;
-            background: #fffdf5;
+            background: #ffffff; /* Trùng với màu nền card để triệt tiêu vệt lệch pixel */
             overflow: hidden;
-            border-radius: 20px 20px 0 0;
+            border-radius: 22px 22px 0 0; /* Đồng nhất bo góc 22px ở đỉnh */
             position: relative;
+            /* Khắc phục lỗi vỡ góc bo tròn trên iOS Safari khi ảnh con transform scale */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
         .collage-main-img {
+            display: block; /* Ép hiển thị dạng block để tính toán kích thước tuyệt đối chính xác */
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -1006,8 +1059,11 @@
             display: grid;
             grid-template-rows: 1fr 1fr;
             gap: 6px;
+            height: 100%; /* Lấp đầy chiều cao của cột bên phải */
+            width: 100%;  /* Lấp đầy chiều rộng */
         }
         .collage-side-img {
+            display: block; /* Ép hiển thị dạng block để tránh lệch pixel */
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -1019,10 +1075,7 @@
         .collage-side-img.bottom {
             border-radius: 4px 4px 14px 4px;
         }
-        .tiemanh-card:hover .collage-main-img, 
-        .tiemanh-card:hover .collage-side-img {
-            transform: scale(1.05);
-        }
+
 
         /* Card Content footer - Balanced & Uniform Layout */
         .tiemanh-card-footer {
@@ -1037,6 +1090,7 @@
             border-top: 1px solid rgba(251, 192, 45, 0.15);
             min-height: 86px;
             box-sizing: border-box;
+            border-radius: 0 0 22px 22px; /* Đồng nhất bo góc 22px ở đáy */
         }
         .tiemanh-card-meta {
             display: flex;
@@ -2326,10 +2380,36 @@
             .tiemanh-pricing-grid::-webkit-scrollbar { display: none; }
             .tiemanh-pricing-grid.active-drag { cursor: grabbing !important; scroll-behavior: auto !important; }
             .tiemanh-price-card {
-                flex: 0 0 72%; /* Giảm từ 78% xuống 72% để lộ nhiều hơn 2 gói hai bên */
-                min-width: 240px; /* Giảm từ 280px để các màn hình hẹp vẫn hiển thị cân đối tỷ lệ */
+                flex: 0 0 76%; /* Rộng 76% giúp lấp đầy khoảng trống thừa hai bên, cân đối đối xứng */
+                min-width: 260px; /* Đảm bảo chiều rộng chứa text đầy đủ */
                 scroll-snap-align: center;
                 height: auto !important; /* Đảm bảo flex stretch hoạt động kéo giãn chiều cao */
+                padding: 26px 14px; /* Giảm padding ngang từ 24px xuống 14px để nhường chỗ cho chữ */
+            }
+            .tiemanh-price-card h3 {
+                font-size: 17px !important; /* Thu nhỏ chữ h3 trên mobile để không bao giờ bị rớt xuống dòng */
+            }
+            .tiemanh-price-card.featured h3 {
+                font-size: 18px !important;
+            }
+            .tiemanh-price-tag {
+                font-size: 26px !important; /* Thu nhỏ thẻ giá tiền trên mobile cho vừa vặn */
+                margin-bottom: 15px !important;
+            }
+            .tiemanh-price-features li {
+                font-size: 13px !important;
+            }
+            .price-desc-highlight {
+                font-size: 12px !important;
+                margin-top: 10px !important;
+                padding-top: 10px !important;
+            }
+            .price-desc-fit {
+                font-size: 12px !important;
+            }
+            .price-best-seller {
+                font-size: 11px !important;
+                padding: 6px 18px !important;
             }
             .tiemanh-pricing-nav-btn {
                 display: flex !important;
@@ -2349,6 +2429,7 @@
             box-shadow: 0 20px 48px rgba(245, 127, 23, 0.22), 0 0 20px rgba(251, 192, 45, 0.15) !important;
             transform: scale(1.02); /* Phóng nhẹ lên một xíu để nổi bật */
             z-index: 2;
+            overflow: visible !important; /* Để ruy băng lấp lánh chéo góc lồi ra ngoài viền card */
         }
         .tiemanh-price-card.featured:hover {
             transform: scale(1.02) translateY(-8px);
@@ -2376,6 +2457,17 @@
             0% { transform: scale(1); box-shadow: 0 6px 16px rgba(245, 127, 23, 0.4); }
             50% { transform: scale(1.06); box-shadow: 0 8px 22px rgba(245, 127, 23, 0.6); }
             100% { transform: scale(1); box-shadow: 0 6px 16px rgba(245, 127, 23, 0.4); }
+        }
+        .tiemanh-price-badge-img {
+            position: absolute;
+            top: -14px; /* Dịch lên trên thêm để mép gấp ruy băng cam thẳng hàng hoàn toàn với viền vàng trên cùng */
+            right: -14px; /* Dịch sang phải tương ứng để giữ cân đối chéo 45 độ */
+            width: 105px; /* Chiều rộng cân đối cho card bảng giá */
+            height: auto;
+            z-index: 5;
+            pointer-events: none; /* Tránh cản click */
+            user-select: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
         }
         .tiemanh-price-badge {
             position: absolute;
@@ -2673,6 +2765,30 @@
             .tiemanh-lightbox-container { grid-template-columns: 1fr; height: 90vh; }
             .tiemanh-lightbox-panel { border-left: none; border-top: 1px solid rgba(255,255,255,0.05); padding: 25px; }
             .tiemanh-lightbox-thumb-container { margin-bottom: 20px; }
+
+            /* Tắt hiệu ứng hover nảy lên và phóng to trên di động để tránh giật lag khi chạm */
+            .tiemanh-card:hover {
+                transform: none !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+                border-color: rgba(251, 192, 45, 0.22) !important;
+            }
+            .tiemanh-card:hover .collage-main-img, 
+            .tiemanh-card:hover .collage-side-img {
+                transform: none !important;
+            }
+            .tiemanh-card:hover .tiemanh-card-icon-box {
+                transform: none !important;
+            }
+            .tiemanh-card:hover .tiemanh-card-title {
+                color: var(--tiemanh-dark) !important;
+            }
+            .tiemanh-card:hover .tiemanh-card-arrow {
+                transform: none !important;
+            }
+            .tiemanh-card:hover .tiemanh-card-btn {
+                transform: none !important;
+                box-shadow: 0 3px 10px rgba(251, 192, 45, 0.28) !important;
+            }
         }
 
         @media (max-width: 768px) {
@@ -2767,7 +2883,7 @@
                 grid-template-columns: 1fr;
                 gap: 18px;
             }
-            .tiemanh-price-card { padding: 26px 18px; border-radius: 18px; }
+            .tiemanh-price-card { padding: 26px 14px; border-radius: 18px; }
             .tiemanh-step-card { padding: 22px 16px; border-radius: 16px; }
             .tiemanh-branch-card { padding: 22px 16px; border-radius: 18px; }
 
@@ -2798,52 +2914,28 @@
             .polaroid-caption { font-size: 9.5px; }
         }
 
-        /* Nhãn Best Seller lấp lánh sang trọng */
-        .tiemanh-card {
-            position: relative;
-        }
-        .concept-best-badge {
+        /* Khung viền góc Best Seller lấp lánh sang trọng */
+        .concept-best-corner {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 50px;
-            z-index: 10;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            animation: badgePulse 2s infinite alternate ease-in-out;
+            top: -11px; /* Đẩy sâu lên trên để dải viền vàng trùng khít hoàn toàn viền trắng card */
+            right: -11px; /* Đẩy sâu sang phải để dải viền vàng trùng khít hoàn toàn viền trắng card */
+            width: 140px; /* Kích thước cân đối cho Concept card */
+            height: auto;
+            z-index: 10; /* Nổi hẳn lên trên ảnh con (không bị ảnh che) */
+            pointer-events: none; /* Tránh cản click vào ảnh */
+            user-select: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)) drop-shadow(0 0 6px rgba(251, 192, 45, 0.45));
         }
-
-        @keyframes badgePulse {
-            0% { transform: scale(1); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
-            100% { transform: scale(1.05); box-shadow: 0 6px 16px rgba(239, 68, 68, 0.6); }
-        }
-
-        /* Badge trên Polaroid card ở Hero banner */
-        .polaroid-card {
-            position: relative;
-        }
-        .polaroid-best-badge {
+        .polaroid-best-corner {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #ef4444;
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 4px;
-            z-index: 5;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
-            text-transform: uppercase;
+            top: -2.5px; /* Cân chỉnh lại tọa độ cho vương miện siêu nhỏ */
+            right: -2.5px;
+            width: 35px; /* Thu nhỏ tối đa xuống 35px để nằm nép ở góc Polaroid, không lấn vào ảnh */
+            height: auto;
+            z-index: 10; /* Nổi hẳn lên trên ảnh Polaroid (không bị ảnh che) */
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15)) drop-shadow(0 0 2px rgba(251, 192, 45, 0.3));
         }
 
         /* --- CẤU HÌNH TYPOGRAPHY BOLD HIỆN ĐẠI (SỬ DỤNG PHÔNG MẶC ĐỊNH, KHÔNG LO BỊ CHẶN FONT) --- */
@@ -3030,12 +3122,18 @@
                 padding: 8px 10px;
             }
             .tiemanh-hero-btns {
-                flex-direction: column;
+                flex-direction: row; /* Để 2 nút nằm ngang */
+                flex-wrap: nowrap; /* Đảm bảo tuyệt đối không bị xuống dòng */
                 width: 100%;
+                justify-content: center;
                 gap: 10px;
             }
             .tiemanh-btn-primary-new, .tiemanh-btn-secondary-new {
-                width: 100%;
+                flex: 1;
+                max-width: 180px; /* Giới hạn chiều rộng nút cho nhỏ gọn vừa vặn */
+                padding: 10px 12px;
+                font-size: 12px; /* Thu nhỏ chữ nhẹ để vừa dòng */
+                white-space: nowrap; /* Đảm bảo chữ trong nút không bị rớt dòng */
                 justify-content: center;
                 box-sizing: border-box;
             }
@@ -3234,7 +3332,7 @@
 
                         <!-- Gói Toả Sáng -->
                         <div class="tiemanh-price-card featured" data-pkg="1">
-                            <div class="tiemanh-price-badge">Bán chạy</div>
+                            <img src="banchay-ribbon.png" class="tiemanh-price-badge-img" alt="Bán chạy">
                             <h3>🌸 GÓI TOẢ SÁNG</h3>
                             <div class="tiemanh-price-tag">1.250.000 <span>đ</span></div>
                             <ul class="tiemanh-price-features">
@@ -3883,6 +3981,9 @@
     // Hàm lấy Icon và Màu sắc chủ đạo tương ứng với 9 Chủ Đề Chuẩn
     function getThemeInfo(themeName) {
         const clean = cleanTextForMatching(themeName);
+        if (clean.includes("BESTSELLER") || clean.includes("BANCHAY")) {
+            return { icon: "👑", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" };
+        }
         if (clean.includes("NANGTHO") || clean.includes("THO") || clean.includes("TIENNU")) {
             return { icon: "🌸", color: "#ff758f", bg: "rgba(255,117,143,0.12)" };
         }
@@ -4090,11 +4191,7 @@
                 const concept = selected[i];
                 card.classList.remove("loading-skeleton");
                 
-                // Thêm nhãn ngọn lửa nhỏ nếu bộ concept là Best Seller
-                const flameHtml = concept.isBestSeller ? `<span class="polaroid-best-badge">🔥 Hot</span>` : "";
-
                 card.innerHTML = `
-                    ${flameHtml}
                     <img src="${concept.images[0]}" alt="${concept.title}">
                     <div class="polaroid-caption">${concept.title}</div>
                 `;
@@ -4202,7 +4299,7 @@
 
         pageConcepts.forEach((concept, index) => {
             const card = document.createElement("div");
-            card.className = "tiemanh-card";
+            card.className = concept.isBestSeller ? "tiemanh-card bestseller-featured" : "tiemanh-card";
             card.setAttribute("data-id", concept.id);
 
             const img0 = concept.images[0] || "";
@@ -4220,7 +4317,7 @@
                 return `<span class="tiemanh-card-badge" style="background:${info.bg};color:${info.color};">${info.icon} ${t}</span>`;
             }).join("");
 
-            const bestSellerHtml = concept.isBestSeller ? `<span class="concept-best-badge">🔥 Best Seller</span>` : "";
+            const bestSellerHtml = concept.isBestSeller ? `<img src="bestseller-corner.png" class="concept-best-corner" alt="Best Seller" title="Concept Best Seller">` : "";
 
             card.innerHTML = `
                 ${bestSellerHtml}
@@ -4774,41 +4871,48 @@
             const targetEl = document.getElementById(targetId);
             if (!targetEl) return;
 
-            const navbar = document.getElementById("tiemanh-navbar");
-            const navHeight = navbar ? navbar.offsetHeight : 70;
+            // Ưu tiên sử dụng scrollIntoView để cuộn mượt native (hỗ trợ hoàn hảo iframe Webcake trên di động)
+            try {
+                targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch (err) {
+                // Fallback tính toán thủ công nếu trình duyệt cũ không hỗ trợ scrollIntoView smooth
+                const navbar = document.getElementById("tiemanh-navbar");
+                const navHeight = navbar ? navbar.offsetHeight : 70;
+                const rect = targetEl.getBoundingClientRect();
+                const absoluteTop = window.pageYOffset + rect.top;
+                const elementHeight = rect.height;
+                const viewportHeight = window.innerHeight;
 
-            // Tính vị trí section so với document và chiều cao của nó
-            const rect = targetEl.getBoundingClientRect();
-            const absoluteTop = window.pageYOffset + rect.top;
-            const elementHeight = rect.height;
-            const viewportHeight = window.innerHeight;
+                let targetScrollTop = absoluteTop - navHeight;
+                if (targetId === "pricingSlider" && elementHeight < viewportHeight - navHeight) {
+                    targetScrollTop = absoluteTop - navHeight - (viewportHeight - navHeight - elementHeight) / 2;
+                }
 
-            let targetScrollTop = absoluteTop - navHeight;
-            // Chỉ tự động căn giữa dọc đối với pricingSlider
-            if (targetId === "pricingSlider" && elementHeight < viewportHeight - navHeight) {
-                targetScrollTop = absoluteTop - navHeight - (viewportHeight - navHeight - elementHeight) / 2;
+                window.scrollTo({ top: Math.max(0, targetScrollTop), behavior: "smooth" });
             }
 
-            // Cuộn window đến vị trí tối ưu
-            window.scrollTo({ top: Math.max(0, targetScrollTop), behavior: "smooth" });
-
-            // Cũng thử cuộn container nếu trang nhúng trong div scrollable (Webcake iframe)
+            // Fallback cuộn container nội bộ nếu trang nhúng trong div scrollable
             const container = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
             if (container && getComputedStyle(container).overflowY !== "visible") {
-                let el = targetEl;
-                let topPos = 0;
-                while (el && el !== container) {
-                    topPos += el.offsetTop;
-                    el = el.offsetParent;
+                try {
+                    targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                } catch (e) {
+                    let el = targetEl;
+                    let topPos = 0;
+                    while (el && el !== container) {
+                        topPos += el.offsetTop;
+                        el = el.offsetParent;
+                    }
+                    const navbar = document.getElementById("tiemanh-navbar");
+                    const navHeight = navbar ? navbar.offsetHeight : 70;
+                    const containerHeight = container.clientHeight;
+                    const elHeight = targetEl.offsetHeight;
+                    let containerScrollTop = topPos - navHeight;
+                    if (targetId === "pricingSlider" && elHeight < containerHeight - navHeight) {
+                        containerScrollTop = topPos - navHeight - (containerHeight - navHeight - elHeight) / 2;
+                    }
+                    container.scrollTo({ top: Math.max(0, containerScrollTop), behavior: "smooth" });
                 }
-                
-                const containerHeight = container.clientHeight;
-                const elHeight = targetEl.offsetHeight;
-                let containerScrollTop = topPos - navHeight;
-                if (targetId === "pricingSlider" && elHeight < containerHeight - navHeight) {
-                    containerScrollTop = topPos - navHeight - (containerHeight - navHeight - elHeight) / 2;
-                }
-                container.scrollTo({ top: Math.max(0, containerScrollTop), behavior: "smooth" });
             }
 
             // GẮN CHẶT MOBILE CAROUSEL GÓI TOẢ SÁNG: Hỗ trợ cả targetId là pricingSlider hoặc banggiaSection
@@ -4870,7 +4974,7 @@
         if (btnHeroExplore) {
             btnHeroExplore.addEventListener("click", (e) => {
                 e.preventDefault();
-                smoothScrollToSection("conceptFilterGroup");
+                smoothScrollToSection("filterBar"); /* Cuộn tới toàn bộ vùng bộ lọc và Concept */
             });
         }
 
@@ -5174,7 +5278,7 @@
         // Trích xuất các chủ đề duy nhất từ c.themes thực tế của các concept, chèn sẵn nút Best Seller ở đầu
         const themes = [
             { slug: "all", name: "Tất cả", icon: "🍍" },
-            { slug: "bestseller", name: "Best Seller", icon: "🔥" }
+            { slug: "bestseller", name: "Best Seller", icon: "👑" }
         ];
         const seenThemes = new Set();
         
