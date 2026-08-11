@@ -1643,6 +1643,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0; /* Khóa cứng không cho co bóp méo hình tròn */
             transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
@@ -2325,8 +2326,8 @@
             .tiemanh-pricing-grid::-webkit-scrollbar { display: none; }
             .tiemanh-pricing-grid.active-drag { cursor: grabbing !important; scroll-behavior: auto !important; }
             .tiemanh-price-card {
-                flex: 0 0 78%;
-                min-width: 280px;
+                flex: 0 0 72%; /* Giảm từ 78% xuống 72% để lộ nhiều hơn 2 gói hai bên */
+                min-width: 240px; /* Giảm từ 280px để các màn hình hẹp vẫn hiển thị cân đối tỷ lệ */
                 scroll-snap-align: center;
                 height: auto !important; /* Đảm bảo flex stretch hoạt động kéo giãn chiều cao */
             }
@@ -2343,14 +2344,38 @@
             border-color: #f43f5e;
         }
         .tiemanh-price-card.featured {
-            border: 3px solid #fbbf24 !important;
+            border: 3.5px solid #fbbf24 !important;
             background: #ffffff;
-            box-shadow: 0 18px 38px rgba(245, 158, 11, 0.15) !important;
+            box-shadow: 0 20px 48px rgba(245, 127, 23, 0.22), 0 0 20px rgba(251, 192, 45, 0.15) !important;
+            transform: scale(1.02); /* Phóng nhẹ lên một xíu để nổi bật */
+            z-index: 2;
         }
         .tiemanh-price-card.featured:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 42px rgba(245, 158, 11, 0.25) !important;
+            transform: scale(1.02) translateY(-8px);
+            box-shadow: 0 24px 54px rgba(245, 127, 23, 0.32), 0 0 25px rgba(251, 192, 45, 0.25) !important;
             border-color: #f59e0b !important;
+        }
+        .tiemanh-price-card.featured h3 {
+            color: #d84315; /* Chữ màu cam đỏ nổi bật */
+            font-size: 23px;
+        }
+        .tiemanh-price-card.featured .tiemanh-price-badge {
+            background-color: #f57f17;
+            color: #ffffff;
+            font-size: 11.5px;
+            box-shadow: 0 3px 8px rgba(245, 127, 23, 0.3);
+        }
+        .tiemanh-price-card.featured .price-best-seller {
+            background: linear-gradient(135deg, #f57f17 0%, #ffb300 100%) !important;
+            font-size: 13.5px;
+            padding: 8px 24px;
+            box-shadow: 0 6px 16px rgba(245, 127, 23, 0.4) !important;
+            animation: tiemanh-pulse-glow 2.2s infinite ease-in-out;
+        }
+        @keyframes tiemanh-pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 6px 16px rgba(245, 127, 23, 0.4); }
+            50% { transform: scale(1.06); box-shadow: 0 8px 22px rgba(245, 127, 23, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 6px 16px rgba(245, 127, 23, 0.4); }
         }
         .tiemanh-price-badge {
             position: absolute;
@@ -2657,6 +2682,8 @@
             .tiemanh-section-desc { font-size: 13.5px; margin-bottom: 22px; line-height: 1.5; }
             .tiemanh-section-container { padding: 25px 14px; }
             .tiemanh-banggia-sec, .tiemanh-quytrinh-sec, .tiemanh-feedback-sec, .tiemanh-chinhanh-sec { padding: 20px 14px 40px; }
+            .tiemanh-pagination { gap: 6px; margin-top: 30px; }
+            .tiemanh-page-btn { width: 32px; height: 32px; font-size: 12px; }
 
             /* Header & Navbar gọn gàng */
             .tiemanh-navbar { flex-direction: column; gap: 10px; padding: 12px 14px; }
@@ -3152,7 +3179,7 @@
             <section class="tiemanh-section-container" id="filterBar">
                 <!-- Filter bar -->
                 <!-- Bộ lọc kép: Chi nhánh & Chủ đề -->
-                <div class="tiemanh-filter-group" style="margin-bottom: 20px;">
+                <div class="tiemanh-filter-group" id="conceptFilterGroup" style="margin-bottom: 20px;">
                     <div class="tiemanh-filter-label">📍 Chọn Chi nhánh:</div>
                     <div class="tiemanh-filter-scroll-wrap">
                         <div class="tiemanh-filter-bar" id="branchFilterBar">
@@ -4647,7 +4674,7 @@
         if (zaloQuickPricingBtn) {
             zaloQuickPricingBtn.addEventListener("click", () => {
                 closeZaloModal();
-                smoothScrollToSection("banggiaSection");
+                smoothScrollToSection("pricingSlider");
             });
         }
         if (zaloQuickBranchBtn) {
@@ -4735,7 +4762,7 @@
             });
         });
 
-        // Hàm cuộn mượt thông minh (hỗ trợ cả cuộn cửa sổ và cuộn Webcake overlay)
+        // Hàm cuộn mượt thông minh (hỗ trợ cả cuộn cửa sổ và cuộn Webcake overlay, tự động căn giữa dọc)
         function smoothScrollToSection(targetId) {
             if (!targetId) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
@@ -4750,12 +4777,20 @@
             const navbar = document.getElementById("tiemanh-navbar");
             const navHeight = navbar ? navbar.offsetHeight : 70;
 
-            // Tính vị trí section so với document
+            // Tính vị trí section so với document và chiều cao của nó
             const rect = targetEl.getBoundingClientRect();
             const absoluteTop = window.pageYOffset + rect.top;
+            const elementHeight = rect.height;
+            const viewportHeight = window.innerHeight;
 
-            // Cuộn window đến section (trừ chiều cao navbar sticky để nội dung không bị che)
-            window.scrollTo({ top: Math.max(0, absoluteTop - navHeight), behavior: "smooth" });
+            let targetScrollTop = absoluteTop - navHeight;
+            // Chỉ tự động căn giữa dọc đối với pricingSlider
+            if (targetId === "pricingSlider" && elementHeight < viewportHeight - navHeight) {
+                targetScrollTop = absoluteTop - navHeight - (viewportHeight - navHeight - elementHeight) / 2;
+            }
+
+            // Cuộn window đến vị trí tối ưu
+            window.scrollTo({ top: Math.max(0, targetScrollTop), behavior: "smooth" });
 
             // Cũng thử cuộn container nếu trang nhúng trong div scrollable (Webcake iframe)
             const container = document.getElementById("tiemanh-container") || document.getElementById(CONFIG.targetId);
@@ -4766,11 +4801,18 @@
                     topPos += el.offsetTop;
                     el = el.offsetParent;
                 }
-                container.scrollTo({ top: Math.max(0, topPos - navHeight), behavior: "smooth" });
+                
+                const containerHeight = container.clientHeight;
+                const elHeight = targetEl.offsetHeight;
+                let containerScrollTop = topPos - navHeight;
+                if (targetId === "pricingSlider" && elHeight < containerHeight - navHeight) {
+                    containerScrollTop = topPos - navHeight - (containerHeight - navHeight - elHeight) / 2;
+                }
+                container.scrollTo({ top: Math.max(0, containerScrollTop), behavior: "smooth" });
             }
 
-            // GẮN CHẶT MOBILE CAROUSEL GÓI TOẢ SÁNG
-            if (targetId === "banggiaSection" && window.innerWidth <= 991 && activePricingScrollFn) {
+            // GẮN CHẶT MOBILE CAROUSEL GÓI TOẢ SÁNG: Hỗ trợ cả targetId là pricingSlider hoặc banggiaSection
+            if ((targetId === "banggiaSection" || targetId === "pricingSlider") && window.innerWidth <= 991 && activePricingScrollFn) {
                 setTimeout(() => {
                     activePricingScrollFn(1);
                 }, 300);
@@ -4780,8 +4822,8 @@
         // Xử lý cuộn mượt cho toàn bộ Menu Header
         const menuScrollLinks = [
             { id: "menuTrangChu", targetId: null }, // null tức là cuộn lên top
-            { id: "menuConcept", targetId: "filterBar" },
-            { id: "menuBangGia", targetId: "banggiaSection" },
+            { id: "menuConcept", targetId: "conceptFilterGroup" },
+            { id: "menuBangGia", targetId: "pricingSlider" },
             { id: "menuQuyTrinh", targetId: "quytrinhSection" },
             { id: "menuChiNhanh", targetId: "chinhanhSection" },
             { id: "menuLienHe", targetId: "tiemanh-footer" }
@@ -4828,9 +4870,31 @@
         if (btnHeroExplore) {
             btnHeroExplore.addEventListener("click", (e) => {
                 e.preventDefault();
-                smoothScrollToSection("filterBar");
+                smoothScrollToSection("conceptFilterGroup");
             });
         }
+
+        // Tối ưu hóa click cho các liên kết gọi điện (tel:) khi chạy trong iframe Webcake
+        document.addEventListener("click", (e) => {
+            const telLink = e.target.closest('a[href^="tel:"]');
+            if (telLink) {
+                const href = telLink.getAttribute("href");
+                if (href) {
+                    e.preventDefault();
+                    try {
+                        // Thử mở ở top-level window (cửa sổ cha ngoài cùng của iframe Webcake) để phá sandbox
+                        if (window.top && window.top !== window) {
+                            window.top.location.href = href;
+                        } else {
+                            window.location.href = href;
+                        }
+                    } catch (err) {
+                        // Fallback an toàn nếu bị trình duyệt chặn cross-origin location access
+                        window.location.href = href;
+                    }
+                }
+            }
+        });
 
 
 
@@ -4894,10 +4958,10 @@
                 if (href && href.startsWith("#")) {
                     e.preventDefault();
                     const targetId = href.substring(1);
-                    if (targetId === "banggiaSection") smoothScrollToSection("banggiaSection");
+                    if (targetId === "banggiaSection") smoothScrollToSection("pricingSlider");
                     else if (targetId === "quytrinhSection") smoothScrollToSection("quytrinhSection");
                     else if (targetId === "chinhanhSection") smoothScrollToSection("chinhanhSection");
-                    else if (targetId === "filterBar") smoothScrollToSection("filterBar");
+                    else if (targetId === "filterBar") smoothScrollToSection("conceptFilterGroup");
                 }
             });
         });
