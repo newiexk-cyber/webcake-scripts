@@ -4660,9 +4660,9 @@
             card.className = concept.isBestSeller ? "tiemanh-card bestseller-featured" : "tiemanh-card";
             card.setAttribute("data-id", concept.id);
 
-            const img0 = (concept.images[0] || "").replace('&sz=w800', '&sz=w600');
-            const img1 = (concept.images[1] || "").replace('&sz=w800', '&sz=w300');
-            const img2 = (concept.images[2] || "").replace('&sz=w800', '&sz=w300');
+            const img0 = (concept.images[0] || "").replace('&sz=w800', '&sz=w640');
+            const img1 = (concept.images[1] || "").replace('&sz=w800', '&sz=w320');
+            const img2 = (concept.images[2] || "").replace('&sz=w800', '&sz=w320');
             const placeholderStyle = "background:linear-gradient(135deg,#f0f0f0,#e0e0e0);min-height:80px;";
 
             const themesList = (concept.themes && concept.themes.length > 0) ? concept.themes : [concept.theme || "Nàng Thơ"];
@@ -4838,7 +4838,7 @@
         const totalImages = concept.images.length;
         concept.images.forEach((imgUrl, idx) => {
             const thumb = document.createElement("img");
-            thumb.src = imgUrl.replace('&sz=w800', '&sz=w150');
+            thumb.src = imgUrl.replace('&sz=w800', '&sz=w220');
             thumb.alt = `${concept.title} - Ảnh ${idx + 1}`;
             thumb.className = `tiemanh-lightbox-thumb ${idx === 0 ? "active" : ""}`;
             thumb.title = `Ảnh ${idx + 1} / ${totalImages}`;
