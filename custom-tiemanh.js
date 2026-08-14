@@ -5448,24 +5448,53 @@
 
             // Tự động lọc chi nhánh & chủ đề từ URL nếu có (phục vụ Sale gửi link cho khách)
             const branchParam = urlParams.get("branch") || urlParams.get("chinhanh");
-            const themeParam = urlParams.get("theme") || urlParams.get("chude");
+            let themeParam = urlParams.get("theme") || urlParams.get("chude");
+
+            // Nếu có nhiều chủ đề cách nhau bởi dấu phẩy, lấy chủ đề đầu tiên để lọc
+            if (themeParam && themeParam.includes(",")) {
+                themeParam = themeParam.split(",")[0].trim();
+            }
+
             let hasFilter = false;
 
-            if (branchParam) {
-                selectedBranch = normalizeBranchName(branchParam);
+            if (branchParam && CONCEPTS && CONCEPTS.length > 0) {
+                const cleanB = cleanTextForMatching(branchParam);
+                let foundBranch = "all";
+                CONCEPTS.forEach(c => {
+                    const branchName = c.tag || c.branch;
+                    if (branchName && cleanTextForMatching(branchName) === cleanB) {
+                        foundBranch = branchName;
+                    }
+                });
+                if (foundBranch !== "all") {
+                    selectedBranch = foundBranch;
+                } else {
+                    selectedBranch = normalizeBranchName(branchParam);
+                }
                 hasFilter = true;
             }
 
-            if (themeParam) {
+            if (themeParam && CONCEPTS && CONCEPTS.length > 0) {
                 const cleanT = cleanTextForMatching(themeParam);
-                const knownThemes = ["Nàng Thơ", "Cổ Trang", "Áo Dài", "Beauty", "Sinh Nhật", "Cá Tính", "Biển", "Couple", "Noel", "Trung Thu", "Tết", "Kỷ Yếu", "Gia Đình", "Profile"];
-                for (const t of knownThemes) {
-                    const cleanKnown = cleanTextForMatching(t);
-                    if (cleanKnown.includes(cleanT) || cleanT.includes(cleanKnown)) {
-                        selectedTheme = t;
-                        hasFilter = true;
-                        break;
-                    }
+                let foundTheme = "all";
+
+                if (cleanT.includes("BESTSELLER") || cleanT.includes("BANCHAY")) {
+                    foundTheme = "bestseller";
+                } else {
+                    CONCEPTS.forEach(c => {
+                        if (c.themes) {
+                            c.themes.forEach(t => {
+                                if (cleanTextForMatching(t) === cleanT) {
+                                    foundTheme = t;
+                                }
+                            });
+                        }
+                    });
+                }
+
+                if (foundTheme !== "all") {
+                    selectedTheme = foundTheme;
+                    hasFilter = true;
                 }
             }
 
