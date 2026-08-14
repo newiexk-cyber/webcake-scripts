@@ -4464,42 +4464,7 @@
         };
     }
 
-    // Xử lý dữ liệu nhận được từ Google Sheets JSONP (Hỗ trợ Multi-tag đa chủ đề)
-    function handleSheetsData(data) {
-        try {
-            const rows = data.table.rows;
-            if (!rows || rows.length === 0) return;
 
-            const cols = data.table.cols.map(c => (c.label || c.id || "").normalize("NFC").trim());
-            const parsed = rows.map((row, rowIdx) => {
-                const obj = {};
-                row.c.forEach((cell, ci) => {
-                    const colName = cols[ci] || "";
-                    // Chuẩn hóa Unicode NFC trực tiếp khi nạp cell từ Google Sheets
-                    obj[colName] = cell ? String(cell.v ?? "").normalize("NFC").trim() : "";
-                });
-
-                const concept = parseSheetsRow(obj, rowIdx);
-                if (concept.isHidden) return null;
-                return concept;
-            }).filter(Boolean);
-
-            if (parsed.length > 0) {
-                CONCEPTS.length = 0;
-                // Xáo trộn ngẫu nhiên toàn bộ concept để không bị cố định vị trí
-                const randomizedConcepts = shuffleArray([...parsed]);
-                randomizedConcepts.forEach(c => CONCEPTS.push(c));
-                currentFiltered = [...CONCEPTS];
-                setupGallery();
-                randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
-                renderFilterBar();
-                checkUrlAndOpenConcept();
-                console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept ngẫu nhiên từ Google Sheets.`);
-            }
-        } catch (e) {
-            console.warn("[TiệmẢnh] Lỗi xử lý dữ liệu từ Google Sheets:", e);
-        }
-    }
 
     // Hàm xáo trộn ngẫu nhiên mảng chuẩn (Fisher-Yates Shuffle)
     function shuffleArray(arr) {
@@ -4576,53 +4541,80 @@
         if (showcase) showcase.classList.add("loaded");
     }
 
-    // 4b. Tải dữ liệu concept từ Google Sheets (CMS dạng bảng đơn - JSONP để bypass CORS)
+    // Hàm phân tích dữ liệu CSV thô thành mảng (chuẩn RFC 4180 để xử lý dấu ngoặc kép và phẩy)
+    function parseCSV(text) {
+        let p = '', r = [];
+        let q = false;
+        let row = [''];
+        for (let i = 0; i < text.length; i++) {
+            let c = text[i];
+            let next = text[i+1];
+            if (c === '"') {
+                if (q && next === '"') { row[row.length - 1] += '"'; i++; }
+                else { q = !q; }
+            } else if (c === ',' && !q) {
+                row.push('');
+            } else if ((c === '\r' || c === '\n') && !q) {
+                if (c === '\r' && next === '\n') { i++; }
+                r.push(row);
+                row = [''];
+            } else {
+                row[row.length - 1] += c;
+            }
+        }
+        if (row.length > 1 || row[0] !== '') { r.push(row); }
+        return r;
+    }
+
+    // 4b. Tải dữ liệu concept từ Google Sheets (Dùng CSV để bypass hoàn toàn bộ lọc filter giao diện của Sheet)
     async function fetchConceptsFromSheets() {
         if (!CONFIG.sheetId) return;
         const gidParam = CONFIG.sheetGid ? `&gid=${CONFIG.sheetGid}` : "";
-        const apiUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:json${gidParam}`;
-
-        // Định nghĩa callback toàn cục để Google Sheets gọi vào
-        window.google = window.google || {};
-        window.google.visualization = window.google.visualization || {};
-        window.google.visualization.Query = window.google.visualization.Query || {};
+        const apiUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/export?format=csv${gidParam}`;
 
         let hasLoaded = false;
-        window.google.visualization.Query.setResponse = function (response) {
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error("Không thể tải file CSV từ Google Sheets");
+            const csvText = await response.text();
             hasLoaded = true;
-            handleSheetsData(response);
-            const scriptTag = document.getElementById("tiemanh-sheets-jsonp");
-            if (scriptTag) scriptTag.remove();
-        };
 
-        // Nhúng thẻ script để load dữ liệu (vượt qua hoàn toàn lỗi CORS của trình duyệt)
-        const oldScript = document.getElementById("tiemanh-sheets-jsonp");
-        if (oldScript) oldScript.remove();
+            const rows = parseCSV(csvText);
+            if (!rows || rows.length < 2) return;
 
-        const script = document.createElement("script");
-        script.id = "tiemanh-sheets-jsonp";
-        script.src = apiUrl;
-        script.onerror = function () {
-            console.warn("[TiệmẢnh] Không thể kết nối Google Sheets (Sheet có thể đang bị đặt Riêng tư / 401). Đang hiển thị danh sách concept mặc định.");
+            const headers = rows[0].map(h => h.trim().normalize("NFC"));
+            const parsed = rows.slice(1).map((row, rowIdx) => {
+                const obj = {};
+                headers.forEach((colName, ci) => {
+                    obj[colName] = row[ci] ? String(row[ci]).normalize("NFC").trim() : "";
+                });
+
+                const concept = parseSheetsRow(obj, rowIdx);
+                if (concept.isHidden) return null;
+                return concept;
+            }).filter(Boolean);
+
+            if (parsed.length > 0) {
+                CONCEPTS.length = 0;
+                // Xáo trộn ngẫu nhiên toàn bộ concept để không bị cố định vị trí
+                const randomizedConcepts = shuffleArray([...parsed]);
+                randomizedConcepts.forEach(c => CONCEPTS.push(c));
+                currentFiltered = [...CONCEPTS];
+                setupGallery();
+                randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
+                renderFilterBar();
+                checkUrlAndOpenConcept();
+                console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept từ Google Sheets (bằng CSV bypass filter).`);
+            }
+        } catch (e) {
+            console.warn("[TiệmẢnh] Lỗi tải dữ liệu CSV, chuyển sang hiển thị concept mặc định hoặc dự phòng:", e);
             if (!hasLoaded) {
                 currentFiltered = [...CONCEPTS];
                 setupGallery();
                 randomizeHeroPolaroids();
                 renderFilterBar();
             }
-        };
-        document.head.appendChild(script);
-
-        // Fallback Timeout: Nếu sau 3 giây Sheet không phản hồi, tự động render concept để không bị trắng trang
-        setTimeout(() => {
-            if (!hasLoaded) {
-                console.warn("[TiệmẢnh] Quá thời gian chờ Google Sheet, tự động hiển thị dữ liệu dự phòng.");
-                currentFiltered = [...CONCEPTS];
-                setupGallery();
-                randomizeHeroPolaroids();
-                renderFilterBar();
-            }
-        }, 3000);
+        }
     }
 
 
