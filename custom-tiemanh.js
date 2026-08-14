@@ -5445,6 +5445,35 @@
     function checkUrlAndOpenConcept() {
         try {
             const urlParams = new URLSearchParams(window.location.search);
+
+            // Tự động lọc chi nhánh & chủ đề từ URL nếu có (phục vụ Sale gửi link cho khách)
+            const branchParam = urlParams.get("branch") || urlParams.get("chinhanh");
+            const themeParam = urlParams.get("theme") || urlParams.get("chude");
+            let hasFilter = false;
+
+            if (branchParam) {
+                selectedBranch = normalizeBranchName(branchParam);
+                hasFilter = true;
+            }
+
+            if (themeParam) {
+                const cleanT = cleanTextForMatching(themeParam);
+                const knownThemes = ["Nàng Thơ", "Cổ Trang", "Áo Dài", "Beauty", "Sinh Nhật", "Cá Tính", "Biển", "Couple", "Noel", "Trung Thu", "Tết", "Kỷ Yếu", "Gia Đình", "Profile"];
+                for (const t of knownThemes) {
+                    const cleanKnown = cleanTextForMatching(t);
+                    if (cleanKnown.includes(cleanT) || cleanT.includes(cleanKnown)) {
+                        selectedTheme = t;
+                        hasFilter = true;
+                        break;
+                    }
+                }
+            }
+
+            if (hasFilter) {
+                applyDoubleFilter();
+                renderFilterBar();
+            }
+
             const conceptParam = urlParams.get("concept");
             const hashMatch = window.location.hash.match(/concept-(\d+)/);
             const targetId = conceptParam || (hashMatch ? hashMatch[1] : null);
