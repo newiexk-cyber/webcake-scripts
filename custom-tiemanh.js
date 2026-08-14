@@ -4618,6 +4618,7 @@
                 randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
                 renderFilterBar();
                 checkUrlAndOpenConcept();
+                setupMusicBackground(); // Khởi tạo nhạc sau khi nạp xong dữ liệu Sheets thành công
                 console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept từ Google Sheets (bằng CSV bypass filter).`);
             }
         } catch (e) {
@@ -4628,6 +4629,7 @@
                 randomizeHeroPolaroids();
                 renderFilterBar();
             }
+            setupMusicBackground(); // Khởi tạo nhạc nền dự phòng nếu nạp Sheets lỗi
         }
     }
 
@@ -5983,13 +5985,9 @@
     // 10. Khởi chạy hệ thống sau khi DOM load (chỉ chạy trong môi trường trình duyệt, bỏ qua khi chạy test Node.js)
     if (typeof window !== 'undefined' && typeof document !== 'undefined' && !(typeof global !== 'undefined' && global.IS_TEST_ENVIRONMENT)) {
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", () => {
-                init();
-                setupMusicBackground();
-            });
+            document.addEventListener("DOMContentLoaded", init);
         } else {
             init();
-            setupMusicBackground();
         }
     }
 
