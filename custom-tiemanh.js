@@ -4589,20 +4589,6 @@
                     obj[colName] = row[ci] ? String(row[ci]).normalize("NFC").trim() : "";
                 });
 
-                // Kiểm tra xem dòng này có phải cấu hình Nhạc nền không
-                const isMusicRow = (
-                    String(obj['Chi nhánh'] || '').toUpperCase() === 'NHẠC NỀN' ||
-                    String(obj['Tên concept'] || '').toUpperCase() === 'NHẠC NỀN'
-                );
-
-                if (isMusicRow) {
-                    const rawMusicUrl = obj['img1'] || obj['img2'] || '';
-                    if (rawMusicUrl) {
-                        updateMusicSourceFromSheet(rawMusicUrl);
-                    }
-                    return null; // Ẩn dòng này khỏi danh sách concept
-                }
-
                 const concept = parseSheetsRow(obj, rowIdx);
                 if (concept.isHidden) return null;
                 return concept;
@@ -4618,7 +4604,6 @@
                 randomizeHeroPolaroids(); // Cập nhật lại Polaroid stack ngẫu nhiên từ Sheets
                 renderFilterBar();
                 checkUrlAndOpenConcept();
-                setupMusicBackground(); // Khởi tạo nhạc sau khi nạp xong dữ liệu Sheets thành công
                 console.log(`[TiệmẢnh] ✅ Đã tải và xáo trộn ${parsed.length} concept từ Google Sheets (bằng CSV bypass filter).`);
             }
         } catch (e) {
@@ -4629,7 +4614,6 @@
                 randomizeHeroPolaroids();
                 renderFilterBar();
             }
-            setupMusicBackground(); // Khởi tạo nhạc nền dự phòng nếu nạp Sheets lỗi
         }
     }
 
@@ -5807,179 +5791,6 @@
                 grid.style.opacity = "1";
             }, 200);
         }
-    }
-    let SHEET_MUSIC_SRC = "https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3";
-
-    function updateMusicSourceFromSheet(rawUrl) {
-        if (!rawUrl) return;
-        const m1 = rawUrl.match(/drive\.google\.com\/file\/d\/([^/&#?]+)/);
-        const m2 = rawUrl.match(/drive\.google\.com\/open\?id=([^&#?]+)/);
-        const m3 = rawUrl.match(/id=([^&#?]+)/);
-        let fileId = null;
-        if (m1) fileId = m1[1];
-        else if (m2) fileId = m2[1];
-        else if (m3 && rawUrl.includes("drive.google.com")) fileId = m3[1];
-        
-        let directUrl = rawUrl;
-        if (fileId) {
-            directUrl = `https://docs.google.com/uc?export=download&id=${fileId}`;
-        }
-        SHEET_MUSIC_SRC = directUrl;
-
-        // Cập nhật nóng vào audio element nếu đã được tạo
-        const audio = document.getElementById("tiemanh-bg-music");
-        if (audio) {
-            audio.src = directUrl;
-            audio.load();
-        }
-    }
-
-    function setupMusicBackground() {
-        if (document.getElementById("tiemanh-music-container")) return;
-
-        const style = document.createElement("style");
-        style.innerHTML = `
-            #tiemanh-music-container {
-                position: fixed;
-                bottom: 110px;
-                left: 20px;
-                z-index: 99999;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                cursor: pointer;
-                font-family: 'Plus Jakarta Sans', sans-serif;
-            }
-            .music-disc {
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                background: rgba(0, 0, 0, 0.6);
-                backdrop-filter: blur(8px);
-                border: 2px solid #ffd600;
-                box-shadow: 0 0 12px rgba(255, 214, 0, 0.4);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #ffd600;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            #tiemanh-music-container:hover .music-disc {
-                transform: scale(1.1);
-                box-shadow: 0 0 20px rgba(255, 214, 0, 0.8);
-            }
-            .music-icon {
-                width: 22px;
-                height: 22px;
-                transition: all 0.3s ease;
-            }
-            #tiemanh-music-container.playing .music-disc {
-                animation: tiemanh-spin 4s linear infinite;
-                border-color: #a855f7;
-                color: #a855f7;
-                box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-            }
-            #tiemanh-music-container.paused .music-icon {
-                transform: scale(0.9);
-            }
-            @keyframes tiemanh-spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-            .music-tooltip {
-                background: rgba(0, 0, 0, 0.85);
-                color: #fff;
-                font-size: 11px;
-                font-weight: 500;
-                padding: 6px 12px;
-                border-radius: 20px;
-                border: 1px solid rgba(255, 214, 0, 0.4);
-                white-space: nowrap;
-                pointer-events: none;
-                opacity: 1;
-                transform: translateX(0);
-                transition: all 0.4s ease;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-                animation: tiemanh-float 2s ease-in-out infinite;
-            }
-            #tiemanh-music-container.playing .music-tooltip {
-                opacity: 0;
-                transform: translateX(-20px);
-                pointer-events: none;
-            }
-            @keyframes tiemanh-float {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-5px); }
-            }
-            @media (max-width: 480px) {
-                .music-tooltip {
-                    display: none;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        const container = document.createElement("div");
-        container.id = "tiemanh-music-container";
-        container.className = "paused";
-        
-        // Sử dụng nhạc từ Sheet nếu có, ngược lại dùng bài lofi mặc định
-        const musicSrc = SHEET_MUSIC_SRC || "https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3";
-
-        container.innerHTML = `
-            <div class="music-disc">
-                <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 18V5l12-2v13"></path>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <circle cx="18" cy="16" r="3"></circle>
-                </svg>
-            </div>
-            <span class="music-tooltip">Chạm để nghe nhạc 🎵</span>
-            <audio id="tiemanh-bg-music" loop preload="none">
-                <source src="${musicSrc}" type="audio/mp3">
-            </audio>
-        `;
-        document.body.appendChild(container);
-
-        const audio = document.getElementById("tiemanh-bg-music");
-
-        function playAudio() {
-            audio.play().then(() => {
-                container.className = "playing";
-                removeInteractionListeners();
-            }).catch(err => {
-                console.log("[TiệmẢnh] Chặn Autoplay, chờ tương tác người dùng...");
-            });
-        }
-
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                container.className = "playing";
-            } else {
-                audio.pause();
-                container.className = "paused";
-            }
-        }
-
-        container.addEventListener("click", (e) => {
-            e.stopPropagation();
-            togglePlay();
-        });
-
-        function handleFirstInteraction() {
-            playAudio();
-        }
-
-        function removeInteractionListeners() {
-            document.removeEventListener("click", handleFirstInteraction);
-            document.removeEventListener("touchstart", handleFirstInteraction);
-            document.removeEventListener("scroll", handleFirstInteraction);
-        }
-
-        document.addEventListener("click", handleFirstInteraction);
-        document.addEventListener("touchstart", handleFirstInteraction);
-        document.addEventListener("scroll", handleFirstInteraction);
     }
 
     // 10. Khởi chạy hệ thống sau khi DOM load (chỉ chạy trong môi trường trình duyệt, bỏ qua khi chạy test Node.js)
